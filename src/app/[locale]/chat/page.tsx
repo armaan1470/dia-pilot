@@ -207,7 +207,7 @@ export default function ChatScreen() {
       </div>
 
       {/* Input Bar (Sits directly in flex layout above bottom nav) */}
-      <div className="w-full px-4 py-2 z-30 bg-brand-dark/95 backdrop-blur-md border-t border-brand-border/40 flex-shrink-0">
+      <div className="w-full px-4 py-2 mb-4 z-30 bg-brand-dark/95 backdrop-blur-md flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();

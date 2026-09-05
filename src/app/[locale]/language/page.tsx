@@ -116,7 +116,7 @@ export default function LanguageScreen() {
           <SecondaryButton
             onClick={() => handleLanguageSelect("en")}
             className={cn(
-              "p-4 flex items-center justify-between transition-all duration-200 cursor-pointer active:scale-[0.99] text-left rtl:text-right", 
+              "h-auto! bg-[#FFFFFF12] border border-[#FFFFFF1A] p-4 flex items-center justify-between transition-all duration-200 cursor-pointer active:scale-[0.99] text-left rtl:text-right", 
               currentLocale === "en" ? "border-brand-cyan/40 bg-brand-cyan/10" : ""
             )}
           >
@@ -144,7 +144,7 @@ export default function LanguageScreen() {
             fullWidth
             onClick={() => handleLanguageSelect("ar")}
             className={cn(
-              "p-4 flex items-center justify-between transition-all duration-200 cursor-pointer active:scale-[0.99] text-left rtl:text-right", 
+              "h-auto! bg-[#FFFFFF12] border border-[#FFFFFF1A] p-4 flex items-center justify-between transition-all duration-200 cursor-pointer active:scale-[0.99] text-left rtl:text-right", 
               currentLocale === "ar" ? "border-brand-cyan/40 bg-brand-cyan/10" : ""
             )}
           >
