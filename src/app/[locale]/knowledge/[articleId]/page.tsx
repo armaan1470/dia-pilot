@@ -31,7 +31,7 @@ export default function ArticleDetailScreen({
     mockArticles.find((a) => a.id === articleId) || mockArticles[0];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "تفاصيل المقال" : "Article Detail"}
@@ -46,7 +46,7 @@ export default function ArticleDetailScreen({
         {/* Article Meta */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Badge className="bg-cyan-950/80 text-cyan-300 border border-cyan-700/40 text-xs px-2.5 py-0.5 rounded-full">
+            <Badge className="bg-brand-card-light text-brand-teal border border-brand-border text-xs px-2.5 py-0.5 rounded-full">
               {isRtl ? article.category_ar : article.category_en}
             </Badge>
             <div className="flex items-center gap-1 text-xs text-slate-400">
@@ -61,8 +61,8 @@ export default function ArticleDetailScreen({
         </div>
 
         {/* Key Takeaways Box */}
-        <div className="rounded-2xl bg-[#132238] border border-cyan-500/30 p-4 space-y-2 shadow-md">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+        <div className="rounded-2xl bg-brand-card border border-brand-border p-4 space-y-2 shadow-md">
+          <div className="flex items-center gap-2 text-brand-teal text-xs font-bold uppercase tracking-wider">
             <CheckCircle2 className="w-4 h-4" />
             <span>{isRtl ? "النقاط الرئيسية" : "Key Takeaways"}</span>
           </div>
@@ -72,7 +72,7 @@ export default function ArticleDetailScreen({
         </div>
 
         {/* Body Content */}
-        <div className="rounded-[24px] bg-[#132238]/60 border border-[#1E3557] p-5 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+        <div className="rounded-[24px] bg-brand-card border border-brand-border p-5 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <p>{isRtl ? article.content_ar : article.content_en}</p>
 
           <p>
@@ -85,7 +85,7 @@ export default function ArticleDetailScreen({
         {/* Ask AI Contextual Prompt Card */}
         <div
           onClick={() => router.push("/chat")}
-          className="mt-6 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 p-4 flex items-center justify-between shadow-xl shadow-cyan-900/30 cursor-pointer active:scale-[0.98] transition-all"
+          className="mt-6 rounded-2xl bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex items-center justify-between shadow-xl shadow-brand-blue/30 cursor-pointer active:scale-[0.98] transition-all"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white/20 p-1 flex items-center justify-center backdrop-blur-md">
@@ -107,7 +107,7 @@ export default function ArticleDetailScreen({
             </div>
           </div>
 
-          <div className="w-8 h-8 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-md rtl:rotate-180">
+          <div className="w-8 h-8 rounded-full bg-white text-brand-dark-blue flex items-center justify-center shadow-md rtl:rotate-180">
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>

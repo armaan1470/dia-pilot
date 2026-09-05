@@ -26,13 +26,13 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   return (
     <Card
       className={cn(
-        "rounded-2xl bg-[#132238] border border-[#1E3557] p-3.5 flex flex-col justify-between gap-2 text-white shadow-sm",
+        "rounded-2xl bg-brand-card border border-brand-border p-3.5 flex flex-col justify-between gap-2 text-white shadow-sm",
         className
       )}
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-slate-400">{label}</span>
-        {icon && <span className="text-cyan-400">{icon}</span>}
+        {icon && <span className="text-brand-teal">{icon}</span>}
       </div>
 
       <div className="flex items-baseline gap-1">

@@ -97,7 +97,7 @@ export default function ChatScreen() {
   };
 
   return (
-    <div className="flex flex-col flex-1 h-[100dvh] max-h-[100dvh] bg-[#070F1E] text-white relative overflow-hidden select-none pb-[max(4.5rem,calc(3.75rem+env(safe-area-inset-bottom,0px)))]">
+    <div className="flex flex-col flex-1 h-[100dvh] max-h-[100dvh] bg-brand-dark text-white relative overflow-hidden select-none pb-[max(4.5rem,calc(3.75rem+env(safe-area-inset-bottom,0px)))]">
       {/* Header */}
       <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-4 flex items-center justify-between bg-gradient-to-b from-[#0284C7] via-[#1E6BBF] to-[#173F8A] z-20 flex-shrink-0 select-none">
         <div>
@@ -109,7 +109,7 @@ export default function ChatScreen() {
           </h1>
         </div>
 
-        <div className="w-11 h-11 rounded-full bg-white/15 border border-white/25 p-1 flex items-center justify-center backdrop-blur-md shadow-lg ring-2 ring-cyan-400/20">
+        <div className="w-11 h-11 rounded-full bg-white/15 border border-white/25 p-1 flex items-center justify-center backdrop-blur-md shadow-lg ring-2 ring-brand-teal/20">
           <Image
             src="/mascots/Robo head.png"
             alt="DiaPilot Assistant"
@@ -126,7 +126,7 @@ export default function ChatScreen() {
           /* Empty / Initial State */
           <div className="flex flex-col items-center text-center my-auto py-4 gap-4">
             {/* Centered Robot Mascot */}
-            <div className="relative w-24 h-24 rounded-full bg-gradient-to-tr from-[#0F294D] via-[#133A6B] to-[#0A1B33] p-2 shadow-2xl border border-cyan-500/40 flex items-center justify-center animate-pulse">
+            <div className="relative w-24 h-24 rounded-full bg-gradient-to-tr from-brand-card via-brand-card-light to-brand-dark p-2 shadow-2xl border border-brand-teal/40 flex items-center justify-center animate-pulse">
               <Image
                 src="/mascots/Robo head.png"
                 alt="DiaPilot Mascot"
@@ -143,7 +143,7 @@ export default function ChatScreen() {
             </div>
 
             {/* Sample Prompt Box */}
-            <div className="w-full max-w-sm rounded-2xl bg-[#132238]/90 border border-[#1E3557] p-3.5 text-xs text-slate-300 italic shadow-inner">
+            <div className="w-full max-w-sm rounded-2xl bg-brand-card border border-brand-border p-3.5 text-xs text-slate-300 italic shadow-inner">
               {t("samplePrompt")}
             </div>
 
@@ -185,13 +185,13 @@ export default function ChatScreen() {
                       <div className="ms-10 me-auto max-w-[85%]">
                         <Link
                           href={msg.actionCard.href}
-                          className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-cyan-950/70 hover:bg-cyan-900/80 border border-cyan-500/40 text-cyan-200 text-xs font-semibold shadow-md transition-all active:scale-[0.98]"
+                          className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border text-brand-teal text-xs font-semibold shadow-md transition-all active:scale-[0.98]"
                         >
                           <div className="flex items-center gap-2">
-                            <Stethoscope className="w-4 h-4 text-cyan-400" />
+                            <Stethoscope className="w-4 h-4 text-brand-teal" />
                             <span>{msg.actionCard.title}</span>
                           </div>
-                          <ChevronRight className="w-4 h-4 rtl:rotate-180 text-cyan-400" />
+                          <ChevronRight className="w-4 h-4 rtl:rotate-180 text-brand-teal" />
                         </Link>
                       </div>
                     )}
@@ -207,13 +207,13 @@ export default function ChatScreen() {
       </div>
 
       {/* Input Bar (Sits directly in flex layout above bottom nav) */}
-      <div className="w-full px-4 py-2 z-30 bg-[#070F1E]/95 backdrop-blur-md border-t border-white/5 flex-shrink-0">
+      <div className="w-full px-4 py-2 z-30 bg-brand-dark/95 backdrop-blur-md border-t border-brand-border/40 flex-shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSendMessage();
           }}
-          className="relative flex items-center w-full bg-[#132238] border border-[#223B5C] rounded-full p-1.5 shadow-2xl"
+          className="relative flex items-center w-full bg-brand-card border border-brand-border rounded-full p-1.5 shadow-2xl"
         >
           <input
             type="text"
@@ -226,7 +226,7 @@ export default function ChatScreen() {
           {input.trim() ? (
             <button
               type="submit"
-              className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-600 text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer rtl:rotate-180"
+              className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer rtl:rotate-180"
             >
               <Send className="w-4 h-4" />
             </button>

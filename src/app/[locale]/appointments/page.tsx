@@ -74,7 +74,7 @@ export default function AppointmentsScreen() {
   const list = activeTab === "upcoming" ? upcomingAppointments : pastAppointments;
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "مواعيدي" : "My Appointments"}
@@ -102,14 +102,14 @@ export default function AppointmentsScreen() {
       {/* Main Content Area */}
       <div className="px-5 space-y-4 pt-4">
         {/* Tab Segment Controls */}
-        <div className="grid grid-cols-2 p-1 rounded-full bg-[#132238] border border-[#1E3557]">
+        <div className="grid grid-cols-2 p-1 rounded-full bg-brand-card border border-brand-border">
           <button
             type="button"
             onClick={() => setActiveTab("upcoming")}
             className={cn(
               "py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
               activeTab === "upcoming"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-600 text-white shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white shadow-md shadow-brand-blue/20"
                 : "text-slate-400 hover:text-slate-200"
             )}
           >
@@ -121,7 +121,7 @@ export default function AppointmentsScreen() {
             className={cn(
               "py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
               activeTab === "past"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-600 text-white shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white shadow-md shadow-brand-blue/20"
                 : "text-slate-400 hover:text-slate-200"
             )}
           >

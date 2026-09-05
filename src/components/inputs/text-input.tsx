@@ -51,7 +51,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             id={inputId}
             ref={ref}
             className={cn(
-              "h-13 w-full rounded-2xl bg-[#152438] border-[#223854] text-white placeholder:text-slate-500 text-sm sm:text-base focus-visible:ring-1 focus-visible:ring-cyan-400 focus-visible:border-cyan-400 transition-all",
+              "h-13 w-full rounded-2xl bg-brand-card border-brand-border text-white placeholder:text-slate-500 text-sm sm:text-base focus-visible:ring-1 focus-visible:ring-brand-teal focus-visible:border-brand-teal transition-all",
               leftIcon && "pl-11 rtl:pl-4 rtl:pr-11",
               rightIcon && "pr-11 rtl:pr-4 rtl:pl-11",
               error && "border-rose-500 focus-visible:ring-rose-500",

@@ -118,7 +118,7 @@ export default function RegisterScreen() {
   const strength = getPasswordStrength();
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-between">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-between">
       {/* Top Header Row */}
       <div className="w-full flex items-center justify-between z-20 mb-3 flex-shrink-0">
         <div className="flex items-center gap-3">
@@ -137,7 +137,7 @@ export default function RegisterScreen() {
         <div className="w-20 h-1.5 rounded-full bg-slate-800 overflow-hidden">
           <div
             className={cn(
-              "h-full bg-cyan-400 transition-all duration-300 rounded-full shadow-sm shadow-cyan-400/50",
+              "h-full bg-gradient-to-r from-brand-teal to-brand-blue transition-all duration-300 rounded-full shadow-sm shadow-brand-teal/50",
               step === 1 ? "w-1/2" : "w-full"
             )}
           />
@@ -145,7 +145,7 @@ export default function RegisterScreen() {
       </div>
 
       {/* Main Card Container */}
-      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-[#132238] border border-[#1E3557]/80 p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
+      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
         <h2 className="text-lg font-bold text-white tracking-tight">
           {step === 1 ? t("tellUsAboutYou") : t("setUpYourAccount")}
         </h2>
@@ -188,8 +188,8 @@ export default function RegisterScreen() {
                     className={cn(
                       "py-2.5 px-2 rounded-2xl text-xs font-semibold transition-all duration-200 border text-center cursor-pointer",
                       gender === item.key
-                        ? "bg-cyan-950/80 border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/20"
-                        : "bg-[#152438] border-[#223854] text-slate-300 hover:border-slate-600"
+                        ? "bg-brand-card-light border-brand-teal text-brand-teal shadow-sm shadow-brand-teal/20"
+                        : "bg-brand-card-light border-brand-border text-slate-300 hover:border-slate-500"
                     )}
                   >
                     {item.label}
@@ -218,8 +218,8 @@ export default function RegisterScreen() {
                     className={cn(
                       "py-2 px-3 rounded-2xl text-xs font-semibold transition-all duration-200 border cursor-pointer",
                       diabetesType === item.key
-                        ? "bg-cyan-950/80 border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/20"
-                        : "bg-[#152438] border-[#223854] text-slate-300 hover:border-slate-600"
+                        ? "bg-brand-card-light border-brand-teal text-brand-teal shadow-sm shadow-brand-teal/20"
+                        : "bg-brand-card-light border-brand-border text-slate-300 hover:border-slate-500"
                     )}
                   >
                     {item.label}
@@ -250,7 +250,7 @@ export default function RegisterScreen() {
                 {t("mobileNumber")}
               </label>
               <div className="flex items-center gap-2">
-                <div className="h-13 px-3.5 rounded-2xl bg-[#152438] border border-[#223854] text-white text-sm font-semibold flex items-center justify-center select-none">
+                <div className="h-13 px-3.5 rounded-2xl bg-brand-card-light border border-brand-border text-white text-sm font-semibold flex items-center justify-center select-none">
                   {t("phoneCode")}
                 </div>
                 <div className="flex-1">
@@ -317,8 +317,8 @@ export default function RegisterScreen() {
                 className={cn(
                   "w-5 h-5 rounded-lg border flex items-center justify-center mt-0.5 transition-all cursor-pointer flex-shrink-0",
                   agreed
-                    ? "bg-cyan-400 border-cyan-400 text-[#070F1E]"
-                    : "border-slate-600 bg-[#152438]"
+                    ? "bg-brand-teal border-brand-teal text-brand-dark"
+                    : "border-brand-border bg-brand-card-light"
                 )}
               >
                 {agreed && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -328,14 +328,14 @@ export default function RegisterScreen() {
                 {t("agreeTermsText")}{" "}
                 <Link
                   href="/privacy"
-                  className="text-cyan-400 font-semibold hover:underline"
+                  className="text-brand-teal font-semibold hover:underline"
                 >
                   {t("termsOfService")}
                 </Link>{" "}
                 {t("and")}{" "}
                 <Link
                   href="/privacy"
-                  className="text-cyan-400 font-semibold hover:underline"
+                  className="text-brand-teal font-semibold hover:underline"
                 >
                   {t("privacyPolicy")}
                 </Link>
@@ -360,7 +360,7 @@ export default function RegisterScreen() {
         <span>{t("alreadyHaveAccount")}</span>
         <Link
           href="/login"
-          className="font-bold text-cyan-400 hover:underline cursor-pointer"
+          className="font-bold text-brand-teal hover:underline cursor-pointer"
         >
           {t("signIn")}
         </Link>

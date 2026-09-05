@@ -36,7 +36,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           variantStyle === "glass" &&
             "bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/15",
           variantStyle === "solid" &&
-            "bg-[#132238] hover:bg-[#1C3354] text-white border border-white/10",
+            "bg-brand-card hover:bg-brand-card-light text-white border border-brand-border",
           variantStyle === "ghost" &&
             "bg-transparent hover:bg-white/10 text-slate-300",
           disabled && "opacity-50 cursor-not-allowed pointer-events-none",

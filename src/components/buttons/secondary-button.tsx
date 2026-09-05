@@ -37,19 +37,23 @@ export const SecondaryButton = React.forwardRef<
         disabled={disabled || isLoading}
         variant="secondary"
         className={cn(
-          "h-14 rounded-full font-semibold text-base transition-all duration-200 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-3 px-6 bg-[#162842]/90 hover:bg-[#1C3354] text-slate-100 border border-white/10 shadow-sm",
+          "min-h-12 h-auto rounded-lg font-semibold text-sm transition-all duration-200 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 px-6 bg-brand-card-light hover:bg-brand-card hover:brightness-110 text-slate-300 border border-brand-border",
           fullWidth ? "w-full" : "w-auto",
-          disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+          disabled && "opacity-50 cursor-not-allowed pointer-events-none shadow-none",
           className
         )}
         {...props}
       >
         {isLoading ? (
-          <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
+          <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
         ) : (
           <>
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
-            <span className="truncate">{children}</span>
+            {typeof children === "string" ? (
+              <span className="truncate">{children}</span>
+            ) : (
+              children
+            )}
             {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
           </>
         )}

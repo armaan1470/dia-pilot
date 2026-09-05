@@ -54,7 +54,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-between">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-between">
       {/* Top Header Row with Back Button */}
       <div className="w-full flex items-center justify-between z-20 mb-1 flex-shrink-0">
         <BackButton />
@@ -68,7 +68,7 @@ export default function LoginScreen() {
 
       {/* Hero Mascot & Title Section */}
       <div className="flex flex-col items-center text-center my-2 z-10 flex-shrink-0">
-        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#0F294D] via-[#133A6B] to-[#0A1B33] p-1.5 shadow-xl shadow-cyan-500/20 border border-cyan-500/30 flex items-center justify-center mb-2">
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-brand-card via-brand-card-light to-brand-dark p-1.5 shadow-xl shadow-brand-blue/20 border border-brand-border flex items-center justify-center mb-2">
           <Image
             src="/mascots/image 1.png"
             alt="DiaPilot Mascot"
@@ -90,7 +90,7 @@ export default function LoginScreen() {
       </div>
 
       {/* Login Card Form */}
-      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-[#132238] border border-[#1E3557]/80 p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
+      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
         <div className="space-y-0.5">
           <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
             {t("welcomeBack")}
@@ -120,7 +120,7 @@ export default function LoginScreen() {
             <div className="flex justify-end mt-1">
               <button
                 type="button"
-                className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
+                className="text-xs font-semibold text-brand-teal hover:text-brand-cyan transition-colors cursor-pointer"
               >
                 {t("forgotPassword")}
               </button>
@@ -140,8 +140,8 @@ export default function LoginScreen() {
 
         {/* Divider */}
         <div className="relative flex items-center justify-center py-0.5">
-          <div className="w-full border-t border-slate-700/60" />
-          <span className="absolute bg-[#132238] px-3 text-xs text-slate-400 font-medium">
+          <div className="w-full border-t border-brand-border/60" />
+          <span className="absolute bg-brand-card px-3 text-xs text-slate-400 font-medium">
             {tCommon("or")}
           </span>
         </div>
@@ -164,7 +164,7 @@ export default function LoginScreen() {
         <span>{t("newPatient")}</span>
         <Link
           href="/register"
-          className="font-bold text-cyan-400 hover:underline cursor-pointer"
+          className="font-bold text-brand-teal hover:underline cursor-pointer"
         >
           {t("createAccount")}
         </Link>

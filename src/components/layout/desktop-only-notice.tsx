@@ -75,8 +75,8 @@ export function DesktopOnlyNotice() {
         </div>
 
         {/* QR Code / Share Card */}
-        <div className="w-full max-w-sm rounded-3xl bg-[#0D192B]/90 border border-slate-700/80 p-5 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
+        <div className="w-full max-w-sm rounded-3xl bg-brand-dark/95 border border-brand-border p-5 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2 text-xs font-semibold text-brand-teal">
             <QrCode className="w-4 h-4" />
             <span>{isRtl ? "امسح الرمز بكاميرا الجوال" : "Scan with your phone camera"}</span>
           </div>
@@ -86,7 +86,7 @@ export function DesktopOnlyNotice() {
             {/* Embedded High-Contrast QR Code Visual */}
             <svg
               viewBox="0 0 120 120"
-              className="w-32 h-32 text-[#070F1E]"
+              className="w-32 h-32 text-brand-dark"
               fill="currentColor"
             >
               {/* Corner 1 */}

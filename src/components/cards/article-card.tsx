@@ -27,14 +27,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     <Card
       onClick={onClick}
       className={cn(
-        "w-full rounded-2xl bg-[#132238] border border-[#1E3557] hover:border-cyan-500/40 p-4 flex flex-col gap-2.5 cursor-pointer transition-all duration-200 active:scale-[0.99] text-white shadow-sm hover:shadow-cyan-950/40",
+        "w-full rounded-2xl bg-brand-card border border-brand-border hover:border-brand-teal/40 p-4 flex flex-col gap-2.5 cursor-pointer transition-all duration-200 active:scale-[0.99] text-white shadow-sm hover:shadow-brand-blue/20",
         className
       )}
     >
       <div className="flex items-center justify-between">
         <Badge
           variant="secondary"
-          className="bg-cyan-950/70 text-cyan-300 border border-cyan-800/40 text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
+          className="bg-brand-card-light text-brand-teal border border-brand-border text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
         >
           {category}
         </Badge>

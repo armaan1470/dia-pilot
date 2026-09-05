@@ -36,7 +36,7 @@ export default function KnowledgeHomeScreen() {
   });
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "مكتبة التثقيف الصحي" : "My Documents"}
@@ -71,8 +71,8 @@ export default function KnowledgeHomeScreen() {
               className={cn(
                 "px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer inline-flex items-center gap-1.5",
                 selectedCategory === cat.key
-                  ? "bg-cyan-950/80 border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/20"
-                  : "bg-[#132238] border-[#1E3557] text-slate-300 hover:border-slate-600"
+                  ? "bg-brand-card-light border-brand-teal text-brand-teal shadow-sm shadow-brand-teal/20"
+                  : "bg-brand-card border-brand-border text-slate-300 hover:border-slate-500"
               )}
             >
               <AppleEmoji name={cat.icon} size={14} />

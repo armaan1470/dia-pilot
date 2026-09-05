@@ -44,7 +44,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
     <nav
       aria-label="Bottom Navigation"
       className={cn(
-        "fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0A1322]/95 backdrop-blur-2xl border-t border-white/10 px-4 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] transition-all duration-300 flex-shrink-0",
+        "fixed bottom-0 left-0 right-0 w-full z-40 bg-brand-dark/95 backdrop-blur-2xl border-t border-brand-border px-4 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] transition-all duration-300 flex-shrink-0",
         className
       )}
     >

@@ -21,7 +21,7 @@ export const ChatBubbleUser: React.FC<ChatBubbleUserProps> = ({
         className
       )}
     >
-      <div className="bg-gradient-to-r from-[#00A3FF] to-[#0066FF] text-white rounded-[20px] rounded-br-[4px] rtl:rounded-br-[20px] rtl:rounded-bl-[4px] px-4 py-3 shadow-md shadow-blue-500/20 text-sm sm:text-base leading-relaxed break-words">
+      <div className="bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white rounded-[20px] rounded-br-[4px] rtl:rounded-br-[20px] rtl:rounded-bl-[4px] px-4 py-3 shadow-md shadow-brand-blue/20 text-sm sm:text-base leading-relaxed break-words">
         {message}
       </div>
       {timestamp && (

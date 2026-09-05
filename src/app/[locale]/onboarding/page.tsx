@@ -70,13 +70,13 @@ export default function OnboardingScreen() {
   const slide = slides[currentSlide];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none justify-between pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none justify-between pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Navigation Row */}
       <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 flex items-center justify-between z-30 flex-shrink-0">
         <BackButton onClick={handleBack} />
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-extrabold tracking-widest text-cyan-400 uppercase">
+          <span className="text-xs font-extrabold tracking-widest text-brand-teal uppercase">
             {isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           </span>
         </div>
@@ -103,11 +103,11 @@ export default function OnboardingScreen() {
           />
 
           {/* Concentric Decorative Rings */}
-          <div className="absolute inset-0 rounded-full border border-cyan-500/20" />
-          <div className="absolute inset-6 rounded-full border border-cyan-400/20 animate-pulse" />
+          <div className="absolute inset-0 rounded-full border border-brand-teal/20" />
+          <div className="absolute inset-6 rounded-full border border-brand-teal/30 animate-pulse" />
 
           {/* Central Hero Frame */}
-          <div className="relative w-40 sm:w-44 h-40 sm:h-44 rounded-full bg-gradient-to-tr from-[#0F294D] via-[#133A6B] to-[#0A1B33] p-1.5 shadow-2xl border border-cyan-500/30 flex items-center justify-center">
+          <div className="relative w-40 sm:w-44 h-40 sm:h-44 rounded-full bg-gradient-to-tr from-brand-card via-brand-card-light to-brand-dark p-1.5 shadow-2xl border border-brand-border flex items-center justify-center">
             <Image
               src={slide.mascot}
               alt="DiaPilot Onboarding Illustration"
@@ -119,9 +119,9 @@ export default function OnboardingScreen() {
           </div>
 
           {/* Feature Badge Pill */}
-          <div className="absolute -bottom-2 bg-cyan-950/90 border border-cyan-500/40 px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur-md flex items-center gap-2">
-            <slide.icon className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-[11px] font-bold text-cyan-200">
+          <div className="absolute -bottom-2 bg-brand-card border border-brand-border px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur-md flex items-center gap-2">
+            <slide.icon className="w-3.5 h-3.5 text-brand-teal" />
+            <span className="text-[11px] font-bold text-brand-cyan">
               {slide.pillBadge}
             </span>
           </div>
@@ -139,7 +139,7 @@ export default function OnboardingScreen() {
                 className={cn(
                   "h-2 rounded-full transition-all duration-300 cursor-pointer",
                   idx === currentSlide
-                    ? "w-8 bg-cyan-400 shadow-sm shadow-cyan-400/50"
+                    ? "w-8 bg-brand-teal shadow-sm shadow-brand-teal/50"
                     : "w-2 bg-slate-700 hover:bg-slate-600"
                 )}
                 aria-label={`Slide ${idx + 1}`}
@@ -176,7 +176,7 @@ export default function OnboardingScreen() {
               <button
                 type="button"
                 onClick={() => router.push("/login")}
-                className="font-bold text-cyan-400 hover:underline cursor-pointer"
+                className="font-bold text-brand-teal hover:underline cursor-pointer"
               >
                 {t("signIn")}
               </button>

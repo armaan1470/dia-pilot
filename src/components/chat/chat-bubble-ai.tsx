@@ -33,7 +33,7 @@ export const ChatBubbleAI: React.FC<ChatBubbleAIProps> = ({
       </div>
 
       <div className="flex flex-col items-start flex-1 min-w-0">
-        <div className="bg-[#132238] border border-[#1E3557] text-slate-100 rounded-[20px] rounded-tl-[4px] rtl:rounded-tl-[20px] rtl:rounded-tr-[4px] px-4 py-3 shadow-md text-sm sm:text-base leading-relaxed break-words">
+        <div className="bg-brand-card border border-brand-border text-slate-100 rounded-[20px] rounded-tl-[4px] rtl:rounded-tl-[20px] rtl:rounded-tr-[4px] px-4 py-3 shadow-md text-sm sm:text-base leading-relaxed break-words">
           {message}
         </div>
         {timestamp && (

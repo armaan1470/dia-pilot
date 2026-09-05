@@ -57,7 +57,7 @@ export default function HelpScreen() {
   ];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "المساعدة والدعم" : "Help & Support"}
@@ -75,7 +75,7 @@ export default function HelpScreen() {
           {/* Chat Now */}
           <div
             onClick={() => router.push("/chat")}
-            className="rounded-[22px] bg-gradient-to-br from-[#0094FF] to-[#0056CC] p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-[22px] bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white">
               <MessageSquare className="w-4 h-4" />
@@ -129,9 +129,9 @@ export default function HelpScreen() {
           {/* Visit Us */}
           <div
             onClick={() => router.push("/services/clinics")}
-            className="rounded-[22px] bg-[#162842] border border-white/10 p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-[22px] bg-brand-card border border-brand-border p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
-            <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-cyan-400">
+            <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-brand-teal">
               <MapPin className="w-4 h-4" />
             </div>
             <div>
@@ -156,12 +156,12 @@ export default function HelpScreen() {
               <AccordionItem
                 key={faq.id}
                 value={faq.id}
-                className="rounded-2xl bg-[#132238] border border-[#1E3557] px-4 py-1 border-none shadow-sm"
+                className="rounded-2xl bg-brand-card border border-brand-border px-4 py-1 border-none shadow-sm"
               >
                 <AccordionTrigger className="text-xs sm:text-sm font-bold text-white hover:no-underline py-3 text-left rtl:text-right">
                   {isRtl ? faq.q_ar : faq.q_en}
                 </AccordionTrigger>
-                <AccordionContent className="text-xs text-slate-300 leading-relaxed pb-3 pt-1 border-t border-white/5">
+                <AccordionContent className="text-xs text-slate-300 leading-relaxed pb-3 pt-1 border-t border-brand-border/40">
                   {isRtl ? faq.a_ar : faq.a_en}
                 </AccordionContent>
               </AccordionItem>

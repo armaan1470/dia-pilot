@@ -25,12 +25,12 @@ export const EmptyStateCard: React.FC<EmptyStateCardProps> = ({
   return (
     <Card
       className={cn(
-        "w-full rounded-3xl bg-[#132238]/60 border border-[#1E3557] p-8 flex flex-col items-center justify-center text-center gap-4 text-white",
+        "w-full rounded-3xl bg-brand-card border border-brand-border p-8 flex flex-col items-center justify-center text-center gap-4 text-white",
         className
       )}
     >
       {icon && (
-        <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 border border-cyan-800/40 flex items-center justify-center text-cyan-400 text-2xl shadow-inner">
+        <div className="w-16 h-16 rounded-2xl bg-brand-card-light border border-brand-border flex items-center justify-center text-brand-teal text-2xl shadow-inner">
           {icon}
         </div>
       )}

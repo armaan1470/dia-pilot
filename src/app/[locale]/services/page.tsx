@@ -52,7 +52,7 @@ export default function ServicesScreen() {
   });
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
       {/* Top Header - Appbar with crisp gradient and border */}
       <PageHeader
         title={t("title")}
@@ -67,7 +67,7 @@ export default function ServicesScreen() {
         {/* AI Powered Online Banner */}
         <div
           onClick={() => router.push("/chat")}
-          className="relative w-full rounded-[24px] bg-gradient-to-r from-[#00A3FF] to-[#0066FF] p-4 shadow-xl shadow-cyan-900/20 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-between"
+          className="relative w-full rounded-[24px] bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 shadow-xl shadow-brand-blue/20 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-between"
         >
           <div className="flex flex-col gap-1 z-10">
             <div className="inline-flex items-center gap-1.5 bg-black/20 px-2.5 py-0.5 rounded-full w-fit">

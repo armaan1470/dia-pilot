@@ -28,10 +28,10 @@ export const TypingIndicator: React.FC<TypingIndicatorProps> = ({
         />
       </div>
 
-      <div className="bg-[#132238] border border-[#1E3557] rounded-[20px] rounded-tl-[4px] rtl:rounded-tl-[20px] rtl:rounded-tr-[4px] px-4 py-3.5 shadow-md flex items-center gap-1.5">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.3s]" />
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.15s]" />
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" />
+      <div className="bg-brand-card border border-brand-border rounded-[20px] rounded-tl-[4px] rtl:rounded-tl-[20px] rtl:rounded-tr-[4px] px-4 py-3.5 shadow-md flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-brand-teal animate-bounce [animation-delay:-0.3s]" />
+        <span className="w-2 h-2 rounded-full bg-brand-teal animate-bounce [animation-delay:-0.15s]" />
+        <span className="w-2 h-2 rounded-full bg-brand-teal animate-bounce" />
       </div>
     </div>
   );

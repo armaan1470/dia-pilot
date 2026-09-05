@@ -69,7 +69,7 @@ export default function NotificationsScreen() {
   ];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "الإشعارات" : "Notifications"}
@@ -85,7 +85,7 @@ export default function NotificationsScreen() {
         {notificationItems.map((item) => (
           <div
             key={item.key}
-            className="w-full rounded-[22px] bg-[#132238] border border-[#1E3557] p-4 flex items-center justify-between gap-3"
+            className="w-full rounded-[22px] bg-brand-card border border-brand-border p-4 flex items-center justify-between gap-3"
           >
             <div className="flex flex-col min-w-0 pr-2">
               <h4 className="text-sm font-bold text-white leading-tight">
@@ -99,7 +99,7 @@ export default function NotificationsScreen() {
             <Switch
               checked={settings[item.key]}
               onCheckedChange={() => toggleSetting(item.key)}
-              className="data-[state=checked]:bg-cyan-500 cursor-pointer"
+              className="data-[state=checked]:bg-brand-teal cursor-pointer"
             />
           </div>
         ))}

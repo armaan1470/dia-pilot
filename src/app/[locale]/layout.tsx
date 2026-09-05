@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cairo, Inter } from "next/font/google";
+import { Cairo, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,6 +10,13 @@ import "../globals.css";
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
   variable: "--font-cairo",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 });
@@ -37,7 +44,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: "cover",
-  themeColor: "#070F1E",
+  themeColor: "#0C1829",
 };
 
 export function generateStaticParams() {
@@ -67,16 +74,20 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
-      className={`${cairo.variable} ${inter.variable} min-h-[100dvh] antialiased dark`}
+      className={`${cairo.variable} ${inter.variable} ${plusJakarta.variable} min-h-[100dvh] antialiased dark`}
     >
-      <body className={`min-h-[100dvh] bg-[#070F1E] text-white flex flex-col font-sans select-none overflow-x-hidden ${isRtl ? "font-cairo" : "font-inter"}`}>
+      <body
+        className={`min-h-[100dvh] bg-brand-dark text-white flex flex-col font-sans select-none overflow-x-hidden ${
+          isRtl ? "font-cairo" : "font-jakarta"
+        }`}
+      >
         <NextIntlClientProvider messages={messages} locale={locale}>
           
           {/* 1. Desktop & Tablet View (>= 640px / md): Dedicated Banking-Grade M-Site Notice Screen */}
           <DesktopOnlyNotice />
 
           {/* 2. Mobile View (< 640px / md): Pure Mobile Application Shell */}
-          <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-[#070F1E] relative overflow-x-hidden">
+          <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-brand-dark relative overflow-x-hidden">
             {children}
           </main>
 

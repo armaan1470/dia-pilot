@@ -116,7 +116,7 @@ export default function ServiceDetailScreen({
   ];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Appbar Header matching CategoryScreen Figma */}
       <PageHeader
         title={isRtl ? service.name_ar : service.name_en}
@@ -134,19 +134,19 @@ export default function ServiceDetailScreen({
       {/* Main Content Area */}
       <div className="px-5 space-y-3.5 pt-4">
         {/* Service Overview Card */}
-        <div className="rounded-[24px] bg-[#132238] border border-[#1E3557] p-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+        <div className="rounded-[24px] bg-brand-card border border-brand-border p-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <p>{isRtl ? service.description_ar : service.description_en}</p>
 
-          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5 text-xs text-slate-400">
+          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-brand-border/40 text-xs text-slate-400">
             {service.contact && (
               <div className="flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-cyan-400" />
+                <Phone className="w-3.5 h-3.5 text-brand-teal" />
                 <span className="dir-ltr">{service.contact}</span>
               </div>
             )}
             {service.workingHours && (
               <div className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                <Clock className="w-3.5 h-3.5 text-brand-teal" />
                 <span>{service.workingHours}</span>
               </div>
             )}
@@ -159,10 +159,10 @@ export default function ServiceDetailScreen({
             <div
               key={topic.id}
               onClick={() => router.push("/chat")}
-              className="w-full rounded-2xl bg-[#132238] hover:bg-[#162842] border border-[#1E3557] hover:border-cyan-500/40 p-4 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
+              className="w-full rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-4 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
             >
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-8 h-8 rounded-xl bg-cyan-950/80 border border-cyan-700/40 text-cyan-400 text-xs font-bold flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-brand-card-light border border-brand-border text-brand-teal text-xs font-bold flex items-center justify-center flex-shrink-0">
                   {topic.id}
                 </div>
                 <div className="flex flex-col min-w-0">
@@ -175,7 +175,7 @@ export default function ServiceDetailScreen({
                 </div>
               </div>
 
-              <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-cyan-400 flex-shrink-0 group-hover:bg-cyan-500/20 rtl:rotate-180 transition-colors">
+              <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-brand-teal flex-shrink-0 group-hover:bg-brand-teal/20 rtl:rotate-180 transition-colors">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>

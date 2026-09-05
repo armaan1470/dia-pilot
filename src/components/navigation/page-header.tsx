@@ -77,21 +77,21 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           {showBack && (
             <BackButton
               onClick={onBack}
-              className="w-9 h-9 bg-white/20 hover:bg-white/30 border-none shadow-sm flex-shrink-0"
+              className="w-9 h-9 bg-white/15 hover:bg-white/30 border-none shrink-0"
             />
           )}
 
           <div className="flex flex-col min-w-0">
             {brandTag && (
-              <span className="text-[10px] font-black tracking-widest text-cyan-100/90 uppercase block font-heading leading-tight mb-0.5">
+              <span className="text-[10px] font-bold leading-3.75 tracking-[1.8px] uppercase text-white/45 mb-0.5">
                 {brandTag}
               </span>
             )}
-            <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight truncate">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-tight truncate">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs text-white/80 mt-0.5 leading-relaxed font-normal truncate">
+              <p className="text-xs text-white/45 mt-0.5 leading-relaxed font-normal truncate">
                 {subtitle}
               </p>
             )}

@@ -33,7 +33,7 @@ export default function AppointmentDetailScreen({
   }, [params]);
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
       {/* Top Header */}
       <PageHeader
         title={isRtl ? "تفاصيل الموعد" : "Appointment Details"}
@@ -46,7 +46,7 @@ export default function AppointmentDetailScreen({
       {/* Main Content Area */}
       <div className="px-5 space-y-4 pt-4">
         {/* Main Appointment Summary Card */}
-        <div className="rounded-[28px] bg-[#132238] border border-[#1E3557] p-5 space-y-4 shadow-xl">
+        <div className="rounded-[28px] bg-brand-card border border-brand-border p-5 space-y-4 shadow-xl">
           <div className="flex items-start justify-between">
             <div>
               <h2 className="text-lg font-black text-white">
@@ -61,9 +61,9 @@ export default function AppointmentDetailScreen({
             </Badge>
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-white/5 text-xs sm:text-sm text-slate-300">
+          <div className="space-y-3 pt-2 border-t border-brand-border/40 text-xs sm:text-sm text-slate-300">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-cyan-950/80 border border-cyan-800/40 flex items-center justify-center text-cyan-400">
+              <div className="w-8 h-8 rounded-xl bg-brand-card-light border border-brand-border flex items-center justify-center text-brand-teal">
                 <UserCheck className="w-4 h-4" />
               </div>
               <div>
@@ -77,7 +77,7 @@ export default function AppointmentDetailScreen({
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-cyan-950/80 border border-cyan-800/40 flex items-center justify-center text-cyan-400">
+              <div className="w-8 h-8 rounded-xl bg-brand-card-light border border-brand-border flex items-center justify-center text-brand-teal">
                 <Calendar className="w-4 h-4" />
               </div>
               <div>
@@ -91,7 +91,7 @@ export default function AppointmentDetailScreen({
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-cyan-950/80 border border-cyan-800/40 flex items-center justify-center text-cyan-400">
+              <div className="w-8 h-8 rounded-xl bg-brand-card-light border border-brand-border flex items-center justify-center text-brand-teal">
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
@@ -109,8 +109,8 @@ export default function AppointmentDetailScreen({
         </div>
 
         {/* Preparation Instructions Card */}
-        <div className="rounded-2xl bg-[#132238]/70 border border-[#1E3557] p-4 space-y-2">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+        <div className="rounded-2xl bg-brand-card border border-brand-border p-4 space-y-2">
+          <div className="flex items-center gap-2 text-brand-teal text-xs font-bold uppercase tracking-wider">
             <AlertCircle className="w-4 h-4" />
             <span>{isRtl ? "تعليمات التحضير للموعد" : "Appointment Preparation"}</span>
           </div>

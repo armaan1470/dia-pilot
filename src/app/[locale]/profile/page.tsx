@@ -96,7 +96,7 @@ export default function ProfileScreen() {
   ];
 
   return (
-    <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
+    <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
       {/* Top Profile Header */}
       <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-5 bg-gradient-to-b from-[#0284C7] via-[#1E6BBF] to-[#173F8A] z-20 flex-shrink-0 select-none">
         <div className="flex items-center gap-3.5">
@@ -159,7 +159,7 @@ export default function ProfileScreen() {
           <div
             key={item.id}
             onClick={() => router.push(item.href as any)}
-            className="w-full rounded-2xl bg-[#132238] hover:bg-[#162842] border border-[#1E3557] hover:border-cyan-500/40 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
+            className="w-full rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
           >
             <div className="flex items-center gap-3 min-w-0">
               <div
@@ -186,7 +186,7 @@ export default function ProfileScreen() {
         {/* Log Out Button */}
         <div
           onClick={() => router.push("/login")}
-          className="w-full rounded-2xl bg-[#132238] hover:bg-rose-950/40 border border-rose-900/30 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all mt-4 group"
+          className="w-full rounded-2xl bg-brand-card hover:bg-rose-950/40 border border-rose-900/30 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all mt-4 group"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-950/80 border border-rose-800/40 text-rose-400 flex items-center justify-center flex-shrink-0">
