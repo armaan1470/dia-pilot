@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 export default function SplashScreen() {
   const locale = useLocale();
@@ -113,28 +114,28 @@ export default function SplashScreen() {
           </div>
 
           {/* Orbiting Satellite 1: Top Nutrition (Apple) */}
-          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-[#DCFCE7] border-2 border-white shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
-            <span>🍎</span>
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-[#DCFCE7] border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+            <AppleEmoji name="apple" size={24} />
           </div>
 
           {/* Orbiting Satellite 2: Right / Foot Care */}
-          <div className="absolute top-1/3 -right-1 w-11 h-11 rounded-full bg-[#FED7AA] border-2 border-white shadow-lg flex items-center justify-center text-base hover:scale-110 transition-transform">
-            <span>🦶</span>
+          <div className="absolute top-1/3 -right-1 w-11 h-11 rounded-full bg-[#FED7AA] border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+            <AppleEmoji name="foot" size={24} />
           </div>
 
           {/* Orbiting Satellite 3: Bottom Right / Eye Care */}
-          <div className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-[#E0F2FE] border-2 border-white shadow-lg flex items-center justify-center text-base hover:scale-110 transition-transform">
-            <span>👁️</span>
+          <div className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-[#E0F2FE] border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+            <AppleEmoji name="eye" size={24} />
           </div>
 
           {/* Orbiting Satellite 4: Left / Diabetes Monitoring & Meter */}
-          <div className="absolute top-1/2 -left-2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#FFEDD5] border-2 border-white shadow-lg flex items-center justify-center text-xs p-1 hover:scale-110 transition-transform">
-            <span>🩸</span>
+          <div className="absolute top-1/2 -left-2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#FFEDD5] border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+            <AppleEmoji name="blood" size={22} />
           </div>
 
           {/* Orbiting Satellite 5: Bottom Left / Insulin & Medication */}
-          <div className="absolute bottom-2 left-6 w-11 h-11 rounded-full bg-[#FCE7F3] border-2 border-white shadow-lg flex items-center justify-center text-base hover:scale-110 transition-transform">
-            <span>💉</span>
+          <div className="absolute bottom-2 left-6 w-11 h-11 rounded-full bg-[#FCE7F3] border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+            <AppleEmoji name="syringe" size={24} />
           </div>
         </div>
       </div>

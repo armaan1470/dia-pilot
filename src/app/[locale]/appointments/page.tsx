@@ -8,6 +8,7 @@ import { PrimaryButton } from "@/components/buttons/primary-button";
 import { AppointmentCard } from "@/components/cards/appointment-card";
 import { Calendar, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 export default function AppointmentsScreen() {
   const router = useRouter();
@@ -84,7 +85,8 @@ export default function AppointmentsScreen() {
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
+        theme="purple"
+        watermark={<AppleEmoji name="calendar" size={80} />}
         rightAction={
           <button
             type="button"

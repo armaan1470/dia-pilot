@@ -6,7 +6,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { PageHeader } from "@/components/navigation/page-header";
 import { PrimaryButton } from "@/components/buttons/primary-button";
 import { SecondaryButton } from "@/components/buttons/secondary-button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerFooter,
+} from "@/components/ui/drawer";
 import { Check, Info, ArrowRight, Globe } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 import { cn } from "@/lib/utils";
 
 export default function LanguageScreen() {
@@ -18,14 +27,14 @@ export default function LanguageScreen() {
   const [selectedLocale, setSelectedLocale] = React.useState<"ar" | "en">(
     currentLocale as "ar" | "en"
   );
-  const [showConfirmModal, setShowConfirmModal] = React.useState(false);
+  const [showConfirmDrawer, setShowConfirmDrawer] = React.useState(false);
+  const [showSuccessDrawer, setShowSuccessDrawer] = React.useState(false);
   const [isUpdating, setIsUpdating] = React.useState(false);
-  const [showSuccessToast, setShowSuccessToast] = React.useState(false);
 
   const handleLanguageSelect = (locale: "ar" | "en") => {
     if (locale !== currentLocale) {
       setSelectedLocale(locale);
-      setShowConfirmModal(true);
+      setShowConfirmDrawer(true);
     }
   };
 
@@ -33,13 +42,13 @@ export default function LanguageScreen() {
     setIsUpdating(true);
     setTimeout(() => {
       setIsUpdating(false);
-      setShowConfirmModal(false);
-      setShowSuccessToast(true);
+      setShowConfirmDrawer(false);
+      setShowSuccessDrawer(true);
 
       setTimeout(() => {
         router.replace("/language", { locale: selectedLocale });
-      }, 700);
-    }, 600);
+      }, 1000);
+    }, 500);
   };
 
   const handleContinue = () => {
@@ -55,12 +64,9 @@ export default function LanguageScreen() {
           subtitle={t("subtitle")}
           brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           showBack={true}
-          variant="gradient"
+          theme="blue"
+          watermark={<AppleEmoji name="globe" size={84} />}
         />
-        {/* Globe Background Watermark */}
-        <div className="absolute top-8 right-4 rtl:right-auto rtl:left-4 opacity-15 pointer-events-none text-white">
-          <Globe className="w-28 h-28" />
-        </div>
       </div>
 
       {/* Language Options List */}
@@ -78,8 +84,8 @@ export default function LanguageScreen() {
             )}
           >
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-2xl shadow-inner border border-white/10">
-                🇬🇧
+              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center shadow-inner border border-white/10">
+                <AppleEmoji name="flag_gb" size={28} />
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-bold text-white leading-tight">
@@ -113,8 +119,8 @@ export default function LanguageScreen() {
             )}
           >
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-2xl shadow-inner border border-white/10">
-                🇸🇦
+              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center shadow-inner border border-white/10">
+                <AppleEmoji name="flag_sa" size={28} />
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-bold text-white leading-tight">
@@ -155,75 +161,100 @@ export default function LanguageScreen() {
         </div>
       </div>
 
-      {/* Confirmation Bottom Sheet Modal */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full bg-[#0D1829] border-t border-cyan-800/40 rounded-t-[32px] p-6 pb-[max(2rem,env(safe-area-inset-bottom,0px))] shadow-2xl flex flex-col items-center gap-5 animate-in slide-in-from-bottom duration-300">
-            {/* Grab Handle */}
-            <div className="w-12 h-1 rounded-full bg-slate-700" />
+      {/* Language Switch Confirmation Bottom Sheet (Shadcn Drawer) */}
+      <Drawer
+        open={showConfirmDrawer}
+        onOpenChange={setShowConfirmDrawer}
+        showSwipeHandle={true}
+      >
+        <DrawerContent className="bg-[#081629] border-t border-[#42BEDD]/60 text-white rounded-t-[28px] p-6 pb-[max(2rem,env(safe-area-inset-bottom,0px))] shadow-2xl flex flex-col items-center">
+          {/* Top Handle */}
+          <div className="w-10 h-1 rounded-full bg-slate-600 mb-2" />
 
-            {/* Language Switch Flag Indicators */}
-            <div className="flex items-center justify-center gap-4 pt-2">
-              <div className="w-14 h-14 rounded-2xl bg-[#152438] border border-white/10 flex items-center justify-center text-3xl shadow-inner">
-                {currentLocale === "en" ? "🇬🇧" : "🇸🇦"}
-              </div>
-              <div className="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center rtl:rotate-180">
-                <ArrowRight className="w-4 h-4" />
-              </div>
-              <div className="w-14 h-14 rounded-2xl bg-cyan-950/70 border border-cyan-500/40 flex items-center justify-center text-3xl shadow-md">
-                {selectedLocale === "en" ? "🇬🇧" : "🇸🇦"}
-              </div>
+          {/* Language Switch Flag Indicators */}
+          <div className="flex items-center justify-center gap-4 py-2">
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center p-2 shadow-inner">
+              <AppleEmoji
+                name={currentLocale === "en" ? "flag_gb" : "flag_sa"}
+                size={32}
+              />
+              <span className="text-[10px] text-slate-400 font-semibold mt-1">
+                {currentLocale === "en" ? "EN" : "AR"}
+              </span>
             </div>
-
-            <div className="text-center space-y-1 max-w-xs">
-              <h3 className="text-lg font-extrabold text-white">
-                {t("modalTitle")}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                {t("modalDesc", {
-                  lang: selectedLocale === "ar" ? "العربية" : "English",
-                })}
-              </p>
+            
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#2478BC] to-[#42BEDD] text-white flex items-center justify-center shadow-md rtl:rotate-180">
+              <ArrowRight className="w-4 h-4" />
             </div>
-
-            <div className="w-full space-y-3 pt-2">
-              <PrimaryButton
-                onClick={handleConfirmSwitch}
-                isLoading={isUpdating}
-                fullWidth
-              >
-                {t("confirmRestart")}
-              </PrimaryButton>
-              <SecondaryButton
-                onClick={() => setShowConfirmModal(false)}
-                disabled={isUpdating}
-                fullWidth
-              >
-                {t("cancel")}
-              </SecondaryButton>
+            
+            <div className="w-16 h-16 rounded-2xl bg-[#0F294D] border border-cyan-400/50 flex flex-col items-center justify-center p-2 text-cyan-300 shadow-md shadow-cyan-500/20">
+              <AppleEmoji
+                name={selectedLocale === "en" ? "flag_gb" : "flag_sa"}
+                size={32}
+              />
+              <span className="text-[10px] text-cyan-300 font-bold mt-1">
+                {selectedLocale === "en" ? "EN" : "AR"}
+              </span>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Success Toast */}
-      {showSuccessToast && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-[#0D1829] border border-cyan-500/40 rounded-3xl p-6 flex flex-col items-center gap-3 shadow-2xl text-center">
-            <div className="w-14 h-14 rounded-full bg-cyan-400 text-[#070F1E] flex items-center justify-center shadow-lg shadow-cyan-400/40 animate-bounce">
-              <Check className="w-7 h-7 stroke-[3]" />
-            </div>
-            <h4 className="text-base font-bold text-white">
+          <DrawerHeader className="p-0 text-center items-center mt-2">
+            <DrawerTitle className="text-xl font-black text-white text-center tracking-tight">
+              {t("modalTitle")}
+            </DrawerTitle>
+            <DrawerDescription className="text-xs sm:text-sm text-slate-300 text-center max-w-xs mt-1 leading-relaxed">
+              {t("modalDesc", {
+                lang: selectedLocale === "ar" ? "العربية" : "English",
+              })}
+            </DrawerDescription>
+          </DrawerHeader>
+
+          <DrawerFooter className="p-0 w-full space-y-2.5 pt-5">
+            <PrimaryButton
+              onClick={handleConfirmSwitch}
+              isLoading={isUpdating}
+              fullWidth
+            >
+              {t("confirmRestart")}
+            </PrimaryButton>
+            <SecondaryButton
+              onClick={() => setShowConfirmDrawer(false)}
+              disabled={isUpdating}
+              fullWidth
+            >
+              {t("cancel")}
+            </SecondaryButton>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+
+      {/* Success Bottom Sheet (Shadcn Drawer) */}
+      <Drawer
+        open={showSuccessDrawer}
+        onOpenChange={setShowSuccessDrawer}
+        showSwipeHandle={true}
+      >
+        <DrawerContent className="bg-[#081629] border-t border-[#42BEDD]/60 text-white rounded-t-[28px] p-6 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] shadow-2xl flex flex-col items-center text-center">
+          {/* Top Handle */}
+          <div className="w-10 h-1 rounded-full bg-slate-600 mb-3" />
+
+          {/* Success Checkmark Badge */}
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#2478BC] to-[#42BEDD] text-white flex items-center justify-center shadow-xl shadow-cyan-500/30 ring-4 ring-cyan-400/20 my-2">
+            <Check className="w-8 h-8 stroke-[3]" />
+          </div>
+
+          <DrawerHeader className="p-0 text-center items-center mt-2">
+            <DrawerTitle className="text-xl font-black text-white text-center tracking-tight">
               {t("languageUpdated")}
-            </h4>
-            <p className="text-xs text-slate-400">
+            </DrawerTitle>
+            <DrawerDescription className="text-xs sm:text-sm text-slate-300 text-center mt-1">
               {t("languageSetTo", {
                 lang: selectedLocale === "ar" ? "العربية" : "English",
               })}
-            </p>
-          </div>
-        </div>
-      )}
+            </DrawerDescription>
+          </DrawerHeader>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }

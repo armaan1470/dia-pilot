@@ -98,7 +98,7 @@ export default function ProfileScreen() {
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
       {/* Top Profile Header */}
-      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-5 bg-gradient-to-b from-[#0080FF] via-[#0060D0] to-[#070F1E] shadow-xl z-20 flex-shrink-0">
+      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-5 bg-gradient-to-b from-[#0284C7] via-[#1E6BBF] to-[#173F8A] z-20 flex-shrink-0 select-none">
         <div className="flex items-center gap-3.5">
           <div className="w-15 h-15 rounded-[22px] bg-white/20 border-2 border-white/30 flex items-center justify-center text-2xl font-black text-white shadow-lg backdrop-blur-md">
             M

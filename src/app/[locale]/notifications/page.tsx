@@ -4,6 +4,7 @@ import * as React from "react";
 import { useLocale } from "next-intl";
 import { PageHeader } from "@/components/navigation/page-header";
 import { Switch } from "@/components/ui/switch";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 export default function NotificationsScreen() {
   const locale = useLocale();
@@ -75,8 +76,8 @@ export default function NotificationsScreen() {
         subtitle={isRtl ? "إدارة التنبيهات والتذكيرات" : "Manage your alerts"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
-        className="bg-gradient-to-b from-[#EA580C] via-[#C2410C] to-[#070F1E]"
+        theme="orange"
+        watermark={<AppleEmoji name="bell" size={80} />}
       />
 
       {/* Main Content Area */}

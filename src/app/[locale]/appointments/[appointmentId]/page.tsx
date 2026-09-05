@@ -13,6 +13,7 @@ import {
   UserCheck,
   AlertCircle,
 } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 interface AppointmentDetailPageProps {
   params: Promise<{ appointmentId: string }>;
@@ -38,7 +39,8 @@ export default function AppointmentDetailScreen({
         title={isRtl ? "تفاصيل الموعد" : "Appointment Details"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
+        theme="purple"
+        watermark={<AppleEmoji name="calendar" size={80} />}
       />
 
       {/* Main Content Area */}

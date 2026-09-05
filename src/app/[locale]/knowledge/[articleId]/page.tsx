@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/navigation/page-header";
 import { Badge } from "@/components/ui/badge";
 import { mockArticles } from "@/lib/mocks/articles";
 import { Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 interface ArticleDetailPageProps {
   params: Promise<{ articleId: string }>;
@@ -36,7 +37,8 @@ export default function ArticleDetailScreen({
         title={isRtl ? "تفاصيل المقال" : "Article Detail"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
+        theme="emerald"
+        watermark={<AppleEmoji name="documents" size={80} />}
       />
 
       {/* Main Content Area */}

@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MessageSquare, Phone, Mail, MapPin } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 export default function HelpScreen() {
   const router = useRouter();
@@ -63,7 +64,8 @@ export default function HelpScreen() {
         subtitle={isRtl ? "نحن هنا لمساعدتك" : "We're here for you"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
+        theme="slate"
+        watermark={<AppleEmoji name="question" size={80} />}
       />
 
       {/* Main Content Area */}

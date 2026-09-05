@@ -4,13 +4,10 @@ import * as React from "react";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
-import { PageHeader } from "@/components/navigation/page-header";
+import { PageHeader, HeaderTheme } from "@/components/navigation/page-header";
 import { mockServices } from "@/lib/mocks/services";
-import {
-  ArrowRight,
-  Phone,
-  Clock,
-} from "lucide-react";
+import { ArrowRight, Phone, Clock } from "lucide-react";
+import { AppleEmoji, type AppleEmojiName } from "@/components/ui/apple-emoji";
 
 interface ServiceDetailPageProps {
   params: Promise<{ serviceId: string }>;
@@ -32,11 +29,38 @@ export default function ServiceDetailScreen({
   const service =
     mockServices.find((s) => s.id === serviceId) || mockServices[0];
 
+  const getCategoryConfig = (
+    id: string
+  ): { theme: HeaderTheme; emojiName: AppleEmojiName } => {
+    switch (id) {
+      case "clinics":
+        return { theme: "cyan", emojiName: "stethoscope" };
+      case "appointments":
+        return { theme: "purple", emojiName: "calendar" };
+      case "eye-care":
+        return { theme: "teal", emojiName: "eye" };
+      case "foot-care":
+        return { theme: "orange", emojiName: "foot" };
+      case "nutrition":
+        return { theme: "emerald", emojiName: "apple" };
+      case "diabetes-management":
+        return { theme: "pink", emojiName: "syringe" };
+      case "oral-health":
+        return { theme: "rose", emojiName: "tooth" };
+      case "education":
+        return { theme: "amber", emojiName: "books" };
+      default:
+        return { theme: "blue", emojiName: "stethoscope" };
+    }
+  };
+
+  const { theme, emojiName } = getCategoryConfig(service.id);
+
   const topicsList = [
     {
       id: "01",
       title_ar: "استشارات السكري والمتابعة",
-      title_en: "Diabetes Consultation & Follow-up",
+      title_en: "Diabetes Clinic",
       desc_ar: "إدارة السكري من النوع 1 والنوع 2",
       desc_en: "Type 1 & Type 2 management",
     },
@@ -45,7 +69,7 @@ export default function ServiceDetailScreen({
       title_ar: "عيادة الغدد الصماء",
       title_en: "Endocrinology Clinic",
       desc_ar: "أخصائيو الهرمونات والغدة الدرقية",
-      desc_en: "Hormonal health specialists",
+      desc_en: "Hormone health specialists",
     },
     {
       id: "03",
@@ -93,7 +117,7 @@ export default function ServiceDetailScreen({
 
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
-      {/* Top Header */}
+      {/* Top Appbar Header matching CategoryScreen Figma */}
       <PageHeader
         title={isRtl ? service.name_ar : service.name_en}
         subtitle={
@@ -103,7 +127,8 @@ export default function ServiceDetailScreen({
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
+        theme={theme}
+        watermark={<AppleEmoji name={emojiName} size={80} />}
       />
 
       {/* Main Content Area */}

@@ -45,12 +45,12 @@ export default function LoginScreen() {
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/otp");
+      router.push("/chat");
     }, 600);
   };
 
   const handleGuestLogin = () => {
-    router.push("/dashboard");
+    router.push("/chat");
   };
 
   return (

@@ -2,23 +2,14 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Link, useRouter } from "@/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { PageHeader } from "@/components/navigation/page-header";
 import { BottomNavigation } from "@/components/navigation/bottom-navigation";
 import { ServiceCard } from "@/components/cards/service-card";
 import { SearchInput } from "@/components/inputs/search-input";
 import { mockServices } from "@/lib/mocks/services";
-import {
-  Stethoscope,
-  Calendar,
-  Eye,
-  Footprints,
-  Apple,
-  Syringe,
-  Sparkles,
-  BookOpen,
-} from "lucide-react";
+import { AppleEmoji, type AppleEmojiName } from "@/components/ui/apple-emoji";
 
 export default function ServicesScreen() {
   const router = useRouter();
@@ -28,26 +19,26 @@ export default function ServicesScreen() {
 
   const [searchQuery, setSearchQuery] = React.useState("");
 
-  const getServiceIcon = (iconName: string) => {
-    switch (iconName) {
-      case "Stethoscope":
-        return <Stethoscope className="w-5 h-5" />;
-      case "Calendar":
-        return <Calendar className="w-5 h-5" />;
-      case "Eye":
-        return <Eye className="w-5 h-5" />;
-      case "Footprints":
-        return <Footprints className="w-5 h-5" />;
-      case "Apple":
-        return <Apple className="w-5 h-5" />;
-      case "Syringe":
-        return <Syringe className="w-5 h-5" />;
-      case "Sparkles":
-        return <Sparkles className="w-5 h-5" />;
-      case "BookOpen":
-        return <BookOpen className="w-5 h-5" />;
+  const getServiceEmoji = (id: string): AppleEmojiName => {
+    switch (id) {
+      case "clinics":
+        return "stethoscope";
+      case "appointments":
+        return "calendar";
+      case "eye-care":
+        return "eye";
+      case "foot-care":
+        return "foot";
+      case "nutrition":
+        return "apple";
+      case "diabetes-management":
+        return "syringe";
+      case "oral-health":
+        return "tooth";
+      case "education":
+        return "books";
       default:
-        return <Stethoscope className="w-5 h-5" />;
+        return "stethoscope";
     }
   };
 
@@ -62,16 +53,17 @@ export default function ServicesScreen() {
 
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-[#070F1E] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
-      {/* Top Header */}
+      {/* Top Header - Appbar with crisp gradient and border */}
       <PageHeader
         title={t("title")}
         subtitle={t("subtitle")}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
-        variant="gradient"
+        theme="blue"
+        watermark={<AppleEmoji name="hospital" size={80} />}
       />
 
       {/* Main Content Area */}
-      <div className="px-5 space-y-4 pt-3">
+      <div className="px-5 space-y-4 pt-4">
         {/* AI Powered Online Banner */}
         <div
           onClick={() => router.push("/chat")}
@@ -111,23 +103,32 @@ export default function ServicesScreen() {
           placeholder={isRtl ? "ابحث في الخدمات..." : "Search services..."}
         />
 
-        {/* All Services Grid */}
+        {/* All Services Grid with Emojis and Watermarks */}
         <div className="space-y-2 pt-1">
           <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase px-1">
             {isRtl ? "جميع الخدمات" : "ALL SERVICES"}
           </h4>
 
           <div className="grid grid-cols-2 gap-3.5">
-            {filteredServices.map((service) => (
-              <ServiceCard
-                key={service.id}
-                title={isRtl ? service.name_ar : service.name_en}
-                gradient={service.gradient}
-                icon={getServiceIcon(service.iconName)}
-                watermarkIcon={getServiceIcon(service.iconName)}
-                onClick={() => router.push(`/services/${service.id}`)}
-              />
-            ))}
+            {filteredServices.map((service) => {
+              const emojiName = getServiceEmoji(service.id);
+              return (
+                <ServiceCard
+                  key={service.id}
+                  title={isRtl ? service.name_ar : service.name_en}
+                  gradient={service.gradient}
+                  icon={<AppleEmoji name={emojiName} size={24} />}
+                  watermarkIcon={
+                    <AppleEmoji
+                      name={emojiName}
+                      size={76}
+                      className="opacity-20"
+                    />
+                  }
+                  onClick={() => router.push(`/services/${service.id}`)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

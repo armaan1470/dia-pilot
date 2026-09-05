@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import { PageHeader } from "@/components/navigation/page-header";
 import { Switch } from "@/components/ui/switch";
 import { Trash2, ArrowRight } from "lucide-react";
+import { AppleEmoji } from "@/components/ui/apple-emoji";
 
 export default function PrivacyScreen() {
   const locale = useLocale();
@@ -64,8 +65,8 @@ export default function PrivacyScreen() {
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
-        variant="gradient"
-        className="bg-gradient-to-b from-[#F59E0B] via-[#D97706] to-[#070F1E]"
+        theme="amber"
+        watermark={<AppleEmoji name="lock" size={80} />}
       />
 
       {/* Main Content Area */}

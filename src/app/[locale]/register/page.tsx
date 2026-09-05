@@ -94,7 +94,7 @@ export default function RegisterScreen() {
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/otp");
+      router.push("/chat");
     }, 600);
   };
 

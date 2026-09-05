@@ -99,23 +99,23 @@ export default function ChatScreen() {
   return (
     <div className="flex flex-col flex-1 h-[100dvh] max-h-[100dvh] bg-[#070F1E] text-white relative overflow-hidden select-none pb-[max(4.5rem,calc(3.75rem+env(safe-area-inset-bottom,0px)))]">
       {/* Header */}
-      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-3.5 flex items-center justify-between bg-gradient-to-b from-[#0080FF] via-[#0060D0] to-[#070F1E] shadow-lg z-20 flex-shrink-0">
+      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-4 flex items-center justify-between bg-gradient-to-b from-[#0284C7] via-[#1E6BBF] to-[#173F8A] z-20 flex-shrink-0 select-none">
         <div>
-          <span className="text-[11px] font-bold tracking-widest text-cyan-200 uppercase block">
+          <span className="text-[11px] font-black tracking-widest text-cyan-100/90 uppercase block font-heading">
             {isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           </span>
-          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-            {t("title")}
+          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+            {isRtl ? "المساعد الذكي" : "AI Assistant"}
           </h1>
         </div>
 
-        <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 p-1 flex items-center justify-center backdrop-blur-md shadow-md">
+        <div className="w-11 h-11 rounded-full bg-white/15 border border-white/25 p-1 flex items-center justify-center backdrop-blur-md shadow-lg ring-2 ring-cyan-400/20">
           <Image
             src="/mascots/Robo head.png"
             alt="DiaPilot Assistant"
-            width={32}
-            height={32}
-            className="object-contain"
+            width={34}
+            height={34}
+            className="object-contain drop-shadow-md"
           />
         </div>
       </div>
