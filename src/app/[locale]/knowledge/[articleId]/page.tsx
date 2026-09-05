@@ -61,7 +61,7 @@ export default function ArticleDetailScreen({
         </div>
 
         {/* Key Takeaways Box */}
-        <div className="rounded-2xl bg-brand-card border border-brand-border p-4 space-y-2 shadow-md">
+        <div className="rounded-lg bg-brand-card border border-brand-border p-4 space-y-2 shadow-md">
           <div className="flex items-center gap-2 text-brand-teal text-xs font-bold uppercase tracking-wider">
             <CheckCircle2 className="w-4 h-4" />
             <span>{isRtl ? "النقاط الرئيسية" : "Key Takeaways"}</span>
@@ -72,7 +72,7 @@ export default function ArticleDetailScreen({
         </div>
 
         {/* Body Content */}
-        <div className="rounded-[24px] bg-brand-card border border-brand-border p-5 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+        <div className="rounded-lg bg-brand-card border border-brand-border p-5 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <p>{isRtl ? article.content_ar : article.content_en}</p>
 
           <p>
@@ -85,7 +85,7 @@ export default function ArticleDetailScreen({
         {/* Ask AI Contextual Prompt Card */}
         <div
           onClick={() => router.push("/chat")}
-          className="mt-6 rounded-2xl bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex items-center justify-between shadow-xl shadow-brand-blue/30 cursor-pointer active:scale-[0.98] transition-all"
+          className="mt-6 rounded-lg bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex items-center justify-between shadow-xl shadow-brand-blue/30 cursor-pointer active:scale-[0.98] transition-all"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white/20 p-1 flex items-center justify-center backdrop-blur-md">

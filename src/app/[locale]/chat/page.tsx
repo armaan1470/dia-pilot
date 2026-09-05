@@ -143,7 +143,7 @@ export default function ChatScreen() {
             </div>
 
             {/* Sample Prompt Box */}
-            <div className="w-full max-w-sm rounded-2xl bg-brand-card border border-brand-border p-3.5 text-xs text-slate-300 italic shadow-inner">
+            <div className="w-full max-w-sm rounded-lg bg-brand-card border border-brand-border p-3.5 text-xs text-slate-300 italic shadow-inner">
               {t("samplePrompt")}
             </div>
 
@@ -185,7 +185,7 @@ export default function ChatScreen() {
                       <div className="ms-10 me-auto max-w-[85%]">
                         <Link
                           href={msg.actionCard.href}
-                          className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border text-brand-teal text-xs font-semibold shadow-md transition-all active:scale-[0.98]"
+                          className="flex items-center justify-between gap-3 p-3 rounded-lg bg-brand-card hover:bg-brand-card-light border border-brand-border text-brand-teal text-xs font-semibold shadow-md transition-all active:scale-[0.98]"
                         >
                           <div className="flex items-center gap-2">
                             <Stethoscope className="w-4 h-4 text-brand-teal" />
@@ -213,14 +213,14 @@ export default function ChatScreen() {
             e.preventDefault();
             handleSendMessage();
           }}
-          className="relative flex items-center w-full bg-brand-card border border-brand-border rounded-full p-1.5 shadow-2xl"
+          className="relative flex items-center w-full bg-brand-input border border-brand-border rounded-lg p-1.5 shadow-2xl"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t("placeholder")}
-            className="flex-1 bg-transparent border-none text-white text-sm px-4 placeholder:text-slate-500 focus:outline-none"
+            className="flex-1 bg-transparent border-none text-white text-sm px-4 placeholder:text-slate-400 focus:outline-none"
           />
 
           {input.trim() ? (

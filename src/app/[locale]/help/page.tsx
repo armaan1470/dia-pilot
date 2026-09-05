@@ -75,7 +75,7 @@ export default function HelpScreen() {
           {/* Chat Now */}
           <div
             onClick={() => router.push("/chat")}
-            className="rounded-[22px] bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-lg bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white">
               <MessageSquare className="w-4 h-4" />
@@ -93,7 +93,7 @@ export default function HelpScreen() {
           {/* Call Us */}
           <a
             href="tel:+9668001234567"
-            className="rounded-[22px] bg-gradient-to-br from-[#06B6D4] to-[#0284C7] p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-lg bg-gradient-to-br from-[#06B6D4] to-[#0284C7] p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white">
               <Phone className="w-4 h-4" />
@@ -111,7 +111,7 @@ export default function HelpScreen() {
           {/* Email */}
           <a
             href="mailto:support@diapilot.sa"
-            className="rounded-[22px] bg-gradient-to-br from-[#10B981] to-[#059669] p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-lg bg-gradient-to-br from-[#10B981] to-[#059669] p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white">
               <Mail className="w-4 h-4" />
@@ -129,7 +129,7 @@ export default function HelpScreen() {
           {/* Visit Us */}
           <div
             onClick={() => router.push("/services/clinics")}
-            className="rounded-[22px] bg-brand-card border border-brand-border p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
+            className="rounded-lg bg-brand-card border border-brand-border p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-brand-teal">
               <MapPin className="w-4 h-4" />
@@ -156,7 +156,7 @@ export default function HelpScreen() {
               <AccordionItem
                 key={faq.id}
                 value={faq.id}
-                className="rounded-2xl bg-brand-card border border-brand-border px-4 py-1 border-none shadow-sm"
+                className="rounded-lg bg-brand-card border border-brand-border px-4 py-1 border-none shadow-sm"
               >
                 <AccordionTrigger className="text-xs sm:text-sm font-bold text-white hover:no-underline py-3 text-left rtl:text-right">
                   {isRtl ? faq.q_ar : faq.q_en}

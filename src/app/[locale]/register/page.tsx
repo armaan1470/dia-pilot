@@ -146,7 +146,7 @@ export default function RegisterScreen() {
       </div>
 
       {/* Main Card Container */}
-      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
+      <div className="w-full max-w-sm mx-auto rounded-xl bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
         <h2 className="text-lg font-bold text-white tracking-tight">
           {step === 1 ? t("tellUsAboutYou") : t("setUpYourAccount")}
         </h2>
@@ -187,7 +187,7 @@ export default function RegisterScreen() {
                     type="button"
                     onClick={() => setGender(item.key as any)}
                     className={cn(
-                      "py-2.5 px-2 rounded-2xl text-xs font-semibold transition-all duration-200 border text-center cursor-pointer",
+                      "py-2.5 px-2 rounded-lg text-xs font-semibold transition-all duration-200 border text-center cursor-pointer",
                       gender === item.key
                         ? "bg-brand-card-light border-brand-teal text-brand-teal shadow-sm shadow-brand-teal/20"
                         : "bg-brand-card-light border-brand-border text-slate-300 hover:border-slate-500"
@@ -217,7 +217,7 @@ export default function RegisterScreen() {
                     type="button"
                     onClick={() => setDiabetesType(item.key as any)}
                     className={cn(
-                      "py-2 px-3 rounded-2xl text-xs font-semibold transition-all duration-200 border cursor-pointer",
+                      "py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200 border cursor-pointer",
                       diabetesType === item.key
                         ? "bg-brand-card-light border-brand-teal text-brand-teal shadow-sm shadow-brand-teal/20"
                         : "bg-brand-card-light border-brand-border text-slate-300 hover:border-slate-500"
@@ -251,7 +251,7 @@ export default function RegisterScreen() {
                 {t("mobileNumber")}
               </label>
               <div className="flex items-center gap-2">
-                <div className="h-13 px-3.5 rounded-2xl bg-brand-card-light border border-brand-border text-white text-sm font-semibold flex items-center justify-center select-none">
+                <div className="h-13 px-3.5 rounded-lg bg-brand-card-light border border-brand-border text-white text-sm font-semibold flex items-center justify-center select-none">
                   {t("phoneCode")}
                 </div>
                 <div className="flex-1">

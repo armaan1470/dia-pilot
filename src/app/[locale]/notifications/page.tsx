@@ -85,7 +85,7 @@ export default function NotificationsScreen() {
         {notificationItems.map((item) => (
           <div
             key={item.key}
-            className="w-full rounded-[22px] bg-brand-card border border-brand-border p-4 flex items-center justify-between gap-3"
+            className="w-full rounded-lg bg-brand-card border border-brand-border p-4 flex items-center justify-between gap-3"
           >
             <div className="flex flex-col min-w-0 pr-2">
               <h4 className="text-sm font-bold text-white leading-tight">

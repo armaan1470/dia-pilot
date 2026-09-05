@@ -100,7 +100,7 @@ export default function ProfileScreen() {
       {/* Top Profile Header */}
       <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-5 bg-gradient-to-b from-brand-teal via-brand-blue to-brand-dark-blue z-20 flex-shrink-0 select-none">
         <div className="flex items-center gap-3.5">
-          <div className="w-15 h-15 rounded-[22px] bg-white/20 border-2 border-white/30 flex items-center justify-center text-2xl font-black text-white shadow-lg backdrop-blur-md">
+          <div className="w-15 h-15 rounded-lg bg-white/20 border-2 border-white/30 flex items-center justify-center text-2xl font-black text-white shadow-lg backdrop-blur-md">
             M
           </div>
           <div className="space-y-0.5">
@@ -124,7 +124,7 @@ export default function ProfileScreen() {
 
         {/* 3 Metrics Cards */}
         <div className="grid grid-cols-3 gap-2.5 mt-4">
-          <div className="rounded-2xl bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
+          <div className="rounded-lg bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
             <span className="text-lg font-black text-white block leading-tight">
               12
             </span>
@@ -133,7 +133,7 @@ export default function ProfileScreen() {
             </span>
           </div>
 
-          <div className="rounded-2xl bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
+          <div className="rounded-lg bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
             <span className="text-lg font-black text-white block leading-tight">
               3
             </span>
@@ -142,7 +142,7 @@ export default function ProfileScreen() {
             </span>
           </div>
 
-          <div className="rounded-2xl bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
+          <div className="rounded-lg bg-white/10 border border-white/15 p-2.5 text-center backdrop-blur-md">
             <span className="text-lg font-black text-white block leading-tight">
               8.2%
             </span>
@@ -159,7 +159,7 @@ export default function ProfileScreen() {
           <div
             key={item.id}
             onClick={() => router.push(item.href as any)}
-            className="w-full rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
+            className="w-full rounded-lg bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
           >
             <div className="flex items-center gap-3 min-w-0">
               <div
@@ -186,7 +186,7 @@ export default function ProfileScreen() {
         {/* Log Out Button */}
         <div
           onClick={() => router.push("/login")}
-          className="w-full rounded-2xl bg-brand-card hover:bg-rose-950/40 border border-rose-900/30 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all mt-4 group"
+          className="w-full rounded-lg bg-brand-card hover:bg-rose-950/40 border border-rose-900/30 p-3.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all mt-4 group"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-950/80 border border-rose-800/40 text-rose-400 flex items-center justify-center flex-shrink-0">

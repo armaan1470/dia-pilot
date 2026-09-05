@@ -75,7 +75,7 @@ export default function PrivacyScreen() {
         {privacyItems.map((item) => (
           <div
             key={item.key}
-            className="w-full rounded-[22px] bg-brand-card border border-brand-border p-4 flex items-center justify-between gap-3"
+            className="w-full rounded-lg bg-brand-card border border-brand-border p-4 flex items-center justify-between gap-3"
           >
             <div className="flex flex-col min-w-0 pr-2">
               <h4 className="text-sm font-bold text-white leading-tight">
@@ -95,7 +95,7 @@ export default function PrivacyScreen() {
         ))}
 
         {/* Delete Account Danger Box */}
-        <div className="rounded-[24px] bg-rose-950/20 border border-rose-900/40 p-5 space-y-3 mt-4">
+        <div className="rounded-lg bg-rose-950/20 border border-rose-900/40 p-5 space-y-3 mt-4">
           <div>
             <h4 className="text-sm font-bold text-rose-300">
               {isRtl ? "حذف الحساب والبيانات" : "Delete Account"}

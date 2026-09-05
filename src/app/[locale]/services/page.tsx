@@ -67,7 +67,7 @@ export default function ServicesScreen() {
         {/* AI Powered Online Banner */}
         <div
           onClick={() => router.push("/chat")}
-          className="relative w-full rounded-[24px] bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 shadow-xl shadow-brand-blue/20 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-between"
+          className="relative w-full rounded-lg bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 shadow-xl shadow-brand-blue/20 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-between"
         >
           <div className="flex flex-col gap-1 z-10">
             <div className="inline-flex items-center gap-1.5 bg-black/20 px-2.5 py-0.5 rounded-full w-fit">

@@ -61,7 +61,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
               key={tab.key}
               href={tab.href}
               className={cn(
-                "flex flex-col items-center justify-center gap-1 min-w-[72px] py-1 px-3 rounded-2xl transition-all duration-200 active:scale-95 group",
+                "flex flex-col items-center justify-center gap-1 min-w-[72px] py-1 px-3 rounded-lg transition-all duration-200 active:scale-95 group",
                 isActive ? "text-cyan-400" : "text-slate-400 hover:text-slate-200"
               )}
             >

@@ -46,7 +46,7 @@ export default function AppointmentDetailScreen({
       {/* Main Content Area */}
       <div className="px-5 space-y-4 pt-4">
         {/* Main Appointment Summary Card */}
-        <div className="rounded-[28px] bg-brand-card border border-brand-border p-5 space-y-4 shadow-xl">
+        <div className="rounded-lg bg-brand-card border border-brand-border p-5 space-y-4 shadow-xl">
           <div className="flex items-start justify-between">
             <div>
               <h2 className="text-lg font-black text-white">
@@ -109,7 +109,7 @@ export default function AppointmentDetailScreen({
         </div>
 
         {/* Preparation Instructions Card */}
-        <div className="rounded-2xl bg-brand-card border border-brand-border p-4 space-y-2">
+        <div className="rounded-lg bg-brand-card border border-brand-border p-4 space-y-2">
           <div className="flex items-center gap-2 text-brand-teal text-xs font-bold uppercase tracking-wider">
             <AlertCircle className="w-4 h-4" />
             <span>{isRtl ? "تعليمات التحضير للموعد" : "Appointment Preparation"}</span>

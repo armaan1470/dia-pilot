@@ -23,7 +23,7 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
         {items.map((_, i) => (
           <div
             key={i}
-            className="h-[140px] rounded-[24px] bg-brand-card border border-brand-border p-4 flex flex-col justify-between"
+            className="h-[140px] rounded-lg bg-brand-card border border-brand-border p-4 flex flex-col justify-between"
           >
             <Skeleton className="w-10 h-10 rounded-xl bg-brand-card-light" />
             <div className="space-y-2">
@@ -42,7 +42,7 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
         {items.map((_, i) => (
           <div
             key={i}
-            className="h-20 rounded-2xl bg-brand-card border border-brand-border p-4 flex items-center gap-3.5"
+            className="h-20 rounded-lg bg-brand-card border border-brand-border p-4 flex items-center gap-3.5"
           >
             <Skeleton className="w-11 h-11 rounded-xl bg-brand-card-light flex-shrink-0" />
             <div className="flex-1 space-y-2">
@@ -60,10 +60,10 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
       <div className={cn("flex flex-col gap-4 w-full py-4", className)}>
         <div className="flex items-start gap-2.5 max-w-[80%]">
           <Skeleton className="w-8 h-8 rounded-full bg-slate-800/80 flex-shrink-0" />
-          <Skeleton className="h-16 w-52 rounded-[20px] rounded-tl-[4px] bg-slate-800/80" />
+          <Skeleton className="h-16 w-52 rounded-lg rounded-tl-[4px] bg-slate-800/80" />
         </div>
         <div className="flex justify-end w-full">
-          <Skeleton className="h-12 w-44 rounded-[20px] rounded-br-[4px] bg-cyan-950/60" />
+          <Skeleton className="h-12 w-44 rounded-lg rounded-br-[4px] bg-cyan-950/60" />
         </div>
       </div>
     );

@@ -44,7 +44,7 @@ export function DesktopOnlyNotice() {
 
         {/* Mascot & Device Graphic */}
         <div className="relative my-2">
-          <div className="relative w-36 h-36 rounded-3xl bg-gradient-to-tr from-brand-sheet-from via-brand-card to-brand-dark p-2 border border-brand-teal/30 shadow-2xl shadow-brand-dark/40 flex items-center justify-center">
+          <div className="relative w-36 h-36 rounded-lg bg-gradient-to-tr from-brand-sheet-from via-brand-card to-brand-dark p-2 border border-brand-teal/30 shadow-2xl shadow-brand-dark/40 flex items-center justify-center">
             <Image
               src="/mascots/image 1.png"
               alt="DiaPilot Companion"
@@ -54,7 +54,7 @@ export function DesktopOnlyNotice() {
               priority
             />
             {/* Phone Badge floating icon */}
-            <div className="absolute -bottom-3 -right-3 rtl:-right-auto rtl:-left-3 w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-teal to-brand-blue flex items-center justify-center text-brand-dark shadow-lg shadow-brand-blue/30">
+            <div className="absolute -bottom-3 -right-3 rtl:-right-auto rtl:-left-3 w-11 h-11 rounded-lg bg-gradient-to-tr from-brand-teal to-brand-blue flex items-center justify-center text-brand-dark shadow-lg shadow-brand-blue/30">
               <Smartphone className="w-6 h-6 stroke-[2.5]" />
             </div>
           </div>
@@ -75,14 +75,14 @@ export function DesktopOnlyNotice() {
         </div>
 
         {/* QR Code / Share Card */}
-        <div className="w-full max-w-sm rounded-3xl bg-brand-dark/95 border border-brand-border p-5 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-4">
+        <div className="w-full max-w-sm rounded-lg bg-brand-dark/95 border border-brand-border p-5 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 text-xs font-semibold text-brand-teal">
             <QrCode className="w-4 h-4" />
             <span>{isRtl ? "امسح الرمز بكاميرا الجوال" : "Scan with your phone camera"}</span>
           </div>
 
           {/* Clean Stylized QR Code Frame */}
-          <div className="p-3 bg-white rounded-2xl shadow-inner flex items-center justify-center">
+          <div className="p-3 bg-white rounded-lg shadow-inner flex items-center justify-center">
             {/* Embedded High-Contrast QR Code Visual */}
             <svg
               viewBox="0 0 120 120"

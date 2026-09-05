@@ -27,7 +27,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     <Card
       onClick={onClick}
       className={cn(
-        "w-full rounded-2xl bg-brand-card border border-brand-border hover:border-brand-teal/40 p-4 flex flex-col gap-2.5 cursor-pointer transition-all duration-200 active:scale-[0.99] text-white shadow-sm hover:shadow-brand-blue/20",
+        "w-full rounded-lg bg-brand-card border border-brand-border hover:border-brand-teal/40 p-4 flex flex-col gap-2.5 cursor-pointer transition-all duration-200 active:scale-[0.99] text-white shadow-sm hover:shadow-brand-blue/20",
         className
       )}
     >

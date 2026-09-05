@@ -90,7 +90,7 @@ export default function LoginScreen() {
       </div>
 
       {/* Login Card Form */}
-      <div className="w-full max-w-sm mx-auto rounded-[28px] bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
+      <div className="w-full max-w-sm mx-auto rounded-xl bg-brand-card border border-brand-border p-5 sm:p-6 shadow-2xl flex flex-col gap-4 z-10 my-auto">
         <div className="space-y-0.5">
           <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
             {t("welcomeBack")}

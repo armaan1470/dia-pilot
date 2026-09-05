@@ -122,7 +122,7 @@ export default function LanguageScreen() {
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-md bg-white/5 border border-white/10 flex items-center justify-center shadow-inner flex-shrink-0">
+                <div className="w-11 h-11 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shadow-inner flex-shrink-0">
                   <AppleEmoji name="flag_gb" size={26} />
                 </div>
                 <div className="flex flex-col">
@@ -150,7 +150,7 @@ export default function LanguageScreen() {
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-md bg-white/5 border border-white/10 flex items-center justify-center shadow-inner flex-shrink-0">
+                <div className="w-11 h-11 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shadow-inner flex-shrink-0">
                   <AppleEmoji name="flag_sa" size={26} />
                 </div>
                 <div className="flex flex-col">

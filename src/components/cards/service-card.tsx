@@ -48,7 +48,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <Card
       onClick={onClick}
       className={cn(
-        "relative w-full h-[140px] sm:h-[150px] rounded-[24px] p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
+        "relative w-full h-[140px] sm:h-[150px] rounded-lg p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
         gradientStyles[gradient],
         className
       )}

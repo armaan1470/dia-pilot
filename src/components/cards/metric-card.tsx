@@ -26,7 +26,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   return (
     <Card
       className={cn(
-        "rounded-2xl bg-brand-card border border-brand-border p-3.5 flex flex-col justify-between gap-2 text-white shadow-sm",
+        "rounded-lg bg-brand-card border border-brand-border p-3.5 flex flex-col justify-between gap-2 text-white shadow-sm",
         className
       )}
     >

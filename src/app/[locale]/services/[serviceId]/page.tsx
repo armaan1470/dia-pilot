@@ -134,7 +134,7 @@ export default function ServiceDetailScreen({
       {/* Main Content Area */}
       <div className="px-5 space-y-3.5 pt-4">
         {/* Service Overview Card */}
-        <div className="rounded-[24px] bg-brand-card border border-brand-border p-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+        <div className="rounded-lg bg-brand-card border border-brand-border p-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <p>{isRtl ? service.description_ar : service.description_en}</p>
 
           <div className="flex items-center gap-4 mt-3 pt-3 border-t border-brand-border/40 text-xs text-slate-400">
@@ -159,7 +159,7 @@ export default function ServiceDetailScreen({
             <div
               key={topic.id}
               onClick={() => router.push("/chat")}
-              className="w-full rounded-2xl bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-4 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
+              className="w-full rounded-lg bg-brand-card hover:bg-brand-card-light border border-brand-border hover:border-brand-teal/40 p-4 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99] transition-all shadow-sm group"
             >
               <div className="flex items-center gap-3.5 min-w-0">
                 <div className="w-8 h-8 rounded-xl bg-brand-card-light border border-brand-border text-brand-teal text-xs font-bold flex items-center justify-center flex-shrink-0">
@@ -185,7 +185,7 @@ export default function ServiceDetailScreen({
         {/* Bottom Floating Ask AI Assistant Card */}
         <div
           onClick={() => router.push("/chat")}
-          className="mt-6 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 p-4 flex items-center justify-between shadow-xl shadow-cyan-900/30 cursor-pointer active:scale-[0.98] transition-all"
+          className="mt-6 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 p-4 flex items-center justify-between shadow-xl shadow-cyan-900/30 cursor-pointer active:scale-[0.98] transition-all"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white/20 p-1 flex items-center justify-center backdrop-blur-md">
