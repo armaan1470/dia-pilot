@@ -26,25 +26,25 @@ export function DesktopOnlyNotice() {
   };
 
   return (
-    <div className="hidden md:flex min-h-[100dvh] w-full bg-[#040812] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,180,255,0.18),rgba(255,255,255,0))] text-white flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden select-none">
+    <div className="hidden md:flex min-h-[100dvh] w-full bg-brand-dark bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,180,255,0.18),rgba(255,255,255,0))] text-white flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden select-none">
       
       {/* Background Glowing Ambient Orbs */}
-      <div className="absolute -top-32 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 left-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 right-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-xl w-full flex flex-col items-center text-center relative z-10 gap-6">
         
         {/* Top Branding Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#0A1B33]/80 border border-cyan-500/30 backdrop-blur-md shadow-lg shadow-cyan-950/40">
-          <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-xs font-bold tracking-widest text-cyan-300 uppercase">
+        <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-card/80 border border-brand-teal/30 backdrop-blur-md shadow-lg shadow-brand-dark/40">
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-teal animate-pulse" />
+          <span className="text-xs font-bold tracking-widest text-brand-teal uppercase">
             {isRtl ? "تطبيق ويب مخصص للجوال فقط" : "MOBILE WEB APP ONLY"}
           </span>
         </div>
 
         {/* Mascot & Device Graphic */}
         <div className="relative my-2">
-          <div className="relative w-36 h-36 rounded-3xl bg-gradient-to-tr from-[#0C1E38] via-[#13315C] to-[#071326] p-2 border border-cyan-400/30 shadow-2xl shadow-cyan-900/40 flex items-center justify-center">
+          <div className="relative w-36 h-36 rounded-3xl bg-gradient-to-tr from-brand-sheet-from via-brand-card to-brand-dark p-2 border border-brand-teal/30 shadow-2xl shadow-brand-dark/40 flex items-center justify-center">
             <Image
               src="/mascots/image 1.png"
               alt="DiaPilot Companion"
@@ -54,7 +54,7 @@ export function DesktopOnlyNotice() {
               priority
             />
             {/* Phone Badge floating icon */}
-            <div className="absolute -bottom-3 -right-3 rtl:-right-auto rtl:-left-3 w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-600 flex items-center justify-center text-[#040812] shadow-lg shadow-cyan-500/30">
+            <div className="absolute -bottom-3 -right-3 rtl:-right-auto rtl:-left-3 w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-teal to-brand-blue flex items-center justify-center text-brand-dark shadow-lg shadow-brand-blue/30">
               <Smartphone className="w-6 h-6 stroke-[2.5]" />
             </div>
           </div>

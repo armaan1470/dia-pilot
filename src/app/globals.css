@@ -17,8 +17,14 @@
   --color-brand-dark-blue: #173F8A;
   --color-brand-dark: #0C1829;
   --color-brand-card: #1D2838;
-  --color-brand-card-light: #2F3948;
-  --color-brand-border: #59616D;
+  --color-brand-input: #2A3646;
+  --color-brand-card-light: #2D3746;
+  --color-brand-card-hover: #374354;
+  --color-brand-border: #2E3B4D;
+  --color-brand-sheet-from: #0E1F38;
+  --color-brand-sheet-to: #081629;
+  --color-brand-checkbox-from: #112A3F;
+  --color-brand-checkbox-to: #3D516D;
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -50,7 +56,7 @@
   --background: #0C1829;
   --foreground: #ffffff;
 
-  --card: #142236;
+  --card: #1D2838;
   --card-foreground: #ffffff;
 
   --popover: #0C1829;
@@ -59,10 +65,10 @@
   --primary: #2478BC;
   --primary-foreground: #ffffff;
 
-  --secondary: #1E2D44;
+  --secondary: #2D3746;
   --secondary-foreground: #e2e8f0;
 
-  --muted: #142236;
+  --muted: #1D2838;
   --muted-foreground: #94a3b8;
 
   --accent: #42BEDD;
@@ -71,8 +77,8 @@
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
-  --border: #59616D;
-  --input: #2F3948;
+  --border: #2E3B4D;
+  --input: #2A3646;
   --ring: #42BEDD;
 
   --radius: 1rem;

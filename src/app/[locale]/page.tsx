@@ -12,11 +12,11 @@ export default function SplashScreen() {
   const isRtl = locale === "ar";
 
   return (
-    <div className="flex flex-col flex-1 min-h-dvh bg-[linear-gradient(160deg,#42BEDD_0%,#1E6BBF_45%,#0C1829_100%)] text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2rem,env(safe-area-inset-bottom,0px))]">
+    <div className="flex flex-col flex-1 min-h-dvh bg-diapilot-gradient text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2rem,env(safe-area-inset-bottom,0px))]">
       {/* Brand Header */}
       <div className="pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 flex items-center justify-between z-20">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-cyan-950/60 border border-cyan-400/40 p-0.5 flex items-center justify-center shadow-md">
+          <div className="w-8 h-8 rounded-full bg-brand-sheet-from/80 border border-brand-teal/40 p-0.5 flex items-center justify-center shadow-md">
             <Image
               src="/mascots/Robo head.png"
               alt="DiaPilot Mascot"
@@ -75,8 +75,8 @@ export default function SplashScreen() {
               className="inline-flex items-center gap-3.5 pl-2.5 pr-5.5 py-2.5 rounded-full bg-white/[0.18] hover:bg-white/[0.28] border border-white/40 backdrop-blur-md text-white font-bold text-sm sm:text-base transition-all active:scale-[0.98] group"
             >
               {!isRtl && (
-                <div className="w-8 h-8 rounded-full bg-white text-[#1E6BBF] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
-                  <ArrowRight className="w-4 h-4 text-[#1E6BBF]" />
+                <div className="w-8 h-8 rounded-full bg-white text-brand-blue flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+                  <ArrowRight className="w-4 h-4 text-brand-blue" />
                 </div>
               )}
 
@@ -85,8 +85,8 @@ export default function SplashScreen() {
               </span>
 
               {isRtl && (
-                <div className="w-8 h-8 rounded-full bg-white text-[#1E6BBF] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
-                  <ArrowRight className="w-4 h-4 text-[#1E6BBF] rotate-180" />
+                <div className="w-8 h-8 rounded-full bg-white text-brand-blue flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+                  <ArrowRight className="w-4 h-4 text-brand-blue rotate-180" />
                 </div>
               )}
             </Link>
@@ -99,12 +99,12 @@ export default function SplashScreen() {
         {/* Orbit Planet & Core Pillars Visual with organic spacing */}
         <div className="relative w-full max-w-[280px] sm:max-w-[310px] aspect-square mx-auto mt-12 flex items-center justify-center">
           {/* Outer Orbital Rings */}
-          <div className="absolute inset-0 rounded-full border border-cyan-200/25" />
-          <div className="absolute inset-8 rounded-full border border-cyan-200/30" />
+          <div className="absolute inset-0 rounded-full border border-brand-teal/25" />
+          <div className="absolute inset-8 rounded-full border border-brand-teal/30" />
 
           {/* Center Robot Hero Mascot Avatar */}
-          <div className="relative w-32 sm:w-36 h-32 sm:h-36 rounded-full bg-gradient-to-tr from-[#1E40AF] via-[#0284C7] to-[#38BDF8] p-1.5 shadow-xl shadow-cyan-900/30 flex items-center justify-center ring-4 ring-white/20">
-            <div className="w-full h-full rounded-full bg-[#0E3A74] flex items-center justify-center overflow-hidden relative">
+          <div className="relative w-32 sm:w-36 h-32 sm:h-36 rounded-full bg-gradient-to-tr from-brand-dark-blue via-brand-blue to-brand-cyan p-1.5 shadow-xl shadow-brand-blue/30 flex items-center justify-center ring-4 ring-white/20">
+            <div className="w-full h-full rounded-full bg-brand-sheet-from flex items-center justify-center overflow-hidden relative">
               <Image
                 src="/mascots/image 1.png"
                 alt="DiaPilot Doctor Robot"

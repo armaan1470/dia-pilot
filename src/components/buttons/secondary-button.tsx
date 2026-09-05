@@ -37,7 +37,7 @@ export const SecondaryButton = React.forwardRef<
         disabled={disabled || isLoading}
         variant="secondary"
         className={cn(
-          "min-h-12 h-auto rounded-lg font-semibold text-sm transition-all duration-200 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 px-6 bg-brand-card-light hover:bg-brand-card hover:brightness-110 text-slate-300 border border-brand-border",
+          "min-h-12 sm:min-h-13 h-auto rounded-2xl font-semibold text-sm sm:text-base transition-all duration-200 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 px-6 bg-brand-card-light hover:bg-brand-card-hover text-slate-300 border border-brand-border",
           fullWidth ? "w-full" : "w-auto",
           disabled && "opacity-50 cursor-not-allowed pointer-events-none shadow-none",
           className

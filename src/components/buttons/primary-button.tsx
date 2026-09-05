@@ -38,7 +38,7 @@ export const PrimaryButton = React.forwardRef<
         ref={ref}
         disabled={disabled || isLoading}
         className={cn(
-          "h-12 rounded-lg font-bold text-sm transition-all duration-200 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 px-6",
+          "h-12 sm:h-13 rounded-2xl font-bold text-sm sm:text-base transition-all duration-200 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 px-6",
           fullWidth ? "w-full" : "w-auto",
           variantStyle === "gradient" &&
             "bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue shadow-[0_6px_18px_rgba(36,120,188,0.28)] hover:brightness-110 text-white",

@@ -46,7 +46,7 @@ export const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     <div
       className={cn(
         sizeClasses,
-        "rounded-full bg-gradient-to-br from-[#112A3F] to-[#3D516D] flex items-center justify-center flex-shrink-0 transition-all duration-200",
+        "rounded-full bg-gradient-to-br from-brand-checkbox-from to-brand-checkbox-to flex items-center justify-center flex-shrink-0 transition-all duration-200",
         className
       )}
     />

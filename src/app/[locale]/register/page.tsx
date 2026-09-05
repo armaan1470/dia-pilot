@@ -8,7 +8,8 @@ import { TextInput } from "@/components/inputs/text-input";
 import { EmailInput } from "@/components/inputs/email-input";
 import { PasswordInput } from "@/components/inputs/password-input";
 import { BackButton } from "@/components/navigation/back-button";
-import { User, Calendar, ArrowRight, Check } from "lucide-react";
+import { CustomCheckbox } from "@/components/ui/custom-checkbox";
+import { User, Calendar, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function RegisterScreen() {
@@ -314,14 +315,9 @@ export default function RegisterScreen() {
               <button
                 type="button"
                 onClick={() => setAgreed((prev) => !prev)}
-                className={cn(
-                  "w-5 h-5 rounded-lg border flex items-center justify-center mt-0.5 transition-all cursor-pointer flex-shrink-0",
-                  agreed
-                    ? "bg-brand-teal border-brand-teal text-brand-dark"
-                    : "border-brand-border bg-brand-card-light"
-                )}
+                className="mt-0.5 cursor-pointer flex-shrink-0"
               >
-                {agreed && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                <CustomCheckbox checked={agreed} size="sm" />
               </button>
 
               <p className="text-xs text-slate-300 leading-relaxed">
