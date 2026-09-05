@@ -1,0 +1,248 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import { Link, useRouter } from "@/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
+import { BottomNavigation } from "@/components/navigation/bottom-navigation";
+import { ChatBubbleUser } from "@/components/chat/chat-bubble-user";
+import { ChatBubbleAI } from "@/components/chat/chat-bubble-ai";
+import { SuggestionChip } from "@/components/chat/suggestion-chip";
+import { TypingIndicator } from "@/components/chat/typing-indicator";
+import { Send, Mic, ChevronRight, Stethoscope } from "lucide-react";
+
+interface Message {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp?: string;
+  actionCard?: {
+    title: string;
+    href: string;
+  };
+}
+
+export default function ChatScreen() {
+  const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations("chat");
+  const isRtl = locale === "ar";
+
+  const [input, setInput] = React.useState("");
+  const [isTyping, setIsTyping] = React.useState(false);
+  const [messages, setMessages] = React.useState<Message[]>([]);
+
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  const handleSendMessage = (textToSend?: string) => {
+    const messageText = textToSend || input;
+    if (!messageText.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: "user",
+      content: messageText,
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsTyping(true);
+
+    setTimeout(() => {
+      let aiReply = isRtl
+        ? "بالنسبة لآلام القدم المرتبطة بالسكري، التقييم المبكر أمر بالغ الأهمية حيث يمكن أن تتطور المضاعفات بسرعة. يمكنني مساعدتك في حجز موعد مع عيادة القدم السكري لدينا — هل ترغب في التحقق من الأوقات المتاحة؟"
+        : "For foot pain related to diabetes, early assessment is important. Diabetic foot complications can develop quickly. I can help you book an appointment with our Diabetic Foot Clinic — would you like to check available slots?";
+
+      let actionCard = {
+        title: isRtl ? "عيادة العناية بالقدم السكري" : "Diabetic Foot Care Clinic",
+        href: "/services/foot-care",
+      };
+
+      if (messageText.includes("appointment") || messageText.includes("موعد")) {
+        aiReply = isRtl
+          ? "يسعدني مساعدتك في توجيهك إلى المواعيد الطبية المعتمدة. يمكنك استعراض العيادات المتوفرة واختيار الوقت المناسب لك."
+          : "I would be glad to help guide your appointments. You can explore available specialized clinics and official booking schedules.";
+        actionCard = {
+          title: isRtl ? "استعراض المواعيد" : "Explore Appointments",
+          href: "/services/appointments",
+        };
+      }
+
+      const aiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: aiReply,
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        actionCard,
+      };
+
+      setMessages((prev) => [...prev, aiMessage]);
+      setIsTyping(false);
+    }, 900);
+  };
+
+  return (
+    <div className="flex flex-col flex-1 h-[100dvh] max-h-[100dvh] bg-[#070F1E] text-white relative overflow-hidden select-none pb-[max(4.5rem,calc(3.75rem+env(safe-area-inset-bottom,0px)))]">
+      {/* Header */}
+      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-3.5 flex items-center justify-between bg-gradient-to-b from-[#0080FF] via-[#0060D0] to-[#070F1E] shadow-lg z-20 flex-shrink-0">
+        <div>
+          <span className="text-[11px] font-bold tracking-widest text-cyan-200 uppercase block">
+            {isRtl ? "ديا - بايلوت" : "DIAPILOT"}
+          </span>
+          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            {t("title")}
+          </h1>
+        </div>
+
+        <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 p-1 flex items-center justify-center backdrop-blur-md shadow-md">
+          <Image
+            src="/mascots/Robo head.png"
+            alt="DiaPilot Assistant"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
+        </div>
+      </div>
+
+      {/* Main Conversation / Greeting View */}
+      <div className="flex-1 overflow-y-auto no-scrollbar px-5 pt-3 pb-3 flex flex-col justify-start">
+        {messages.length === 0 ? (
+          /* Empty / Initial State */
+          <div className="flex flex-col items-center text-center my-auto py-4 gap-4">
+            {/* Centered Robot Mascot */}
+            <div className="relative w-24 h-24 rounded-full bg-gradient-to-tr from-[#0F294D] via-[#133A6B] to-[#0A1B33] p-2 shadow-2xl border border-cyan-500/40 flex items-center justify-center animate-pulse">
+              <Image
+                src="/mascots/Robo head.png"
+                alt="DiaPilot Mascot"
+                width={70}
+                height={70}
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            <div className="space-y-1">
+              <h2 className="text-xl sm:text-2xl font-black text-white">{t("greeting")}</h2>
+              <p className="text-xs sm:text-sm text-slate-300">{t("subtitle")}</p>
+            </div>
+
+            {/* Sample Prompt Box */}
+            <div className="w-full max-w-sm rounded-2xl bg-[#132238]/90 border border-[#1E3557] p-3.5 text-xs text-slate-300 italic shadow-inner">
+              {t("samplePrompt")}
+            </div>
+
+            <p className="text-xs text-slate-400 max-w-xs">{t("promptHint")}</p>
+
+            {/* Suggestion Chips */}
+            <div className="w-full max-w-sm flex flex-col gap-2 pt-1">
+              <SuggestionChip
+                label={t("suggestion1")}
+                onClick={() => handleSendMessage(t("suggestion1"))}
+                icon={<ChevronRight className="w-4 h-4 rtl:rotate-180" />}
+              />
+              <SuggestionChip
+                label={t("suggestion2")}
+                onClick={() => handleSendMessage(t("suggestion2"))}
+                icon={<ChevronRight className="w-4 h-4 rtl:rotate-180" />}
+              />
+            </div>
+          </div>
+        ) : (
+          /* Message List */
+          <div className="flex flex-col gap-3 py-2">
+            {messages.map((msg) => (
+              <div key={msg.id} className="flex flex-col w-full">
+                {msg.role === "user" ? (
+                  <ChatBubbleUser
+                    message={msg.content}
+                    timestamp={msg.timestamp}
+                  />
+                ) : (
+                  <div className="flex flex-col gap-2 w-full">
+                    <ChatBubbleAI
+                      message={msg.content}
+                      timestamp={msg.timestamp}
+                    />
+
+                    {/* Integrated Service Action Card */}
+                    {msg.actionCard && (
+                      <div className="ms-10 me-auto max-w-[85%]">
+                        <Link
+                          href={msg.actionCard.href}
+                          className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-cyan-950/70 hover:bg-cyan-900/80 border border-cyan-500/40 text-cyan-200 text-xs font-semibold shadow-md transition-all active:scale-[0.98]"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Stethoscope className="w-4 h-4 text-cyan-400" />
+                            <span>{msg.actionCard.title}</span>
+                          </div>
+                          <ChevronRight className="w-4 h-4 rtl:rotate-180 text-cyan-400" />
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {isTyping && <TypingIndicator />}
+            <div ref={messagesEndRef} />
+          </div>
+        )}
+      </div>
+
+      {/* Input Bar (Sits directly in flex layout above bottom nav) */}
+      <div className="w-full px-4 py-2 z-30 bg-[#070F1E]/95 backdrop-blur-md border-t border-white/5 flex-shrink-0">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSendMessage();
+          }}
+          className="relative flex items-center w-full bg-[#132238] border border-[#223B5C] rounded-full p-1.5 shadow-2xl"
+        >
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={t("placeholder")}
+            className="flex-1 bg-transparent border-none text-white text-sm px-4 placeholder:text-slate-500 focus:outline-none"
+          />
+
+          {input.trim() ? (
+            <button
+              type="submit"
+              className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-600 text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer rtl:rotate-180"
+            >
+              <Send className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <Mic className="w-4 h-4" />
+            </button>
+          )}
+        </form>
+      </div>
+
+      {/* Persistent Bottom Navigation */}
+      <BottomNavigation />
+    </div>
+  );
+}

@@ -89,3 +89,30 @@ Use PNG for layout reference and SVG for icons/illustrations.
 - RTL/LTR parity
 - Loading & Empty states
 - Disabled states
+
+## Example Prompt Pattern That Produces Pixel-Perfect Screens
+Implement Screen: Dashboard
+
+Context:
+Read docs/DIAPILOT_CONTEXT_PHASE1.md.
+Read docs/DESIGN_SYSTEM.md.
+
+Reference Image:
+design-reference/en/dashboard.png
+
+Requirements:
+
+Pixel-perfect.
+Mobile only.
+Use shadcn/ui only.
+RTL compatible.
+Use existing reusable components.
+Do not implement backend.
+Mock data only.
+
+Output:
+
+Component tree.
+Files created.
+Translation keys.
+Tailwind classes.
