@@ -38,6 +38,10 @@ export default function ServicesScreen() {
         return "tooth";
       case "education":
         return "books";
+      case "living":
+        return "handshake";
+      case "support":
+        return "handset";
       default:
         return "stethoscope";
     }

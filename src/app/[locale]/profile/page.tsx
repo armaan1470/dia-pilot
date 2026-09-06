@@ -41,7 +41,7 @@ export default function ProfileScreen() {
       desc_en: "Test results & reports",
       icon: Activity,
       color: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
-      href: "/services/clinics",
+      href: "/health-records",
     },
     {
       id: "documents",

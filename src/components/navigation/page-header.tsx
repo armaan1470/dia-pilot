@@ -33,8 +33,8 @@ export interface PageHeaderProps {
 
 const themeGradients: Record<HeaderTheme, string> = {
   blue: "bg-gradient-to-b from-brand-teal via-brand-blue to-brand-dark-blue",
-  cyan: "bg-gradient-to-b from-[#0284C7] to-[#0369A1]",
-  purple: "bg-gradient-to-b from-[#6366F1] to-[#3730A3]",
+  cyan: "bg-gradient-to-b from-[#38BDF8] via-[#0EA5E9] to-[#0284C7]",
+  purple: "bg-[linear-gradient(140deg,_#A78BFA_3.67%,_#3730A3_96.33%)]",
   teal: "bg-gradient-to-b from-[#06B6D4] to-[#0891B2]",
   orange: "bg-gradient-to-b from-[#EA580C] to-[#B91C1C]",
   emerald: "bg-gradient-to-b from-[#10B981] to-[#0EA5E9]",

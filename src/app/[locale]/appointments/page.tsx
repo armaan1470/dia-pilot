@@ -92,7 +92,7 @@ export default function AppointmentsScreen() {
           <button
             type="button"
             onClick={() => router.push("/chat")}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-xs font-bold text-white transition-all active:scale-95 cursor-pointer"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-md hover:bg-white/25 border border-white/20 text-xs font-bold text-white transition-all active:scale-95 cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{isRtl ? "حجز" : "Book"}</span>
@@ -110,7 +110,7 @@ export default function AppointmentsScreen() {
             className={cn(
               "py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
               activeTab === "upcoming"
-                ? "bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white shadow-md shadow-brand-blue/20"
+                ? "bg-[linear-gradient(140deg,_#A78BFA_3.67%,_#3730A3_96.33%)] text-white"
                 : "text-slate-400 hover:text-slate-200"
             )}
           >
@@ -122,7 +122,7 @@ export default function AppointmentsScreen() {
             className={cn(
               "py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
               activeTab === "past"
-                ? "bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white shadow-md shadow-brand-blue/20"
+                ? "bg-[linear-gradient(140deg,_#A78BFA_3.67%,_#3730A3_96.33%)] text-white"
                 : "text-slate-400 hover:text-slate-200"
             )}
           >
@@ -141,7 +141,6 @@ export default function AppointmentsScreen() {
               time={isRtl ? apt.time_ar : apt.time_en}
               status={apt.status}
               statusText={isRtl ? apt.statusText_ar : apt.statusText_en}
-              onClick={() => router.push(`/appointments/${apt.id}`)}
             />
           ))}
         </div>
@@ -152,7 +151,7 @@ export default function AppointmentsScreen() {
             onClick={() => router.push("/chat")}
             leftIcon={<Calendar className="w-5 h-5" />}
             fullWidth
-            className="bg-gradient-to-r from-indigo-500 to-purple-600 shadow-indigo-500/25"
+            className="bg-[linear-gradient(140deg,#A78BFA_3.67%,#3730A3_96.33%)]"
           >
             {isRtl ? "حجز موعد جديد" : "Book New Appointment"}
           </PrimaryButton>

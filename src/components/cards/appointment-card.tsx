@@ -51,11 +51,11 @@ export const AppointmentCard: React.FC<AppointmentCardProps> = ({
             className={cn(
               "text-[11px] font-semibold px-2.5 py-0.5 rounded-full border",
               status === "confirmed" &&
-                "bg-emerald-950/70 text-emerald-300 border-emerald-800/40",
+              "bg-emerald-950/70 text-emerald-300 border-emerald-800/40",
               status === "pending" &&
-                "bg-amber-950/70 text-amber-300 border-amber-800/40",
+              "bg-amber-950/70 text-amber-300 border-amber-800/40",
               status === "completed" &&
-                "bg-brand-card-light text-slate-300 border-brand-border"
+              "bg-brand-card-light text-slate-300 border-brand-border"
             )}
           >
             {statusText}

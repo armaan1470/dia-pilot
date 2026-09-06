@@ -25,7 +25,16 @@ export type AppleEmojiName =
   | "hospital"
   | "purple_heart"
   | "handshake"
-  | "building";
+  | "building"
+  | "phone"
+  | "telephone"
+  | "handset"
+  | "headset"
+  | "chart"
+  | "clipboard"
+  | "memo"
+  | "satellite"
+  | "moon";
 
 export interface AppleEmojiProps {
   name: AppleEmojiName;

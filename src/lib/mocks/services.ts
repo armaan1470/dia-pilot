@@ -13,7 +13,9 @@ export interface ServiceItem {
     | "pink"
     | "rose"
     | "amber"
-    | "blue";
+    | "blue"
+    | "violet"
+    | "slate";
   iconName: string;
   topics: { ar: string; en: string }[];
   contact?: string;
@@ -160,5 +162,39 @@ export const mockServices: ServiceItem[] = [
     ],
     contact: "+966 800 123 4567",
     workingHours: "24/7 Access",
+  },
+  {
+    id: "living",
+    name_ar: "التعايش مع السكري",
+    name_en: "Living with Diabetes",
+    category: "lifestyle",
+    description_ar: "الدعم النفسي والتعايش الإيجابي مع مرض السكري في مختلف مراحل الحياة.",
+    description_en:
+      "Psychological support, lifestyle adaptation, and thriving with diabetes.",
+    gradient: "violet",
+    iconName: "HeartHandshake",
+    topics: [
+      { ar: "التأقلم والدعم النفسي", en: "Coping & Psychological Support" },
+      { ar: "الرياضة والنشاط البدني", en: "Physical Activity & Sports" },
+    ],
+    contact: "+966 800 123 4567",
+    workingHours: "24/7 Support",
+  },
+  {
+    id: "support",
+    name_ar: "الإدارة والدعم",
+    name_en: "Administration & Support",
+    category: "support",
+    description_ar: "خدمات الاستعلام، المواقع، الشكاوى والمقترحات والتواصل المباشر.",
+    description_en:
+      "Administrative tools, clinic locations, inquiries, and customer care.",
+    gradient: "slate",
+    iconName: "Phone",
+    topics: [
+      { ar: "مواقع العيادات", en: "Clinic Locations" },
+      { ar: "الشكاوى والمقترحات", en: "Feedback & Inquiries" },
+    ],
+    contact: "+966 800 123 4567",
+    workingHours: "8:00 AM - 5:00 PM",
   },
 ];

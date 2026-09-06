@@ -12,7 +12,9 @@ export type ServiceGradient =
   | "pink"
   | "rose"
   | "amber"
-  | "blue";
+  | "blue"
+  | "violet"
+  | "slate";
 
 export interface ServiceCardProps {
   title: string;
@@ -33,6 +35,8 @@ const gradientStyles: Record<ServiceGradient, string> = {
   rose: "bg-gradient-to-br from-[#FB7185] to-[#E11D48] shadow-rose-500/15",
   amber: "bg-gradient-to-br from-[#FBBF24] to-[#D97706] shadow-amber-500/15",
   blue: "bg-gradient-to-br from-[#38BDF8] to-[#0284C7] shadow-blue-500/15",
+  violet: "bg-gradient-to-br from-[#A855F7] to-[#7C3AED] shadow-purple-500/15",
+  slate: "bg-gradient-to-br from-[#64748B] to-[#334155] shadow-slate-500/15",
 };
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({

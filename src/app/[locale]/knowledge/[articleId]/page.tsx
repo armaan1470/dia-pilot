@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
+import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { PageHeader } from "@/components/navigation/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -15,17 +16,13 @@ interface ArticleDetailPageProps {
 }
 
 export default function ArticleDetailScreen({
-  params,
+  params: _paramsPromise,
 }: ArticleDetailPageProps) {
   const router = useRouter();
+  const routeParams = useParams();
+  const articleId = (routeParams?.articleId as string) || "carb-counting-guide";
   const locale = useLocale();
   const isRtl = locale === "ar";
-
-  const [articleId, setArticleId] = React.useState<string>("carb-counting-guide");
-
-  React.useEffect(() => {
-    params.then((p) => setArticleId(p.articleId));
-  }, [params]);
 
   const article =
     mockArticles.find((a) => a.id === articleId) || mockArticles[0];
