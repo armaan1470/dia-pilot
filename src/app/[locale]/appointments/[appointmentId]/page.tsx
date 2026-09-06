@@ -39,6 +39,7 @@ export default function AppointmentDetailScreen({
         title={isRtl ? "تفاصيل الموعد" : "Appointment Details"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/appointments"
         theme="purple"
         watermark={<AppleEmoji name="calendar" size={80} />}
       />

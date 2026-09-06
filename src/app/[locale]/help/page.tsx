@@ -64,6 +64,7 @@ export default function HelpScreen() {
         subtitle={isRtl ? "نحن هنا لمساعدتك" : "We're here for you"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/profile"
         theme="slate"
         watermark={<AppleEmoji name="question" size={80} />}
       />

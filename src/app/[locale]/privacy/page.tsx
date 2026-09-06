@@ -65,6 +65,7 @@ export default function PrivacyScreen() {
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/profile"
         theme="amber"
         watermark={<AppleEmoji name="lock" size={80} />}
       />

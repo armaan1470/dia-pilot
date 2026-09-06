@@ -109,14 +109,14 @@ export default function ProfileScreen() {
               <h1 className="text-lg font-black text-white leading-tight truncate">
                 Mohammed
               </h1>
-              <p className="text-[12px] text-cyan-100/60 font-medium">
+              <p className="text-xs text-cyan-100/60 font-medium">
                 {isRtl ? "رقم المريض: #DM-2847" : "Patient ID: #DM-2847"}
               </p>
               <div className="flex items-center gap-2 pt-1 flex-wrap">
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/15 text-white border border-white/20 backdrop-blur-sm">
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-white/15 text-white border border-white/20 backdrop-blur-sm">
                   {isRtl ? "السكري من النوع 1" : "Type 1 Diabetes"}
                 </span>
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-white/20 backdrop-blur-sm flex items-center gap-1.5">
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-white/20 backdrop-blur-sm flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   {isRtl ? "نشط" : "Active"}
                 </span>
@@ -126,7 +126,7 @@ export default function ProfileScreen() {
 
           {/* Top-Right Logout Button */}
           <button
-            onClick={() => router.push("/login")}
+            onClick={() => router.replace("/login")}
             className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-md active:scale-95 shadow-sm flex-shrink-0"
             title={isRtl ? "تسجيل الخروج" : "Log Out"}
             aria-label={isRtl ? "تسجيل الخروج" : "Log Out"}
@@ -141,7 +141,7 @@ export default function ProfileScreen() {
             <span className="text-base font-black text-white block leading-tight">
               12
             </span>
-            <span className="text-xs text-cyan-100/40 font-medium">
+            <span className="text-[10px] text-cyan-100/40 font-medium">
               {isRtl ? "المواعيد" : "Appointments"}
             </span>
           </div>
@@ -150,7 +150,7 @@ export default function ProfileScreen() {
             <span className="text-base font-black text-white block leading-tight">
               3
             </span>
-            <span className="text-xs text-cyan-100/40 font-medium">
+            <span className="text-[10px] text-cyan-100/40 font-medium">
               {isRtl ? "الخطط النشطة" : "Active Plans"}
             </span>
           </div>
@@ -159,7 +159,7 @@ export default function ProfileScreen() {
             <span className="text-base font-black text-white block leading-tight">
               8.2%
             </span>
-            <span className="text-xs text-cyan-100/40 font-medium">
+            <span className="text-[10px] text-cyan-100/40 font-medium">
               {isRtl ? "آخر تراكمي" : "Last HbA1c"}
             </span>
           </div>

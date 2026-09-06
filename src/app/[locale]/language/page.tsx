@@ -71,6 +71,7 @@ export default function LanguageScreen() {
           subtitle={t("subtitle")}
           brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           showBack={true}
+          fallbackHref="/profile"
           theme="cyan"
           watermark={
             <svg

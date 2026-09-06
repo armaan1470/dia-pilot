@@ -95,7 +95,7 @@ export default function RegisterScreen() {
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/chat");
+      router.replace("/chat");
     }, 600);
   };
 
@@ -357,6 +357,7 @@ export default function RegisterScreen() {
           <span>{t("alreadyHaveAccount")}</span>
           <Link
             href="/login"
+            replace
             className="font-bold text-brand-teal hover:underline cursor-pointer"
           >
             {t("signIn")}

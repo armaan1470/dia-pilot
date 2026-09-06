@@ -127,6 +127,7 @@ export default function ServiceDetailScreen({
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/services"
         theme={theme}
         watermark={<AppleEmoji name={emojiName} size={80} />}
       />

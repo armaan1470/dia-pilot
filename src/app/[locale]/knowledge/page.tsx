@@ -47,6 +47,7 @@ export default function KnowledgeHomeScreen() {
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/services"
         theme="emerald"
         watermark={<AppleEmoji name="documents" size={80} />}
       />

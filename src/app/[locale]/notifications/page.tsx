@@ -76,6 +76,7 @@ export default function NotificationsScreen() {
         subtitle={isRtl ? "إدارة التنبيهات والتذكيرات" : "Manage your alerts"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/profile"
         theme="orange"
         watermark={<AppleEmoji name="bell" size={80} />}
       />

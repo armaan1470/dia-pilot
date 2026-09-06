@@ -8,7 +8,6 @@ import { PrimaryButton } from "@/components/buttons/primary-button";
 import { SecondaryButton } from "@/components/buttons/secondary-button";
 import { TextInput } from "@/components/inputs/text-input";
 import { PasswordInput } from "@/components/inputs/password-input";
-import { BackButton } from "@/components/navigation/back-button";
 import { User, ArrowRight } from "lucide-react";
 
 export default function LoginScreen() {
@@ -45,19 +44,18 @@ export default function LoginScreen() {
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/chat");
+      router.replace("/chat");
     }, 600);
   };
 
   const handleGuestLogin = () => {
-    router.push("/chat");
+    router.replace("/chat");
   };
 
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-start gap-4">
-      {/* Top Header Row with Back Button */}
-      <div className="w-full flex items-center justify-between z-20 mb-1 flex-shrink-0">
-        <BackButton />
+      {/* Top Header Row with Language Switch */}
+      <div className="w-full flex items-center justify-end z-20 mb-1 flex-shrink-0">
         <Link
           href="/language"
           className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 transition-all"

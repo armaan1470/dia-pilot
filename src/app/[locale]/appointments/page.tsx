@@ -85,6 +85,7 @@ export default function AppointmentsScreen() {
         }
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/services"
         theme="purple"
         watermark={<AppleEmoji name="calendar" size={80} />}
         rightAction={

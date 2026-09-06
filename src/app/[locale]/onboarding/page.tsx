@@ -51,12 +51,12 @@ export default function OnboardingScreen() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      router.push("/login");
+      router.replace("/login");
     }
   };
 
   const handleSkip = () => {
-    router.push("/login");
+    router.replace("/login");
   };
 
   const handleBack = () => {
@@ -175,7 +175,7 @@ export default function OnboardingScreen() {
               <span>{t("alreadyAccount")}</span>
               <button
                 type="button"
-                onClick={() => router.push("/login")}
+                onClick={() => router.replace("/login")}
                 className="font-bold text-brand-teal hover:underline cursor-pointer"
               >
                 {t("signIn")}

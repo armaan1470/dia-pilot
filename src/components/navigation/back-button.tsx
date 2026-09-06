@@ -8,12 +8,14 @@ import { cn } from "@/lib/utils";
 
 export interface BackButtonProps {
   onClick?: () => void;
+  fallbackHref?: string;
   className?: string;
   variantStyle?: "glass" | "solid" | "ghost";
 }
 
 export const BackButton: React.FC<BackButtonProps> = ({
   onClick,
+  fallbackHref,
   className,
   variantStyle = "glass",
 }) => {
@@ -22,6 +24,10 @@ export const BackButton: React.FC<BackButtonProps> = ({
   const handleBack = () => {
     if (onClick) {
       onClick();
+    } else if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back();
+    } else if (fallbackHref) {
+      router.push(fallbackHref as any);
     } else {
       router.back();
     }
@@ -38,3 +44,4 @@ export const BackButton: React.FC<BackButtonProps> = ({
     />
   );
 };
+

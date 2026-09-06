@@ -23,6 +23,7 @@ export interface PageHeaderProps {
   subtitle?: string;
   showBack?: boolean;
   onBack?: () => void;
+  fallbackHref?: string;
   rightAction?: React.ReactNode;
   brandTag?: string;
   theme?: HeaderTheme;
@@ -50,6 +51,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   subtitle,
   showBack = false,
   onBack,
+  fallbackHref,
   rightAction,
   brandTag,
   theme = "blue",
@@ -77,6 +79,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           {showBack && (
             <BackButton
               onClick={onBack}
+              fallbackHref={fallbackHref}
               className="w-9 h-9 bg-white/15 hover:bg-white/30 border-none shrink-0"
             />
           )}

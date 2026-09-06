@@ -37,6 +37,7 @@ export default function ArticleDetailScreen({
         title={isRtl ? "تفاصيل المقال" : "Article Detail"}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         showBack={true}
+        fallbackHref="/knowledge"
         theme="emerald"
         watermark={<AppleEmoji name="documents" size={80} />}
       />
