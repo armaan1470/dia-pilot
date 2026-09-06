@@ -55,14 +55,14 @@ export default function LoginScreen() {
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-start gap-4">
       {/* Top Header Row with Language Switch */}
-      <div className="w-full flex items-center justify-end z-20 mb-1 flex-shrink-0">
+      {/* <div className="w-full flex items-center justify-end z-20 mb-1 flex-shrink-0">
         <Link
           href="/language"
           className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 transition-all"
         >
           {isRtl ? "English" : "العربية"}
         </Link>
-      </div>
+      </div> */}
 
       {/* Hero Mascot & Title Section */}
       <div className="flex flex-col items-center text-center my-2 z-10 flex-shrink-0">

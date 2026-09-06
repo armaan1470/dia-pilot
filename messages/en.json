@@ -37,7 +37,7 @@
     "modalTitle": "Change Language?",
     "modalDesc": "The app will restart and switch to {lang}.",
     "confirmRestart": "Confirm & Restart",
-    "continue": "Continue to Onboarding",
+    "continue": "Continue",
     "cancel": "Cancel",
     "languageUpdated": "Language Updated",
     "languageSetTo": "App language set to {lang}"

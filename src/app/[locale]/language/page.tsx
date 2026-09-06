@@ -57,7 +57,8 @@ export default function LanguageScreen() {
   };
 
   const handleContinue = () => {
-    router.push("/onboarding");
+    // Note: Onboarding is hidden/bypassed as per Figma; can be restored by changing to "/onboarding"
+    router.push("/login");
   };
 
 

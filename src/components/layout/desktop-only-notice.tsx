@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Copy, Check, ExternalLink, Globe } from "lucide-react";
 import QRCode from "qrcode";
-import { SplashScreen } from "@/components/screens/splash-screen";
 
 export function DesktopOnlyNotice() {
   const locale = useLocale();
@@ -206,9 +205,16 @@ export function DesktopOnlyNotice() {
                 <div className="w-1 h-1 rounded-full bg-emerald-500/80" />
               </div>
 
-              {/* In-Phone Screen Content */}
-              <div className="flex-1 w-full h-full overflow-hidden flex flex-col">
-                <SplashScreen isEmbedded={true} />
+              {/* In-Phone Screen Content - Direct Splash Screen Image */}
+              <div className="flex-1 w-full h-full overflow-hidden relative bg-brand-dark">
+                <Image
+                  src={isRtl ? "/screenshots/splash-ar.png" : "/screenshots/splash-en.png"}
+                  alt={isRtl ? "DiaPilot Splash Screen Arabic" : "DiaPilot Splash Screen English"}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
+                  className="object-cover object-top select-none pointer-events-none"
+                  priority
+                />
               </div>
 
               {/* Protective Transparent Overlay - prevents click/touch interaction */}

@@ -37,7 +37,7 @@
     "modalTitle": "تغيير اللغة؟",
     "modalDesc": "سيتم إعادة تشغيل التطبيق والتحويل إلى {lang}.",
     "confirmRestart": "تأكيد وإعادة التشغيل",
-    "continue": "المتابعة إلى التعريف بالتطبيق",
+    "continue": "المتابعة",
     "cancel": "إلغاء",
     "languageUpdated": "تم تحديث اللغة",
     "languageSetTo": "تم ضبط لغة التطبيق إلى {lang}"
