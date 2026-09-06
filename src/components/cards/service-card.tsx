@@ -55,7 +55,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     >
       {/* Background Watermark Icon if provided */}
       {watermarkIcon && (
-        <div className="absolute -bottom-1 right-4 rtl:-right-auto rtl:left-4 opacity-75 pointer-events-none scale-80 text-white">
+        <div className="absolute -bottom-1 right-4 rtl:right-auto rtl:left-4 opacity-75 pointer-events-none scale-80 text-white">
           {watermarkIcon}
         </div>
       )}
