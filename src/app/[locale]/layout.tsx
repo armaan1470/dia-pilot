@@ -77,7 +77,7 @@ export default async function LocaleLayout({
       className={`${cairo.variable} ${inter.variable} ${plusJakarta.variable} min-h-[100dvh] antialiased dark`}
     >
       <body
-        className={`min-h-[100dvh] bg-brand-dark text-white flex flex-col font-sans select-none overflow-x-hidden ${
+        className={`min-h-[100dvh] md:h-screen md:max-h-screen md:overflow-hidden bg-brand-dark text-white flex flex-col font-sans select-none overflow-x-hidden ${
           isRtl ? "font-cairo" : "font-jakarta"
         }`}
       >

@@ -2,164 +2,223 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useLocale } from "next-intl";
-import { Smartphone, QrCode, Copy, Check, Sparkles, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Copy, Check, ExternalLink, Globe } from "lucide-react";
+import QRCode from "qrcode";
+import { SplashScreen } from "@/components/screens/splash-screen";
 
 export function DesktopOnlyNotice() {
   const locale = useLocale();
+  const t = useTranslations();
   const isRtl = locale === "ar";
   const [copied, setCopied] = React.useState(false);
-  const [currentUrl, setCurrentUrl] = React.useState("");
+  const [qrCodeUrl, setQrCodeUrl] = React.useState<string>("");
+  const targetUrl = "https://diapilot.vercel.app/";
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(window.location.href);
-    }
+    QRCode.toDataURL(
+      targetUrl,
+      {
+        width: 200,
+        margin: 1,
+        color: {
+          dark: "#080F1E",
+          light: "#FFFFFF",
+        },
+      },
+      (err, url) => {
+        if (!err && url) {
+          setQrCodeUrl(url);
+        }
+      }
+    );
   }, []);
 
   const handleCopy = () => {
     if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(targetUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
   return (
-    <div className="hidden md:flex min-h-[100dvh] w-full bg-brand-dark bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,180,255,0.18),rgba(255,255,255,0))] text-white flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden select-none">
+    <section className="hidden md:flex h-screen max-h-screen w-full bg-[#080F1E] text-white relative overflow-hidden select-none flex-col justify-between px-8 lg:px-16 py-6 lg:py-8">
       
-      {/* Background Glowing Ambient Orbs */}
-      <div className="absolute -top-32 left-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 right-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle Background Glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-cyan-500/[0.05] rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-blue-600/[0.04] rounded-full blur-[120px]" />
+      </div>
 
-      <div className="max-w-xl w-full flex flex-col items-center text-center relative z-10 gap-6">
-        
-        {/* Top Branding Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-card/80 border border-brand-teal/30 backdrop-blur-md shadow-lg shadow-brand-dark/40">
-          <div className="w-2.5 h-2.5 rounded-full bg-brand-teal animate-pulse" />
-          <span className="text-xs font-bold tracking-widest text-brand-teal uppercase">
-            {isRtl ? "تطبيق ويب مخصص للجوال فقط" : "MOBILE WEB APP ONLY"}
+      {/* 1. Header Bar */}
+      <header className="relative z-10 w-full max-w-6xl mx-auto flex items-center justify-between pb-3">
+        {/* Brand Logo */}
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-brand-sheet-from border border-brand-teal/40 p-1 flex items-center justify-center shadow-md">
+            <Image
+              src="/mascots/Robo head.png"
+              alt="DiaPilot Logo"
+              width={26}
+              height={26}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <span className="text-sm font-extrabold tracking-[0.18em] text-white uppercase font-heading">
+            {t("common.appName")}
           </span>
         </div>
 
-        {/* Mascot & Device Graphic */}
-        <div className="relative my-2">
-          <div className="relative w-36 h-36 rounded-lg bg-gradient-to-tr from-brand-sheet-from via-brand-card to-brand-dark p-2 border border-brand-teal/30 shadow-2xl shadow-brand-dark/40 flex items-center justify-center">
-            <Image
-              src="/mascots/image 1.png"
-              alt="DiaPilot Companion"
-              width={120}
-              height={120}
-              className="object-contain drop-shadow-xl"
-              priority
-            />
-            {/* Phone Badge floating icon */}
-            <div className="absolute -bottom-3 -right-3 rtl:-right-auto rtl:-left-3 w-11 h-11 rounded-lg bg-gradient-to-tr from-brand-teal to-brand-blue flex items-center justify-center text-brand-dark shadow-lg shadow-brand-blue/30">
-              <Smartphone className="w-6 h-6 stroke-[2.5]" />
-            </div>
-          </div>
-        </div>
+        {/* Language Switcher */}
+        <Link
+          href={isRtl ? "/en" : "/ar"}
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-semibold text-slate-200 transition-all active:scale-95"
+        >
+          <Globe className="w-3.5 h-3.5 text-cyan-400" />
+          <span>{isRtl ? "English" : "العربية"}</span>
+        </Link>
+      </header>
 
-        {/* Headings */}
-        <div className="space-y-3">
-          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
-            {isRtl
-              ? "ديا-بايلوت مصمم حصرياً للهواتف الذكية"
-              : "DiaPilot is Designed Exclusively for Mobile"}
-          </h1>
-          <p className="text-sm md:text-base text-slate-300 leading-relaxed max-w-md mx-auto">
-            {isRtl
-              ? "تم بناء ديا-بايلوت كرفيق تفاعلي محمول يعمل باللمس لرعاية مرضى السكري. يرجى فتح الموقع من خلال متصفح هاتفك المحمول أو مسح الرمز أدناه."
-              : "DiaPilot is crafted exclusively as a touch-first mobile companion for smart diabetes care. Please open this web app on your mobile browser for the full experience."}
-          </p>
-        </div>
-
-        {/* QR Code / Share Card */}
-        <div className="w-full max-w-sm rounded-lg bg-brand-dark/95 border border-brand-border p-5 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-xs font-semibold text-brand-teal">
-            <QrCode className="w-4 h-4" />
-            <span>{isRtl ? "امسح الرمز بكاميرا الجوال" : "Scan with your phone camera"}</span>
-          </div>
-
-          {/* Clean Stylized QR Code Frame */}
-          <div className="p-3 bg-white rounded-lg shadow-inner flex items-center justify-center">
-            {/* Embedded High-Contrast QR Code Visual */}
-            <svg
-              viewBox="0 0 120 120"
-              className="w-32 h-32 text-brand-dark"
-              fill="currentColor"
-            >
-              {/* Corner 1 */}
-              <rect x="10" y="10" width="30" height="30" rx="4" />
-              <rect x="16" y="16" width="18" height="18" fill="white" rx="2" />
-              <rect x="20" y="20" width="10" height="10" rx="1" />
-              
-              {/* Corner 2 */}
-              <rect x="80" y="10" width="30" height="30" rx="4" />
-              <rect x="86" y="16" width="18" height="18" fill="white" rx="2" />
-              <rect x="90" y="20" width="10" height="10" rx="1" />
-              
-              {/* Corner 3 */}
-              <rect x="10" y="80" width="30" height="30" rx="4" />
-              <rect x="16" y="86" width="18" height="18" fill="white" rx="2" />
-              <rect x="20" y="90" width="10" height="10" rx="1" />
-
-              {/* Data Pattern Modules */}
-              <rect x="46" y="12" width="8" height="8" rx="1" />
-              <rect x="62" y="12" width="8" height="8" rx="1" />
-              <rect x="46" y="26" width="8" height="8" rx="1" />
-              <rect x="62" y="26" width="8" height="8" rx="1" />
-              <rect x="12" y="48" width="8" height="8" rx="1" />
-              <rect x="26" y="48" width="8" height="8" rx="1" />
-              <rect x="44" y="44" width="32" height="32" rx="6" fill="#0072FF" />
-              <circle cx="60" cy="60" r="8" fill="white" />
-              <rect x="84" y="48" width="8" height="8" rx="1" />
-              <rect x="98" y="48" width="8" height="8" rx="1" />
-              <rect x="46" y="84" width="8" height="8" rx="1" />
-              <rect x="62" y="84" width="8" height="8" rx="1" />
-              <rect x="84" y="84" width="12" height="12" rx="2" />
-              <rect x="98" y="98" width="12" height="12" rx="2" />
-            </svg>
-          </div>
-
-          {/* Quick Copy Link Row */}
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-750 border border-slate-700 text-xs font-medium text-slate-200 transition-all active:scale-[0.98] cursor-pointer"
-          >
-            <span className="truncate max-w-[240px] text-slate-400">
-              {currentUrl || "https://diapilot.app"}
-            </span>
-            <div className="flex items-center gap-1.5 text-cyan-400 font-bold flex-shrink-0">
-              {copied ? (
+      {/* 2. Main 50/50 Viewport Area */}
+      <main className="relative z-10 w-full max-w-6xl mx-auto flex-1 flex items-center justify-between gap-10 lg:gap-16 py-3 min-h-0">
+        
+        {/* LEFT: Clean Brand Messaging & QR Code */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-6 max-w-lg">
+          
+          <div className="space-y-3">
+            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-black text-white tracking-tight leading-[1.12]">
+              {isRtl ? (
                 <>
-                  <Check className="w-3.5 h-3.5" />
-                  <span>{isRtl ? "تم النسخ" : "Copied"}</span>
+                  رفيقك الذكي
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">
+                    لرعاية السكري
+                  </span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>{isRtl ? "نسخ الرابط" : "Copy Link"}</span>
+                  Your Smart
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">
+                    Diabetes Companion
+                  </span>
                 </>
               )}
+            </h1>
+
+            <p className="text-sm lg:text-base text-slate-300 leading-relaxed font-normal">
+              {t("splash.subtitle")}
+            </p>
+          </div>
+
+          {/* QR Code & Access Container */}
+          <div className="bg-[#0E1B2E]/90 border border-slate-700/80 rounded-2xl p-5 shadow-xl backdrop-blur-sm space-y-4">
+            
+            <div className="flex items-center gap-4">
+              {/* QR Image */}
+              <div className="bg-white p-2 rounded-xl shadow-md flex-shrink-0">
+                {qrCodeUrl ? (
+                  <img
+                    src={qrCodeUrl}
+                    alt="Scan to open DiaPilot on mobile"
+                    className="w-20 h-20 object-contain"
+                  />
+                ) : (
+                  <div className="w-20 h-20 bg-slate-100 animate-pulse rounded-lg" />
+                )}
+              </div>
+
+              {/* Text Instructions */}
+              <div className="space-y-1">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+                  {isRtl ? "امسح الرمز لفتح التطبيق" : "Scan to open on your phone"}
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {isRtl
+                    ? "وجه كاميرا هاتفك نحو الرمز للفتح المباشر في المتصفح."
+                    : "Point your phone camera at the QR code to launch the web app instantly."}
+                </p>
+              </div>
             </div>
-          </button>
+
+            {/* URL & Action Buttons */}
+            <div className="flex items-center gap-2 pt-1 border-t border-slate-700/60">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="flex-1 flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 transition-colors cursor-pointer"
+              >
+                <span className="truncate max-w-[200px] text-slate-300">
+                  {targetUrl}
+                </span>
+                <span className="flex items-center gap-1.5 text-cyan-400 font-sans font-bold flex-shrink-0 text-xs">
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400">{isRtl ? "تم النسخ" : "Copied"}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>{isRtl ? "نسخ" : "Copy"}</span>
+                    </>
+                  )}
+                </span>
+              </button>
+
+              <a
+                href={targetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 text-cyan-300 font-semibold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <span>{isRtl ? "فتح" : "Open"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Feature Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-400">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{isRtl ? "مساعد ذكاء اصطناعي فوري" : "Instant AI Companion"}</span>
+        {/* RIGHT: Smartphone Mockup with Real App Screen & Accurate Narrow 19.5:9 Aspect Ratio */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center my-auto py-2">
+          
+          {/* Narrow Modern Smartphone Chassis (iPhone 16 Pro / 19.5:9 ratio) */}
+          <div className="relative w-[265px] lg:w-[280px] h-[530px] lg:h-[560px] rounded-[44px] bg-[#141F32] p-[2.5px] shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_25px_rgba(56,189,248,0.12)] ring-1 ring-slate-700/80 flex flex-col my-auto transition-transform">
+            
+            {/* Screen Bezel */}
+            <div className="w-full h-full rounded-[41px] bg-brand-dark flex flex-col justify-between relative overflow-hidden border border-slate-800 text-white select-none">
+              
+              {/* Dynamic Island */}
+              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-30 flex items-center justify-between px-2 pointer-events-none">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#111827]" />
+                <div className="w-1 h-1 rounded-full bg-emerald-500/80" />
+              </div>
+
+              {/* Reusable Real App Screen */}
+              <div className="flex-1 w-full h-full overflow-hidden flex flex-col">
+                <SplashScreen isEmbedded={true} />
+              </div>
+
+              {/* iPhone Home Indicator Bar */}
+              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-20 h-1 bg-white/30 rounded-full z-30 pointer-events-none" />
+
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{isRtl ? "دخول موثوق وآمن" : "Secure Patient Access"}</span>
-          </div>
+
         </div>
 
-      </div>
-    </div>
+      </main>
+
+      {/* 3. Footer */}
+      <footer className="relative z-10 w-full max-w-6xl mx-auto flex items-center justify-between pt-2 border-t border-slate-800/60 text-[11px] text-slate-400">
+        <span>© {new Date().getFullYear()} DiaPilot</span>
+        <span>{t("common.appTagline")}</span>
+      </footer>
+
+    </section>
   );
 }
