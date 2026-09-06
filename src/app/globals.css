@@ -50,6 +50,10 @@
   --radius-2xl: 24px;
   --radius-3xl: 32px;
   --radius-full: 9999px;
+
+    /* Override Tailwind's default text-xs globally */
+  --text-xs: 0.625rem;           /* 10px */
+  --text-xs--line-height: 0.9375rem; /* 15px */
 }
 
 :root {

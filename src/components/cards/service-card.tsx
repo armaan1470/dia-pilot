@@ -48,14 +48,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <Card
       onClick={onClick}
       className={cn(
-        "relative w-full h-[140px] sm:h-[150px] rounded-lg p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
+        "relative w-full min-h-30 rounded-lg p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
         gradientStyles[gradient],
         className
       )}
     >
       {/* Background Watermark Icon if provided */}
       {watermarkIcon && (
-        <div className="absolute -bottom-1 right-4 rtl:-right-auto rtl:left-4 opacity-40 pointer-events-none scale-100 text-white">
+        <div className="absolute -bottom-1 right-4 rtl:-right-auto rtl:left-4 opacity-75 pointer-events-none scale-80 text-white">
           {watermarkIcon}
         </div>
       )}
@@ -71,7 +71,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
       {/* Title & Subtitle */}
       <div className="z-10 mt-auto">
-        <h3 className="text-base sm:text-lg font-bold text-white leading-tight line-clamp-2">
+        <h3 className="text-sm font-bold text-white leading-tight line-clamp-2">
           {title}
         </h3>
         {subtitle && (

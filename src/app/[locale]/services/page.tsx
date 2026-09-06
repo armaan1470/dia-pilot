@@ -10,6 +10,7 @@ import { ServiceCard } from "@/components/cards/service-card";
 import { SearchInput } from "@/components/inputs/search-input";
 import { mockServices } from "@/lib/mocks/services";
 import { AppleEmoji, type AppleEmojiName } from "@/components/ui/apple-emoji";
+import { ArrowRight } from "lucide-react";
 
 export default function ServicesScreen() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function ServicesScreen() {
         subtitle={t("subtitle")}
         brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
         theme="blue"
-        watermark={<AppleEmoji name="hospital" size={80} />}
+        // watermark={<AppleEmoji name="hospital" size={80} />}
       />
 
       {/* Main Content Area */}
@@ -67,45 +68,57 @@ export default function ServicesScreen() {
         {/* AI Powered Online Banner */}
         <div
           onClick={() => router.push("/chat")}
-          className="relative w-full rounded-lg bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue p-4 shadow-xl shadow-brand-blue/20 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-center justify-between"
+          className="relative w-full rounded-xl bg-linear-to-br from-brand-teal via-brand-blue to-brand-dark-blue shadow-[0_8px_32px_rgba(36,120,188,0.40)] p-5 overflow-hidden cursor-pointer hover:brightness-105 active:scale-[0.99] transition-all flex items-end justify-between group"
         >
-          <div className="flex flex-col gap-1 z-10">
-            <div className="inline-flex items-center gap-1.5 bg-black/20 px-2.5 py-0.5 rounded-full w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] font-bold text-cyan-100">
-                {isRtl ? "مدعوم بالذكاء الاصطناعي • متصل" : "AI Powered • Online"}
+          {/* Background Mascot Watermark (Large, integrated organically on the right side) */}
+          <div className="absolute right-10 rtl:right-auto rtl:left-10 top-1 size-36 pointer-events-none select-none opacity-20 -rotate-6 transition-transform group-hover:scale-105">
+            <Image
+              src="/mascots/Robo head.png"
+              alt="DiaPilot Assistant"
+              width={128}
+              height={128}
+              className="object-contain drop-shadow-xl"
+            />
+          </div>
+
+          {/* Left Content Area */}
+          <div className="flex flex-col gap-1.5 z-10 max-w-[210px] sm:max-w-[240px]">
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full w-fit">
+              <span className="size-1.5 rounded-full bg-[#7BF1A8] shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+              <span className="text-xs font-medium text-white tracking-wider">
+                {isRtl ? "مدعوم بالذكاء الاصطناعي • متصل" : "AI Powered · Online"}
               </span>
             </div>
-            <h3 className="text-base font-bold text-white leading-tight">
+
+            {/* Title */}
+            <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight mt-1">
               {isRtl ? "تحدث مع ديا-بايلوت" : "Chat with DiaPilot"}
             </h3>
-            <p className="text-xs text-cyan-100/80">
+
+            {/* Subtitle */}
+            <p className="text-xs sm:text-sm text-cyan-100/60 font-normal">
               {isRtl ? "اسأل أي شيء عن صحتك" : "Ask anything about your health"}
             </p>
           </div>
 
-          <div className="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
-            <Image
-              src="/mascots/Robo head.png"
-              alt="DiaPilot Assistant"
-              width={54}
-              height={54}
-              className="object-contain drop-shadow-md"
-            />
+          {/* Right Action Circular Arrow Button */}
+          <div className="size-8 rounded-full bg-white/20 group-hover:bg-white/30 border border-white/40 backdrop-blur-md flex items-center justify-center text-white shadow-lg transition-transform active:scale-95 group-hover:scale-105 flex-shrink-0 z-10">
+            <ArrowRight className="size-4 rtl:rotate-180 text-white" />
           </div>
         </div>
 
         {/* Search Bar */}
-        <SearchInput
+        {/* <SearchInput
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onClear={() => setSearchQuery("")}
           placeholder={isRtl ? "ابحث في الخدمات..." : "Search services..."}
-        />
+        /> */}
 
         {/* All Services Grid with Emojis and Watermarks */}
         <div className="space-y-2 pt-1">
-          <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase px-1">
+          <h4 className="text-xs font-bold tracking-[2px] text-slate-400/40 uppercase p-1">
             {isRtl ? "جميع الخدمات" : "ALL SERVICES"}
           </h4>
 

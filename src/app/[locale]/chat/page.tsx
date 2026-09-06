@@ -99,23 +99,23 @@ export default function ChatScreen() {
   return (
     <div className="flex flex-col flex-1 h-[100dvh] max-h-[100dvh] bg-brand-dark text-white relative overflow-hidden select-none pb-[max(4.5rem,calc(3.75rem+env(safe-area-inset-bottom,0px)))]">
       {/* Header */}
-      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-4 flex items-center justify-between bg-gradient-to-b from-brand-teal via-brand-blue to-brand-dark-blue z-20 flex-shrink-0 select-none">
+      <div className="w-full pt-[max(1.25rem,env(safe-area-inset-top,0px))] px-6 pb-4 flex items-end justify-between bg-gradient-to-b from-brand-teal via-brand-blue to-brand-dark-blue z-20 flex-shrink-0 select-none">
         <div>
-          <span className="text-[11px] font-black tracking-widest text-cyan-100/90 uppercase block font-heading">
+          <span className="text-[10px] font-bold leading-3.75 tracking-[1.8px] uppercase text-white/45 mb-0.5">
             {isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           </span>
-          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight truncate">
             {isRtl ? "المساعد الذكي" : "AI Assistant"}
           </h1>
         </div>
 
-        <div className="w-11 h-11 rounded-full bg-white/15 border border-white/25 p-1 flex items-center justify-center backdrop-blur-md shadow-lg ring-2 ring-brand-teal/20">
+        <div className="w-11 h-11 rounded-full bg-[#003989A6] p-1 flex items-center justify-center">
           <Image
             src="/mascots/Robo head.png"
             alt="DiaPilot Assistant"
             width={34}
             height={34}
-            className="object-contain drop-shadow-md"
+            className="object-contain mb-1"
           />
         </div>
       </div>
@@ -126,13 +126,13 @@ export default function ChatScreen() {
           /* Empty / Initial State */
           <div className="flex flex-col items-center text-center my-auto py-4 gap-4">
             {/* Centered Robot Mascot */}
-            <div className="relative w-24 h-24 rounded-full bg-gradient-to-tr from-brand-card via-brand-card-light to-brand-dark p-2 shadow-2xl border border-brand-teal/40 flex items-center justify-center animate-pulse">
+            <div className="relative size-[100px] rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#4794FF_0%,#091A32_100%)] flex items-center justify-center animate-pulse">
               <Image
                 src="/mascots/Robo head.png"
                 alt="DiaPilot Mascot"
-                width={70}
-                height={70}
-                className="object-contain"
+                width={76}
+                height={76}
+                className="object-contain mb-1.5"
                 priority
               />
             </div>
