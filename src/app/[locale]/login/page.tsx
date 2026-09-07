@@ -4,10 +4,14 @@ import * as React from "react";
 import Image from "next/image";
 import { useRouter, Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { PrimaryButton } from "@/components/buttons/primary-button";
 import { SecondaryButton } from "@/components/buttons/secondary-button";
 import { TextInput } from "@/components/inputs/text-input";
 import { PasswordInput } from "@/components/inputs/password-input";
+import { FieldGroup } from "@/components/ui/field";
 import { User, ArrowRight } from "lucide-react";
 
 export default function LoginScreen() {
@@ -17,31 +21,40 @@ export default function LoginScreen() {
   const tCommon = useTranslations("common");
   const isRtl = locale === "ar";
 
-  const [identifier, setIdentifier] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
 
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!identifier) {
-      setError(
-        isRtl
-          ? "يرجى إدخال رقم الهاتف أو البريد الإلكتروني"
-          : "Please enter your phone or email"
-      );
-      return;
-    }
-    if (!password) {
-      setError(
-        isRtl ? "يرجى إدخال كلمة المرور" : "Please enter your password"
-      );
-      return;
-    }
+  const loginSchema = React.useMemo(
+    () =>
+      z.object({
+        identifier: z.string().min(1, {
+          message: isRtl
+            ? "يرجى إدخال رقم الهاتف أو البريد الإلكتروني"
+            : "Please enter your phone or email",
+        }),
+        password: z.string().min(1, {
+          message: isRtl
+            ? "يرجى إدخال كلمة المرور"
+            : "Please enter your password",
+        }),
+      }),
+    [isRtl]
+  );
 
-    setError(null);
+  type LoginFormValues = z.infer<typeof loginSchema>;
+
+  const {
+    control,
+    handleSubmit,
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      identifier: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (_values: LoginFormValues) => {
     setIsLoading(true);
-
     setTimeout(() => {
       setIsLoading(false);
       router.replace("/chat");
@@ -54,16 +67,6 @@ export default function LoginScreen() {
 
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none px-5 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] justify-start gap-4">
-      {/* Top Header Row with Language Switch */}
-      {/* <div className="w-full flex items-center justify-end z-20 mb-1 flex-shrink-0">
-        <Link
-          href="/language"
-          className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 transition-all"
-        >
-          {isRtl ? "English" : "العربية"}
-        </Link>
-      </div> */}
-
       {/* Hero Mascot & Title Section */}
       <div className="flex flex-col items-center text-center my-2 z-10 flex-shrink-0">
         <div className="relative w-32 h-w-32 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#4794FF_0%,#091A32_100%)] flex items-center justify-center my-2">
@@ -99,36 +102,46 @@ export default function LoginScreen() {
             </p>
           </div>
 
-          <form onSubmit={handleSignIn} className="flex flex-col gap-3.5">
-            <TextInput
-              label={t("phoneOrEmail")}
-              placeholder={t("phonePlaceholder")}
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              leftIcon={<User className="w-4 h-4 text-slate-400" />}
-              autoComplete="username"
-            />
-
-            <div>
-              <PasswordInput
-                label={t("password")}
-                placeholder={t("passwordPlaceholder")}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3.5">
+            <FieldGroup className="gap-3.5">
+              <Controller
+                control={control}
+                name="identifier"
+                render={({ field, fieldState }) => (
+                  <TextInput
+                    {...field}
+                    label={t("phoneOrEmail")}
+                    placeholder={t("phonePlaceholder")}
+                    leftIcon={<User className="w-4 h-4 text-slate-400" />}
+                    autoComplete="username"
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
-              <div className="flex justify-end mt-1">
-                <button
-                  type="button"
-                  className="text-xs font-semibold text-brand-teal hover:text-brand-cyan transition-colors cursor-pointer"
-                >
-                  {t("forgotPassword")}
-                </button>
-              </div>
-            </div>
 
-            {error && (
-              <p className="text-xs text-rose-400 font-medium px-1">{error}</p>
-            )}
+              <div>
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({ field, fieldState }) => (
+                    <PasswordInput
+                      {...field}
+                      label={t("password")}
+                      placeholder={t("passwordPlaceholder")}
+                      error={fieldState.error?.message}
+                    />
+                  )}
+                />
+                <div className="flex justify-end mt-1">
+                  <button
+                    type="button"
+                    className="text-xs font-semibold text-brand-teal hover:text-brand-cyan transition-colors cursor-pointer"
+                  >
+                    {t("forgotPassword")}
+                  </button>
+                </div>
+              </div>
+            </FieldGroup>
 
             <div className="pt-1">
               <PrimaryButton type="submit" isLoading={isLoading} fullWidth>
@@ -156,7 +169,6 @@ export default function LoginScreen() {
           >
             {t("continueAsGuest")}
           </SecondaryButton>
-
         </div>
 
         {/* Bottom Create Account Link */}
@@ -170,8 +182,6 @@ export default function LoginScreen() {
           </Link>
         </div>
       </div>
-
-
     </div>
   );
 }

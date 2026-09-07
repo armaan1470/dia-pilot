@@ -12,6 +12,7 @@ export interface TextInputProps
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   helperText?: string;
+  hideErrorText?: boolean;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -23,6 +24,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       leftIcon,
       rightIcon,
       helperText,
+      hideErrorText,
       id,
       ...props
     },
@@ -43,7 +45,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         )}
         <div className="relative flex items-center">
           {leftIcon && (
-            <div className="absolute left-4 rtl:left-auto rtl:right-4 flex items-center pointer-events-none text-slate-400">
+            <div className="absolute start-4 flex items-center pointer-events-none text-slate-400">
               {leftIcon}
             </div>
           )}
@@ -51,21 +53,21 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             id={inputId}
             ref={ref}
             className={cn(
-              "h-12 sm:h-13 w-full rounded-lg bg-brand-input border-brand-border text-white placeholder:text-slate-500 text-sm sm:text-base focus-visible:ring-1 focus-visible:ring-brand-teal focus-visible:border-brand-teal transition-all shadow-inner",
-              leftIcon && "pl-11 rtl:pl-4 rtl:pr-11",
-              rightIcon && "pr-11 rtl:pr-4 rtl:pl-11",
-              error && "border-rose-500 focus-visible:ring-rose-500",
+              "h-12 sm:h-13 w-full rounded-lg bg-brand-input border-brand-border text-white placeholder:text-slate-500 text-sm sm:text-base focus-visible:ring-1 focus-visible:ring-brand-teal focus-visible:border-brand-teal transition-all shadow-inner px-4",
+              leftIcon && "ps-11",
+              rightIcon && "pe-11",
+              error && "border-rose-500 focus-visible:ring-rose-500 focus-visible:border-rose-500 hover:border-rose-500",
               className
             )}
             {...props}
           />
           {rightIcon && (
-            <div className="absolute right-4 rtl:right-auto rtl:left-4 flex items-center text-slate-400">
+            <div className="absolute end-4 flex items-center text-slate-400">
               {rightIcon}
             </div>
           )}
         </div>
-        {error ? (
+        {error && !hideErrorText ? (
           <p className="text-xs text-rose-400 font-medium px-1 mt-0.5">{error}</p>
         ) : helperText ? (
           <p className="text-xs text-slate-400 px-1 mt-0.5">{helperText}</p>
