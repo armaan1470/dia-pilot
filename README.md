@@ -1,38 +1,23 @@
-#Dia-pilot
+# DiaPilot frontend
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Mobile Next.js frontend for DiaPilot, with Arabic and English chat and service discovery.
 
-## Getting Started
+## Run locally
 
-First, run the development server:
+Start the backend in the sibling diapilot project on port 3002. Run its database migration and service seed command first:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    npm run migration:run
+    npm run services:seed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then start the frontend:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    pnpm install
+    pnpm dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000. Chat uses the frontend /api/chat proxy and backend POST /chat. The service directory and detail pages use /api/services and /api/services/:slug, which proxy to the corresponding backend endpoints. In local development, draft entries appear with an internal-preview label.
 
-## Learn More
+The default backend URL is http://127.0.0.1:3002. To use a different address, set DIAPILOT_API_URL in this project's .env.local and deployment environment:
 
-To learn more about Next.js, take a look at the following resources:
+    DIAPILOT_API_URL=http://127.0.0.1:3002
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is a server-side variable. Do not put API credentials in a NEXT_PUBLIC_ variable. Staging and production APIs return approved service records only.

@@ -129,7 +129,7 @@ export default function HelpScreen() {
 
           {/* Visit Us */}
           <div
-            onClick={() => router.push("/services/clinics")}
+            onClick={() => router.push("/services/diabetes-care")}
             className="rounded-lg bg-brand-card border border-brand-border p-4 flex flex-col justify-between h-28 cursor-pointer active:scale-95 transition-all shadow-md"
           >
             <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-brand-teal">
