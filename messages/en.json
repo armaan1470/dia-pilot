@@ -117,6 +117,9 @@
     "allServices": "ALL SERVICES"
   },
   "chat": {
+    "brand": "DIAPILOT",
+    "send": "Send message",
+    "sendError": "Could not send your message. Please try again.",
     "title": "AI Assistant",
     "greeting": "Hello...",
     "subtitle": "How can I help you today?",
@@ -139,7 +142,23 @@
     "oralHealth": "Oral & Dental Health",
     "education": "Health Education",
     "living": "Living & Coping",
-    "support": "Support & Contact"
+    "support": "Support & Contact",
+    "searchPlaceholder": "Search services...",
+    "loadingServices": "Loading services...",
+    "servicesError": "Could not load services. Please try again.",
+    "noServices": "No services are available yet.",
+    "draftStatus": "Draft · internal preview",
+    "draftNotice": "This service content is a draft for internal preview and is not approved for public use.",
+    "aboutService": "About this service",
+    "targetAudience": "Who this service supports",
+    "topicsCovered": "Topics covered",
+    "location": "Location",
+    "workingHours": "Working hours",
+    "contact": "Contact",
+    "booking": "Booking",
+    "detailsPending": "Operational details are pending approval.",
+    "serviceNotFound": "Service not found.",
+    "allServices": "ALL SERVICES"
   },
   "profile": {
     "title": "Profile",

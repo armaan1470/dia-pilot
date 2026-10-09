@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export interface CategoryTopicCardProps {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   numberColor: string;
   arrowPillClass: string;
   arrowIconClass: string;
@@ -49,9 +49,11 @@ export const CategoryTopicCard: React.FC<CategoryTopicCardProps> = ({
           <h4 className="text-sm font-bold text-white leading-tight truncate">
             {title}
           </h4>
-          <span className="text-xs text-slate-400 mt-0.5 truncate font-normal">
-            {description}
-          </span>
+          {description && (
+            <span className="text-xs text-slate-400 mt-0.5 truncate font-normal">
+              {description}
+            </span>
+          )}
         </div>
 
         {/* Circular arrow button styled according to category */}
