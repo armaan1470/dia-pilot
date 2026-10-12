@@ -3,105 +3,70 @@
 import * as React from "react";
 import { useAuthStore } from "@/lib/auth/auth-store";
 import { usePathname, useRouter } from "@/i18n/routing";
+import { useLocale } from "next-intl";
 
-// Routes that unauthenticated users can access
-const UNAUTHENTICATED_ALLOWED_ROUTES = [
+const PUBLIC_ROUTES = [
   "/",
   "/splash",
   "/language",
   "/onboarding",
-  "/login",
-  "/register",
   "/privacy",
   "/help",
 ];
 
-// Routes strictly forbidden for logged-in users (both patients and guests)
-const FORBIDDEN_FOR_LOGGED_IN_USERS = [
-  "/",
-  "/splash",
-  "/onboarding",
-  "/login",
-];
+const AUTH_ROUTES = ["/login", "/register"];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { initialize, user, isLoading } = useAuthStore();
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
 
   React.useEffect(() => {
     initialize();
   }, [initialize]);
 
-  // Determine route permissions
-  const isForbiddenForLoggedIn = React.useMemo(() => {
-    if (!user) return false;
-    // Splash, onboarding, and login are never accessible once logged in
-    const isBaseForbidden = FORBIDDEN_FOR_LOGGED_IN_USERS.some(
-      (r) => pathname === r || pathname.startsWith(`${r}/`)
-    );
-    if (isBaseForbidden) return true;
-
-    // Full patients (non-guests) cannot visit /register (only guests can upgrade)
-    if (!user.is_anonymous && (pathname === "/register" || pathname.startsWith("/register/"))) {
-      return true;
-    }
-
-    return false;
-  }, [user, pathname]);
-
-  const isForbiddenForUnauthenticated = React.useMemo(() => {
-    if (user || isLoading) return false;
-    return !UNAUTHENTICATED_ALLOWED_ROUTES.some(
-      (r) => pathname === r || pathname.startsWith(`${r}/`)
-    );
-  }, [user, isLoading, pathname]);
-
-  // Client-side route guarding for instant SPA navigation & back-stack enforcement
+  // Client-side guard for SPA transitions
   React.useEffect(() => {
     if (isLoading) return;
 
-    if (isForbiddenForLoggedIn) {
-      router.replace("/chat");
-      return;
-    }
+    const isAuthRoute = AUTH_ROUTES.some(
+      (r) => pathname === r || pathname.startsWith(`${r}/`)
+    );
+    const isPublicRoute = PUBLIC_ROUTES.some((r) => pathname === r);
 
-    if (isForbiddenForUnauthenticated) {
-      router.replace("/login");
-      return;
-    }
-  }, [isLoading, isForbiddenForLoggedIn, isForbiddenForUnauthenticated, router]);
-
-  // Popstate history trap: prevent back-button from popping into splash/auth routes
-  React.useEffect(() => {
-    if (typeof window === "undefined" || !user) return;
-
-    const handlePopState = () => {
-      const currentPath =
-        window.location.pathname.replace(/^\/(ar|en)/, "") || "/";
-
-      const isBaseForbidden = FORBIDDEN_FOR_LOGGED_IN_USERS.some(
-        (r) => currentPath === r || currentPath.startsWith(`${r}/`)
-      );
-
-      const isRegisterForbidden =
-        !user.is_anonymous &&
-        (currentPath === "/register" || currentPath.startsWith("/register/"));
-
-      if (isBaseForbidden || isRegisterForbidden) {
-        // Prevent landing on auth/splash: force navigation back to /chat
-        router.replace("/chat");
+    // 1. If logged in as full patient and on an auth or onboarding page, replace to /chat
+    if (user && !user.is_anonymous) {
+      if (
+        isAuthRoute ||
+        pathname === "/" ||
+        pathname === "/splash" ||
+        pathname === "/onboarding"
+      ) {
+        router.replace("/chat", { locale });
+        return;
       }
-    };
+    }
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [user, router]);
+    // 2. If logged in as guest and on login, splash, or onboarding, replace to /chat
+    if (user && user.is_anonymous) {
+      if (
+        pathname === "/login" ||
+        pathname === "/" ||
+        pathname === "/splash" ||
+        pathname === "/onboarding"
+      ) {
+        router.replace("/chat", { locale });
+        return;
+      }
+    }
 
-  // Prevent flashing forbidden auth/splash screens while redirecting
-  if (!isLoading && (isForbiddenForLoggedIn || isForbiddenForUnauthenticated)) {
-    return <div className="flex flex-1 min-h-dvh bg-brand-dark" />;
-  }
+    // 3. If unauthenticated and on a protected internal route, redirect to /login
+    if (!user && !isPublicRoute && !isAuthRoute) {
+      router.replace("/login", { locale });
+      return;
+    }
+  }, [user, isLoading, pathname, router, locale]);
 
   return <>{children}</>;
 }

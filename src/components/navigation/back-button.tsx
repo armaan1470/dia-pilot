@@ -27,21 +27,10 @@ export const BackButton: React.FC<BackButtonProps> = ({
       return;
     }
 
-    if (fallbackHref) {
-      const hasInternalReferrer =
-        typeof window !== "undefined" &&
-        Boolean(document.referrer && document.referrer.includes(window.location.host));
-
-      if (hasInternalReferrer && window.history.length > 1) {
-        router.back();
-      } else {
-        router.push(fallbackHref as any);
-      }
-      return;
-    }
-
     if (typeof window !== "undefined" && window.history.length > 1) {
       router.back();
+    } else if (fallbackHref) {
+      router.push(fallbackHref as any);
     } else {
       router.push("/chat" as any);
     }

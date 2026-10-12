@@ -2,27 +2,14 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Link, useRouter } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { AppleEmoji } from "@/components/ui/apple-emoji";
-import { useAuthStore } from "@/lib/auth/auth-store";
 
 export default function SplashScreen() {
   const locale = useLocale();
   const isRtl = locale === "ar";
-  const { user, isLoading } = useAuthStore();
-  const router = useRouter();
-
-  React.useEffect(() => {
-    if (!isLoading && user) {
-      router.replace("/chat");
-    }
-  }, [user, isLoading, router]);
-
-  if (!isLoading && user) {
-    return <div className="flex flex-1 min-h-dvh bg-brand-dark" />;
-  }
 
   return (
     <div className="flex flex-col flex-1 min-h-dvh bg-diapilot-gradient text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2rem,env(safe-area-inset-bottom,0px))]">
