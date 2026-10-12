@@ -59,11 +59,11 @@ export const CategoryTopicCard: React.FC<CategoryTopicCardProps> = ({
         {/* Circular arrow button styled according to category */}
         <div
           className={cn(
-            "w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 rtl:rotate-180 transition-colors",
+            "w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors",
             arrowPillClass
           )}
         >
-          <ArrowRight className={cn("w-3.5 h-3.5", arrowIconClass)} />
+          <ArrowRight className={cn("w-3.5 h-3.5 rtl:rotate-180", arrowIconClass)} />
         </div>
       </div>
     </div>

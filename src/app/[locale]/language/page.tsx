@@ -80,7 +80,7 @@ export default function LanguageScreen() {
               height="130"
               viewBox="0 0 130 130"
               fill="none"
-              className="pointer-events-none select-none opacity-40 -mt-2 -mr-2 rtl:-ml-2"
+              className="pointer-events-none select-none opacity-40 -mt-2 -me-2"
             >
               <circle
                 cx="110"
@@ -212,8 +212,8 @@ export default function LanguageScreen() {
             </div>
 
             {/* Arrow Button */}
-            <div className="glow-primary w-8 h-8 rounded-full bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue border-t border-white/40 text-white flex items-center justify-center mb-6 rtl:rotate-180 flex-shrink-0">
-              <ArrowRight className="w-4 h-4" />
+            <div className="glow-primary w-8 h-8 rounded-full bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue border-t border-white/40 text-white flex items-center justify-center mb-6 flex-shrink-0">
+              <ArrowRight className="w-4 h-4 rtl:rotate-180" />
             </div>
 
             {/* To Lang */}

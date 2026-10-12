@@ -57,8 +57,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             </p>
           )}
         </div>
-        <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-slate-400 flex-shrink-0 rtl:rotate-180">
-          <ChevronRight className="w-4 h-4" />
+        <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-slate-400 flex-shrink-0">
+          <ChevronRight className="w-4 h-4 rtl:rotate-180" />
         </div>
       </div>
     </Card>
