@@ -19,8 +19,8 @@ export type HeaderTheme =
   | "red";
 
 export interface PageHeaderProps {
-  title: string;
-  subtitle?: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
   showBack?: boolean;
   onBack?: () => void;
   fallbackHref?: string;
@@ -94,9 +94,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs text-white/45 mt-0.5 leading-relaxed font-normal truncate">
+              <div className="text-xs text-white/45 mt-0.5 leading-relaxed font-normal truncate">
                 {subtitle}
-              </p>
+              </div>
             )}
           </div>
         </div>

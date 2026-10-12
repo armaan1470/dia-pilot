@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 export interface LoadingSkeletonProps {
-  type?: "card" | "list" | "chat" | "profile";
+  type?: "card" | "list" | "chat" | "profile" | "topic" | "detailCard";
   count?: number;
   className?: string;
 }
@@ -48,6 +48,54 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
             <div className="flex-1 space-y-2">
               <Skeleton className="h-4 w-2/3 bg-brand-card-light" />
               <Skeleton className="h-3 w-1/3 bg-brand-card-light" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (type === "detailCard") {
+    return (
+      <div className={cn("space-y-4 w-full", className)}>
+        {items.map((_, i) => (
+          <div
+            key={i}
+            className="rounded-lg bg-brand-card border border-brand-border p-4 space-y-2.5"
+          >
+            <Skeleton className="h-4 w-28 bg-brand-card-light rounded" />
+            <div className="space-y-2">
+              <Skeleton className="h-3.5 w-full bg-brand-card-light/60 rounded" />
+              <Skeleton className="h-3.5 w-5/6 bg-brand-card-light/60 rounded" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (type === "topic") {
+    return (
+      <div className={cn("space-y-2.5 w-full", className)}>
+        {items.map((_, i) => (
+          <div
+            key={i}
+            className="w-full rounded-lg bg-brand-card border border-white/5 flex items-stretch overflow-hidden h-[54px]"
+          >
+            {/* Left Number Section */}
+            <div className="w-13 shrink-0 flex items-center justify-center border-r border-white/10 rtl:border-r-0 rtl:border-l bg-brand-card-light/20">
+              <Skeleton className="h-4 w-5 bg-brand-card-light rounded" />
+            </div>
+
+            {/* Right Content Section */}
+            <div className="flex-1 p-3.5 pl-4 rtl:pl-3.5 rtl:pr-4 flex items-center justify-between gap-3 min-w-0">
+              <div className="flex-1 space-y-1.5 min-w-0">
+                <Skeleton className="h-3.5 w-3/5 bg-brand-card-light rounded" />
+                <Skeleton className="h-2.5 w-2/5 bg-brand-card-light/60 rounded" />
+              </div>
+
+              {/* Arrow Pill placeholder */}
+              <Skeleton className="w-7 h-7 rounded-full bg-brand-card-light shrink-0" />
             </div>
           </div>
         ))}

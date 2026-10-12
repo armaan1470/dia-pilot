@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/navigation/page-header";
 import { AppleEmoji } from "@/components/ui/apple-emoji";
 import { CategoryTopicCard } from "@/components/cards/category-topic-card";
 import { AskAIBanner } from "@/components/cards/ask-ai-banner";
+import { LoadingSkeleton } from "@/components/feedback/loading-skeleton";
 import { serviceCategoryData } from "@/lib/data/services-categories";
 import type { ServiceRecord } from "@/lib/api/services";
 
@@ -23,6 +24,9 @@ function ServiceDetailContent({ serviceId }: { serviceId: string }) {
   const locale = useLocale();
   const t = useTranslations("services");
   const isRtl = locale === "ar";
+
+  const categoryConfig =
+    serviceCategoryData[serviceId] ?? serviceCategoryData["diabetes-care"];
 
   const [service, setService] = React.useState<ServiceRecord | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -56,31 +60,91 @@ function ServiceDetailContent({ serviceId }: { serviceId: string }) {
     };
   }, [serviceId]);
 
-  if (loading || !service) {
+  if (loading) {
     return (
-      <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar pb-10">
+      <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
         <PageHeader
-          title={loading ? t("loadingServices") : notFound ? t("serviceNotFound") : t("title")}
+          title={
+            <span className="inline-block h-6 sm:h-7 w-36 sm:w-48 rounded-md bg-white/25 animate-pulse" />
+          }
+          subtitle={
+            <span className="inline-block h-3.5 w-24 rounded bg-white/20 animate-pulse mt-0.5" />
+          }
           brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
           showBack
           fallbackHref="/services"
-          theme="blue"
+          theme={categoryConfig.theme}
+          watermark={<AppleEmoji name={categoryConfig.emojiName} size={80} />}
         />
-        <p
-          role={hasError ? "alert" : undefined}
-          className="px-5 py-6 text-sm text-slate-400"
-        >
-          {hasError
-            ? t("servicesError")
-            : notFound
-              ? t("serviceNotFound")
-              : t("loadingServices")}
-        </p>
+
+        <div className="px-5 space-y-4 pt-4" role="status" aria-busy="true">
+          <span className="sr-only">{t("loadingServices")}</span>
+
+          {/* About Service & Target Audience Cards Skeleton */}
+          <LoadingSkeleton type="detailCard" count={2} />
+
+          {/* Topics Covered Section Skeleton */}
+          <section className="space-y-2.5">
+            <div className="h-4 w-28 rounded bg-brand-card-light/70 animate-pulse mx-1" />
+            <LoadingSkeleton type="topic" count={4} />
+          </section>
+
+          {/* Ask AI Banner Skeleton */}
+          <div className="w-full h-18 rounded-xl bg-brand-card/80 border border-brand-border p-4 flex items-center justify-between animate-pulse">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-brand-card-light" />
+              <div className="space-y-2">
+                <div className="h-3.5 w-28 rounded bg-brand-card-light" />
+                <div className="h-2.5 w-40 rounded bg-brand-card-light/60" />
+              </div>
+            </div>
+            <div className="w-7 h-7 rounded-full bg-brand-card-light shrink-0" />
+          </div>
+        </div>
       </div>
     );
   }
 
-  const config = serviceCategoryData[service.slug] ?? serviceCategoryData["diabetes-care"];
+  if (notFound) {
+    return (
+      <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar pb-10">
+        <PageHeader
+          title={t("serviceNotFound")}
+          brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
+          showBack
+          fallbackHref="/services"
+          theme={categoryConfig.theme}
+          watermark={<AppleEmoji name={categoryConfig.emojiName} size={80} />}
+        />
+        <div className="px-5 py-8 text-center space-y-3">
+          <p className="text-sm text-slate-400">{t("serviceNotFound")}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError || !service) {
+    return (
+      <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar pb-10">
+        <PageHeader
+          title={t("title")}
+          brandTag={isRtl ? "ديا - بايلوت" : "DIAPILOT"}
+          showBack
+          fallbackHref="/services"
+          theme={categoryConfig.theme}
+          watermark={<AppleEmoji name={categoryConfig.emojiName} size={80} />}
+        />
+        <div className="px-5 py-8 text-center space-y-3">
+          <p role="alert" className="text-sm text-red-300">
+            {t("servicesError")}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const config =
+    serviceCategoryData[service.slug] ?? categoryConfig;
   const topics = (isRtl ? service.topicsAr : service.topicsEn).map(
     (title, index) => ({
       id: String(index + 1).padStart(2, "0"),
