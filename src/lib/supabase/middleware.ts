@@ -72,23 +72,30 @@ export async function updateSession(request: NextRequest, response?: NextRespons
 
   // CASE 1: User is an authenticated patient (full account)
   if (user && !user.is_anonymous) {
-    // Prevent logged-in users from visiting /login or /register
-    if (isAuthRoute) {
-      return createRedirect("/chat");
-    }
-    // Prevent logged-in users from landing on the initial splash screen
-    if (pathWithoutLocale === "/" || pathWithoutLocale === "/splash") {
+    // Prevent logged-in users from visiting /login, /register, /, /splash, or /onboarding
+    if (
+      isAuthRoute ||
+      pathWithoutLocale === "/" ||
+      pathWithoutLocale === "/splash" ||
+      pathWithoutLocale === "/onboarding"
+    ) {
       return createRedirect("/chat");
     }
   }
 
   // CASE 2: User is an anonymous Guest
   if (user && user.is_anonymous) {
-    // If a guest lands on initial splash screen, jump straight into chat
-    if (pathWithoutLocale === "/" || pathWithoutLocale === "/splash") {
+    // Prevent guests from visiting /, /splash, /onboarding, or /login
+    if (
+      pathWithoutLocale === "/" ||
+      pathWithoutLocale === "/splash" ||
+      pathWithoutLocale === "/onboarding" ||
+      pathWithoutLocale === "/login" ||
+      pathWithoutLocale.startsWith("/login/")
+    ) {
       return createRedirect("/chat");
     }
-    // Allow guests to visit /register (to upgrade) or /login (to switch account)
+    // Allow guests to visit /register (to upgrade)
     // and all core feature routes (/chat, /services, /profile, etc.)
   }
 
