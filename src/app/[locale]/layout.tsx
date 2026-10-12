@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { DesktopOnlyNotice } from "@/components/layout/desktop-only-notice";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 import "../globals.css";
 
 const cairo = Cairo({
@@ -83,17 +84,17 @@ export default async function LocaleLayout({
         }`}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
-          
-          {/* 1. Desktop & Tablet View (>= 640px / md): Dedicated Banking-Grade M-Site Notice Screen */}
-          <DesktopOnlyNotice />
+          <QueryProvider>
+            {/* 1. Desktop & Tablet View (>= 640px / md): Dedicated Banking-Grade M-Site Notice Screen */}
+            <DesktopOnlyNotice />
 
-          {/* 2. Mobile View (< 640px / md): Pure Mobile Application Shell */}
-          <AuthProvider>
-            <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-brand-dark relative overflow-x-hidden">
-              {children}
-            </main>
-          </AuthProvider>
-
+            {/* 2. Mobile View (< 640px / md): Pure Mobile Application Shell */}
+            <AuthProvider>
+              <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-brand-dark relative overflow-x-hidden">
+                {children}
+              </main>
+            </AuthProvider>
+          </QueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

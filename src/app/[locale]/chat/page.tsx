@@ -9,6 +9,7 @@ import { ChatBubbleAI } from "@/components/chat/chat-bubble-ai";
 import { SuggestionChip } from "@/components/chat/suggestion-chip";
 import { TypingIndicator } from "@/components/chat/typing-indicator";
 import { Send, ChevronRight } from "lucide-react";
+import { useChatMutation } from "@/hooks/queries/use-chat";
 
 interface Message {
   id: string;
@@ -22,14 +23,15 @@ export default function ChatScreen() {
   const t = useTranslations("chat");
 
   const [input, setInput] = React.useState("");
-  const [isTyping, setIsTyping] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([]);
-  const [error, setError] = React.useState(false);
 
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const conversationIdRef = React.useRef<string | undefined>(undefined);
-  const inFlightRef = React.useRef(false);
   const nextMessageIdRef = React.useRef(0);
+
+  const chatMutation = useChatMutation();
+  const isTyping = chatMutation.isPending;
+  const error = chatMutation.isError;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -41,10 +43,9 @@ export default function ChatScreen() {
 
   const handleSendMessage = async (textToSend?: string) => {
     const messageText = (textToSend ?? input).trim();
-    if (!messageText || inFlightRef.current) return;
+    if (!messageText || chatMutation.isPending) return;
 
-    inFlightRef.current = true;
-    setError(false);
+    chatMutation.reset();
 
     const userMessage: Message = {
       id: String(++nextMessageIdRef.current),
@@ -58,21 +59,14 @@ export default function ChatScreen() {
 
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
-    setIsTyping(true);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: messageText,
-          language: locale,
-          conversationId: conversationIdRef.current,
-        }),
+      const result = await chatMutation.mutateAsync({
+        message: messageText,
+        language: locale as "ar" | "en",
+        conversationId: conversationIdRef.current,
       });
-      if (!response.ok) throw new Error("Chat request failed");
 
-      const result = (await response.json()) as { conversationId: string; reply: string };
       conversationIdRef.current = result.conversationId;
       const aiMessage: Message = {
         id: String(++nextMessageIdRef.current),
@@ -87,10 +81,6 @@ export default function ChatScreen() {
     } catch {
       setMessages((prev) => prev.filter((message) => message.id !== userMessage.id));
       setInput(messageText);
-      setError(true);
-    } finally {
-      inFlightRef.current = false;
-      setIsTyping(false);
     }
   };
 
