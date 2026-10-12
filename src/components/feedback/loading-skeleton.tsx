@@ -23,12 +23,12 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
         {items.map((_, i) => (
           <div
             key={i}
-            className="h-[140px] rounded-lg bg-brand-card border border-brand-border p-4 flex flex-col justify-between"
+            className="h-[148px] sm:h-[156px] rounded-2xl bg-brand-card/70 border border-brand-border/60 p-4 flex flex-col justify-between overflow-hidden relative"
           >
             <Skeleton className="w-10 h-10 rounded-xl bg-brand-card-light" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-3/4 bg-brand-card-light" />
-              <Skeleton className="h-3 w-1/2 bg-brand-card-light" />
+            <div className="space-y-1.5 min-h-[2.6rem] flex flex-col justify-end">
+              <Skeleton className="h-4 w-4/5 rounded bg-brand-card-light" />
+              <Skeleton className="h-3 w-1/2 rounded bg-brand-card-light/60" />
             </div>
           </div>
         ))}
