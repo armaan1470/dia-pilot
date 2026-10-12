@@ -105,8 +105,8 @@ export default function ArticleDetailScreen({
             </div>
           </div>
 
-          <div className="w-8 h-8 rounded-full bg-white text-brand-dark-blue flex items-center justify-center shadow-md rtl:rotate-180">
-            <ArrowRight className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-full bg-white text-brand-dark-blue flex items-center justify-center shadow-md">
+            <ArrowRight className="w-4 h-4 rtl:rotate-180" />
           </div>
         </div>
       </div>

@@ -153,8 +153,8 @@ export default function MyDocumentsScreen() {
                   </div>
 
                   {/* Right: Circular Arrow Pill */}
-                  <div className="w-7 h-7 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center flex-shrink-0 rtl:rotate-180 transition-colors group-hover:bg-emerald-500/25">
-                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-7 h-7 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-emerald-500/25">
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400 rtl:rotate-180" />
                   </div>
                 </div>
               ))}

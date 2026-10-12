@@ -18,7 +18,7 @@ export const ChatBubbleAI: React.FC<ChatBubbleAIProps> = ({
   return (
     <div
       className={cn(
-        "flex items-start gap-2.5 w-full max-w-[90%] self-start me-auto my-1.5",
+        "flex items-start gap-2.5 w-full max-w-[90%] mr-auto my-1.5",
         className
       )}
     >

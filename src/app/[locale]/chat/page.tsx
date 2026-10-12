@@ -208,9 +208,9 @@ export default function ChatScreen() {
             type="submit"
             aria-label={t("send")}
             disabled={!input.trim() || isTyping}
-            className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer rtl:rotate-180 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 rtl:-scale-x-100" />
           </button>
         </form>
       </div>

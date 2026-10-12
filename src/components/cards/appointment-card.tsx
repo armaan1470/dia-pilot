@@ -75,8 +75,8 @@ export const AppointmentCard: React.FC<AppointmentCardProps> = ({
           </div>
         </div>
 
-        <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-slate-400 rtl:rotate-180">
-          <ChevronRight className="w-3.5 h-3.5" />
+        <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-slate-400">
+          <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
         </div>
       </div>
     </Card>

@@ -49,8 +49,8 @@ export const AskAIBanner: React.FC<AskAIBannerProps> = ({
         </div>
       </div>
 
-      <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-white flex-shrink-0 rtl:rotate-180 shadow-sm">
-        <ArrowRight className="w-4 h-4" />
+      <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+        <ArrowRight className="w-4 h-4 rtl:rotate-180" />
       </div>
     </div>
   );

@@ -17,11 +17,11 @@ export const ChatBubbleUser: React.FC<ChatBubbleUserProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-end w-full max-w-[85%] self-end ms-auto my-1.5",
+        "flex flex-col items-end w-full max-w-[85%] ml-auto my-1.5",
         className
       )}
     >
-      <div className="bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white rounded-lg rounded-br-[4px] rtl:rounded-br-[20px] rtl:rounded-bl-[4px] px-4 py-3 shadow-md shadow-brand-blue/20 text-sm sm:text-base leading-relaxed break-words">
+      <div className="bg-gradient-to-br from-brand-teal via-brand-blue to-brand-dark-blue text-white rounded-lg rounded-br-[4px] px-4 py-3 shadow-md shadow-brand-blue/20 text-sm sm:text-base leading-relaxed break-words">
         {message}
       </div>
       {timestamp && (

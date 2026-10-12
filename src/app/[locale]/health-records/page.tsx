@@ -152,7 +152,7 @@ export default function HealthRecordsScreen() {
                 </div>
 
                 {/* Right: Value & Change Badge */}
-                <div className="flex flex-col items-end rtl:items-start text-right rtl:text-left flex-shrink-0">
+                <div className="flex flex-col items-end text-end flex-shrink-0">
                   <span className="text-sm sm:text-base font-bold text-white">
                     {item.value}
                   </span>

@@ -177,7 +177,7 @@ export default function ProfileScreen() {
             title={isRtl ? "تسجيل الخروج" : "Log Out"}
             aria-label={isRtl ? "تسجيل الخروج" : "Log Out"}
           >
-            <LogOut className="w-4 h-4 rtl:rotate-180" />
+            <LogOut className="w-4 h-4 rtl:-scale-x-100" />
           </button>
         </div>
 

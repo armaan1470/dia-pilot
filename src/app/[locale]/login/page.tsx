@@ -221,6 +221,7 @@ export default function LoginScreen() {
           <span>{t("newPatient")}</span>
           <Link
             href="/register"
+            replace
             className="font-bold text-brand-teal hover:underline cursor-pointer"
           >
             {t("createAccount")}
