@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { BottomNavigation } from "@/components/navigation/bottom-navigation";
-import { mockProfile } from "@/lib/mocks/profile";
+import { useAuthStore } from "@/lib/auth/auth-store";
 import {
   Calendar,
   Activity,
@@ -15,6 +15,7 @@ import {
   HelpCircle,
   LogOut,
   ChevronRight,
+  UserCheck,
 } from "lucide-react";
 
 export default function ProfileScreen() {
@@ -95,6 +96,45 @@ export default function ProfileScreen() {
     },
   ];
 
+  const { user, profile, isGuest, signOut } = useAuthStore();
+
+  const handleLogout = async () => {
+    await signOut();
+    router.replace("/login");
+  };
+
+  const displayName = isGuest
+    ? isRtl
+      ? "زائر ديا-بايلوت"
+      : "DiaPilot Guest"
+    : profile?.full_name || user?.email?.split("@")[0] || (isRtl ? "مريض ديا-بايلوت" : "Patient");
+
+  const avatarInitial = displayName.charAt(0).toUpperCase();
+
+  const patientId = isGuest
+    ? `#GUEST-${user?.id ? user.id.slice(0, 4).toUpperCase() : "VISITOR"}`
+    : `#DM-${profile?.id ? profile.id.slice(0, 4).toUpperCase() : "2847"}`;
+
+  const diabetesLabels: Record<string, { ar: string; en: string }> = {
+    type1: { ar: "السكري من النوع 1", en: "Type 1 Diabetes" },
+    type2: { ar: "السكري من النوع 2", en: "Type 2 Diabetes" },
+    gestational: { ar: "سكري الحمل", en: "Gestational Diabetes" },
+    pre: { ar: "ما قبل السكري", en: "Pre-diabetes" },
+    other: { ar: "حالة أخرى", en: "Other Condition" },
+  };
+
+  const diabetesTag = isGuest
+    ? isRtl
+      ? "وضع التصفح كزائر"
+      : "Guest Visitor Mode"
+    : profile?.diabetes_type && diabetesLabels[profile.diabetes_type]
+    ? isRtl
+      ? diabetesLabels[profile.diabetes_type].ar
+      : diabetesLabels[profile.diabetes_type].en
+    : isRtl
+    ? "متابع للسكري"
+    : "Diabetes Care";
+
   return (
     <div className="flex flex-col flex-1 min-h-[100dvh] bg-brand-dark text-white relative overflow-y-auto no-scrollbar select-none pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom,0px)))]">
       {/* Top Profile Header */}
@@ -103,22 +143,28 @@ export default function ProfileScreen() {
         <div className="relative z-10 flex items-start justify-between gap-3">
           <div className="flex items-center gap-3.5 min-w-0">
             <div className="size-16 rounded-lg bg-white/20 border-2 border-white/35 flex items-center justify-center text-2xl font-black text-white backdrop-blur-md flex-shrink-0">
-              M
+              {avatarInitial}
             </div>
             <div className="space-y-0.5 min-w-0">
               <h1 className="text-lg font-black text-white leading-tight truncate">
-                Mohammed
+                {displayName}
               </h1>
               <p className="text-xs text-cyan-100/60 font-medium">
-                {isRtl ? "رقم المريض: #DM-2847" : "Patient ID: #DM-2847"}
+                {patientId}
               </p>
               <div className="flex items-center gap-2 pt-1 flex-wrap">
                 <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-white/15 text-white border border-white/20 backdrop-blur-sm">
-                  {isRtl ? "السكري من النوع 1" : "Type 1 Diabetes"}
+                  {diabetesTag}
                 </span>
                 <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-white/20 backdrop-blur-sm flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  {isRtl ? "نشط" : "Active"}
+                  {isGuest
+                    ? isRtl
+                      ? "زائر"
+                      : "Guest"
+                    : isRtl
+                    ? "نشط"
+                    : "Active"}
                 </span>
               </div>
             </div>
@@ -126,7 +172,7 @@ export default function ProfileScreen() {
 
           {/* Top-Right Logout Button */}
           <button
-            onClick={() => router.replace("/login")}
+            onClick={handleLogout}
             className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-md active:scale-95 shadow-sm flex-shrink-0"
             title={isRtl ? "تسجيل الخروج" : "Log Out"}
             aria-label={isRtl ? "تسجيل الخروج" : "Log Out"}
@@ -165,6 +211,29 @@ export default function ProfileScreen() {
           </div>
         </div>
       </div>
+
+      {/* Guest Mode Conversion Banner */}
+      {isGuest && (
+        <div className="mx-5 mt-4 p-4 rounded-xl bg-gradient-to-r from-brand-teal/15 via-brand-blue/15 to-brand-card border border-brand-teal/30 flex items-center justify-between gap-3 shadow-lg">
+          <div className="space-y-1 min-w-0">
+            <h3 className="text-xs font-bold text-brand-teal flex items-center gap-1.5">
+              <UserCheck className="w-3.5 h-3.5 shrink-0" />
+              <span>{isRtl ? "تفعيل السجل الطبي الكامل" : "Enable Full Health Records"}</span>
+            </h3>
+            <p className="text-[11px] text-slate-300 leading-snug">
+              {isRtl
+                ? "سجّل حسابك الآن لحفظ محادثات الذكاء الاصطناعي ومواعيدك الطبية."
+                : "Sign up now to sync and save your AI consultations and clinic visits."}
+            </p>
+          </div>
+          <button
+            onClick={() => router.push("/register")}
+            className="px-3.5 py-2 rounded-lg bg-brand-teal hover:bg-brand-cyan text-brand-dark text-xs font-bold shrink-0 transition-all cursor-pointer shadow-md active:scale-95"
+          >
+            {isRtl ? "إنشاء حساب" : "Sign Up"}
+          </button>
+        </div>
+      )}
 
       {/* Profile Menu List */}
       <div className="px-5 space-y-2.5 pt-3">

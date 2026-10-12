@@ -12,7 +12,8 @@ import { SecondaryButton } from "@/components/buttons/secondary-button";
 import { TextInput } from "@/components/inputs/text-input";
 import { PasswordInput } from "@/components/inputs/password-input";
 import { FieldGroup } from "@/components/ui/field";
-import { User, ArrowRight } from "lucide-react";
+import { useAuthStore } from "@/lib/auth/auth-store";
+import { User, ArrowRight, AlertCircle } from "lucide-react";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -22,15 +23,26 @@ export default function LoginScreen() {
   const isRtl = locale === "ar";
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isGuestLoading, setIsGuestLoading] = React.useState(false);
+  const [authError, setAuthError] = React.useState<string | null>(null);
+
+  const { signInWithEmail, signInAsGuest } = useAuthStore();
 
   const loginSchema = React.useMemo(
     () =>
       z.object({
-        identifier: z.string().min(1, {
-          message: isRtl
-            ? "يرجى إدخال رقم الهاتف أو البريد الإلكتروني"
-            : "Please enter your phone or email",
-        }),
+        identifier: z
+          .string()
+          .min(1, {
+            message: isRtl
+              ? "يرجى إدخال البريد الإلكتروني"
+              : "Please enter your email",
+          })
+          .email({
+            message: isRtl
+              ? "صيغة البريد الإلكتروني غير صحيحة"
+              : "Invalid email format",
+          }),
         password: z.string().min(1, {
           message: isRtl
             ? "يرجى إدخال كلمة المرور"
@@ -53,16 +65,41 @@ export default function LoginScreen() {
     },
   });
 
-  const onSubmit = (_values: LoginFormValues) => {
+  const onSubmit = async (values: LoginFormValues) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setAuthError(null);
+    const res = await signInWithEmail(values.identifier, values.password);
+    setIsLoading(false);
+
+    if (res.success) {
       router.replace("/chat");
-    }, 600);
+    } else {
+      setAuthError(
+        res.error?.includes("Invalid login credentials")
+          ? isRtl
+            ? "بيانات الدخول غير صحيحة. يرجى التأكد من البريد وكلمة المرور"
+            : "Invalid login credentials. Please check your email and password."
+          : res.error || (isRtl ? "حدث خطأ أثناء تسجيل الدخول" : "Failed to sign in")
+      );
+    }
   };
 
-  const handleGuestLogin = () => {
-    router.replace("/chat");
+  const handleGuestLogin = async () => {
+    setIsGuestLoading(true);
+    setAuthError(null);
+    const res = await signInAsGuest();
+    setIsGuestLoading(false);
+
+    if (res.success) {
+      router.replace("/chat");
+    } else {
+      setAuthError(
+        res.error ||
+          (isRtl
+            ? "تعذر تسجيل الدخول كزائر، يرجى المحاولة لاحقاً"
+            : "Unable to continue as guest. Please try again.")
+      );
+    }
   };
 
   return (
@@ -101,6 +138,13 @@ export default function LoginScreen() {
               {t("signInSubtitle")}
             </p>
           </div>
+
+          {authError && (
+            <div className="p-3 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2 leading-relaxed">
+              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              <span>{authError}</span>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3.5">
             <FieldGroup className="gap-3.5">
@@ -162,6 +206,7 @@ export default function LoginScreen() {
           <SecondaryButton
             type="button"
             onClick={handleGuestLogin}
+            isLoading={isGuestLoading}
             rightIcon={
               <ArrowRight className="w-4 h-4 rtl:rotate-180 text-slate-400" />
             }
