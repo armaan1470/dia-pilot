@@ -10,6 +10,7 @@ import { ServiceCard } from "@/components/cards/service-card";
 import { SearchInput } from "@/components/inputs/search-input";
 import { AppleEmoji, type AppleEmojiName } from "@/components/ui/apple-emoji";
 import { ArrowRight } from "lucide-react";
+import { LoadingSkeleton } from "@/components/feedback/loading-skeleton";
 import type { ServiceRecord } from "@/lib/api/services";
 
 const servicePresentation: Record<
@@ -123,53 +124,58 @@ export default function ServicesScreen() {
           placeholder={t("searchPlaceholder")}
         />
 
-        <div className="space-y-2 pt-1">
+        <div className="space-y-3 pt-1">
           <h4 className="text-xs font-bold tracking-[2px] text-slate-400/40 uppercase p-1">
             {t("allServices")}
           </h4>
 
-          {loading && <p className="px-1 text-sm text-slate-400">{t("loadingServices")}</p>}
-          {hasError && <p role="alert" className="px-1 text-sm text-red-300">{t("servicesError")}</p>}
-          {!loading && !hasError && filteredServices.length === 0 && (
+          {loading ? (
+            <div role="status" aria-busy="true" className="w-full">
+              <span className="sr-only">{t("loadingServices")}</span>
+              <LoadingSkeleton type="card" count={6} />
+            </div>
+          ) : hasError ? (
+            <p role="alert" className="px-1 text-sm text-red-300">{t("servicesError")}</p>
+          ) : filteredServices.length === 0 ? (
             <p className="px-1 text-sm text-slate-400">{t("noServices")}</p>
+          ) : (
+            <div className="grid grid-cols-2 gap-3.5">
+              {filteredServices.map((service) => {
+                const presentation = servicePresentation[service.slug] ?? {
+                  emoji: "stethoscope" as const,
+                  gradient: "cyan" as const,
+                };
+                const name = isRtl ? service.nameAr : service.nameEn;
+                const description = isRtl
+                  ? service.descriptionAr
+                  : service.descriptionEn;
+
+                return (
+                  <div key={service.slug} className="relative h-full">
+                    <ServiceCard
+                      title={name}
+                      subtitle={description}
+                      gradient={presentation.gradient}
+                      icon={<AppleEmoji name={presentation.emoji} size={24} />}
+                      watermarkIcon={
+                        <AppleEmoji
+                          name={presentation.emoji}
+                          size={76}
+                          className="opacity-20"
+                        />
+                      }
+                      onClick={() => router.push("/services/" + service.slug)}
+                    />
+                    {service.approvalStatus !== "approved" && (
+                      <span className="absolute end-2 top-2 rounded-full border border-white/20 bg-black/50 px-2 py-1 text-[9px] font-semibold text-white/80">
+                        {t("draftStatus")}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
-
-          <div className="grid grid-cols-2 gap-3.5">
-            {filteredServices.map((service) => {
-              const presentation = servicePresentation[service.slug] ?? {
-                emoji: "stethoscope" as const,
-                gradient: "cyan" as const,
-              };
-              const name = isRtl ? service.nameAr : service.nameEn;
-              const description = isRtl
-                ? service.descriptionAr
-                : service.descriptionEn;
-
-              return (
-                <div key={service.slug} className="relative">
-                  <ServiceCard
-                    title={name}
-                    subtitle={description}
-                    gradient={presentation.gradient}
-                    icon={<AppleEmoji name={presentation.emoji} size={24} />}
-                    watermarkIcon={
-                      <AppleEmoji
-                        name={presentation.emoji}
-                        size={76}
-                        className="opacity-20"
-                      />
-                    }
-                    onClick={() => router.push("/services/" + service.slug)}
-                  />
-                  {service.approvalStatus !== "approved" && (
-                    <span className="absolute end-2 top-2 rounded-full border border-white/20 bg-black/50 px-2 py-1 text-[9px] font-semibold text-white/80">
-                      {t("draftStatus")}
-                    </span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
 

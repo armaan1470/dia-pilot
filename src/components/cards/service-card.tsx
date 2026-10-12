@@ -52,7 +52,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <Card
       onClick={onClick}
       className={cn(
-        "relative w-full min-h-30 rounded-lg p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
+        "relative w-full h-[148px] sm:h-[156px] rounded-2xl p-4 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:brightness-105 active:scale-[0.98] border-none text-white shadow-lg",
         gradientStyles[gradient],
         className
       )}
@@ -74,12 +74,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
 
       {/* Title & Subtitle */}
-      <div className="z-10 mt-auto">
-        <h3 className="text-sm font-bold text-white leading-tight line-clamp-2">
-          {title}
-        </h3>
+      <div className="z-10 mt-auto flex flex-col justify-end">
+        <div className="min-h-[2.6rem] flex flex-col justify-end">
+          <h3 className="text-sm font-bold text-white leading-snug line-clamp-2">
+            {title}
+          </h3>
+        </div>
         {subtitle && (
-          <p className="text-xs text-white/80 font-medium mt-0.5 line-clamp-1">
+          <p className="text-xs text-white/80 font-medium mt-0.5 line-clamp-1 truncate">
             {subtitle}
           </p>
         )}

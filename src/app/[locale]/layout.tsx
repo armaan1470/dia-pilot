@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { DesktopOnlyNotice } from "@/components/layout/desktop-only-notice";
+import { AuthProvider } from "@/components/providers/auth-provider";
 import "../globals.css";
 
 const cairo = Cairo({
@@ -87,9 +88,11 @@ export default async function LocaleLayout({
           <DesktopOnlyNotice />
 
           {/* 2. Mobile View (< 640px / md): Pure Mobile Application Shell */}
-          <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-brand-dark relative overflow-x-hidden">
-            {children}
-          </main>
+          <AuthProvider>
+            <main className="flex md:hidden flex-col w-full min-h-[100dvh] bg-brand-dark relative overflow-x-hidden">
+              {children}
+            </main>
+          </AuthProvider>
 
         </NextIntlClientProvider>
       </body>

@@ -20,7 +20,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { User, Calendar, ArrowRight, ChevronDown } from "lucide-react";
+import { User, Calendar, ArrowRight, ChevronDown, AlertCircle } from "lucide-react";
+import { useAuthStore } from "@/lib/auth/auth-store";
 import { cn } from "@/lib/utils";
 
 interface CountryOption {
@@ -51,6 +52,8 @@ export default function RegisterScreen() {
   const [step, setStep] = React.useState<1 | 2>(1);
   const [selectedCountry, setSelectedCountry] = React.useState<CountryOption>(COUNTRIES[0]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [authError, setAuthError] = React.useState<string | null>(null);
+  const { signUp } = useAuthStore();
 
   // Zod Schemas
   const step1Schema = React.useMemo(
@@ -59,7 +62,65 @@ export default function RegisterScreen() {
         fullName: z.string().min(1, {
           message: isRtl ? "يرجى إدخال اسمك الكامل" : "Please enter your full name",
         }),
-        dob: z.union([z.date(), z.string()]).optional(),
+        dob: z
+          .union([z.date(), z.string()])
+          .refine((val) => val !== undefined && val !== null && val !== "", {
+            message: isRtl
+              ? "يرجى تحديد تاريخ الميلاد"
+              : "Please select your date of birth",
+          })
+          .refine(
+            (val) => {
+              const d = val instanceof Date ? val : new Date(val);
+              return !isNaN(d.getTime());
+            },
+            {
+              message: isRtl
+                ? "تاريخ الميلاد غير صالح"
+                : "Invalid date of birth",
+            }
+          )
+          .refine(
+            (val) => {
+              const d = val instanceof Date ? val : new Date(val);
+              const today = new Date();
+              return d <= today;
+            },
+            {
+              message: isRtl
+                ? "لا يمكن أن يكون تاريخ الميلاد في المستقبل"
+                : "Date of birth cannot be in the future",
+            }
+          )
+          .refine(
+            (val) => {
+              const d = val instanceof Date ? val : new Date(val);
+              const today = new Date();
+              let age = today.getFullYear() - d.getFullYear();
+              const m = today.getMonth() - d.getMonth();
+              if (m < 0 || (m === 0 && today.getDate() < d.getDate())) {
+                age--;
+              }
+              return age >= 18;
+            },
+            {
+              message: isRtl
+                ? "يجب أن يكون عمرك ١٨ عاماً على الأقل لإنشاء حساب"
+                : "You must be at least 18 years old to create an account",
+            }
+          )
+          .refine(
+            (val) => {
+              const d = val instanceof Date ? val : new Date(val);
+              const today = new Date();
+              return today.getFullYear() - d.getFullYear() <= 120;
+            },
+            {
+              message: isRtl
+                ? "يرجى إدخال تاريخ ميلاد صالح"
+                : "Please enter a valid date of birth",
+            }
+          ),
         gender: z.enum(["male", "female", "other"]),
         diabetesType: z.enum(["type1", "type2", "gestational", "pre", "other"]),
       }),
@@ -127,15 +188,46 @@ export default function RegisterScreen() {
   });
 
   const onStep1Submit = (_values: Step1FormValues) => {
+    setAuthError(null);
     setStep(2);
   };
 
-  const onStep2Submit = (_values: Step2FormValues) => {
+  const onStep2Submit = async (step2Values: Step2FormValues) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setAuthError(null);
+    const step1Values = form1.getValues();
+
+    const formattedDob = step1Values.dob
+      ? step1Values.dob instanceof Date
+        ? step1Values.dob.toISOString().split("T")[0]
+        : String(step1Values.dob)
+      : undefined;
+
+    const fullMobile = `${selectedCountry.code}${step2Values.mobileNumber.replace(/^0+/, "")}`;
+
+    const res = await signUp({
+      fullName: step1Values.fullName,
+      dob: formattedDob,
+      gender: step1Values.gender,
+      diabetesType: step1Values.diabetesType,
+      mobileNumber: fullMobile,
+      email: step2Values.email,
+      password: step2Values.password,
+    });
+
+    setIsLoading(false);
+
+    if (res.success) {
       router.replace("/chat");
-    }, 600);
+    } else {
+      setAuthError(
+        res.error?.includes("already registered")
+          ? isRtl
+            ? "البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول"
+            : "This email is already registered. Please sign in instead."
+          : res.error || (isRtl ? "حدث خطأ أثناء إنشاء الحساب" : "Failed to create account")
+      );
+    }
   };
 
   const handleBack = () => {
@@ -222,6 +314,7 @@ export default function RegisterScreen() {
                       label={t("dateOfBirth")}
                       placeholder={t("datePlaceholder")}
                       error={fieldState.error?.message}
+                      minAge={18}
                     />
                   )}
                 />
@@ -309,6 +402,12 @@ export default function RegisterScreen() {
             </form>
           ) : (
             <form onSubmit={form2.handleSubmit(onStep2Submit)} className="flex flex-col gap-3.5">
+              {authError && (
+                <div className="p-3 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2 leading-relaxed">
+                  <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                  <span>{authError}</span>
+                </div>
+              )}
               <FieldGroup className="gap-3.5">
                 {/* Mobile Number */}
                 <Controller
