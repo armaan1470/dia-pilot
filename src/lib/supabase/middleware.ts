@@ -1,8 +1,29 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
+// Routes accessible by anyone without authentication
+const PUBLIC_ROUTES = [
+  "/",
+  "/splash",
+  "/language",
+  "/onboarding",
+  "/privacy",
+  "/help",
+];
+
+// Routes strictly for authentication
+const AUTH_ROUTES = [
+  "/login",
+  "/register",
+];
+
 export async function updateSession(request: NextRequest, response?: NextResponse) {
   let supabaseResponse = response ?? NextResponse.next({ request });
+
+  // If next-intl already issued a redirect (e.g. adding /ar locale prefix), preserve it
+  if (response?.headers.get("location")) {
+    return response;
+  }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const supabaseKey =
@@ -24,8 +45,66 @@ export async function updateSession(request: NextRequest, response?: NextRespons
     },
   });
 
-  // Refreshes the auth token if expired
-  await supabase.auth.getUser();
+  // Verify and refresh the current user session
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const pathname = request.nextUrl.pathname;
+  const localeMatch = pathname.match(/^\/(ar|en)(\/|$)/);
+  const locale = localeMatch ? localeMatch[1] : "ar";
+  const pathWithoutLocale = pathname.replace(/^\/(ar|en)/, "") || "/";
+
+  // Helper to construct locale-aware redirects while preserving session cookies
+  const createRedirect = (targetPath: string) => {
+    const redirectUrl = new URL(`/${locale}${targetPath === "/" ? "" : targetPath}`, request.url);
+    const redirectResponse = NextResponse.redirect(redirectUrl);
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+    });
+    return redirectResponse;
+  };
+
+  const isAuthRoute = AUTH_ROUTES.some(
+    (route) => pathWithoutLocale === route || pathWithoutLocale.startsWith(`${route}/`)
+  );
+  const isPublicRoute = PUBLIC_ROUTES.some((route) => pathWithoutLocale === route);
+
+  // CASE 1: User is an authenticated patient (full account)
+  if (user && !user.is_anonymous) {
+    // Prevent logged-in users from visiting /login or /register
+    if (isAuthRoute) {
+      return createRedirect("/chat");
+    }
+    // Prevent logged-in users from landing on the initial splash screen
+    if (pathWithoutLocale === "/" || pathWithoutLocale === "/splash") {
+      return createRedirect("/chat");
+    }
+  }
+
+  // CASE 2: User is an anonymous Guest
+  if (user && user.is_anonymous) {
+    // If a guest lands on initial splash screen, jump straight into chat
+    if (pathWithoutLocale === "/" || pathWithoutLocale === "/splash") {
+      return createRedirect("/chat");
+    }
+    // Allow guests to visit /register (to upgrade) or /login (to switch account)
+    // and all core feature routes (/chat, /services, /profile, etc.)
+  }
+
+  // CASE 3: User is unauthenticated (no active session)
+  if (!user) {
+    // Allow public informational routes
+    if (isPublicRoute) {
+      return supabaseResponse;
+    }
+    // Allow login & registration
+    if (isAuthRoute) {
+      return supabaseResponse;
+    }
+    // Any protected route (e.g. /chat, /profile, /appointments, /services...) -> Redirect to login
+    return createRedirect("/login");
+  }
 
   return supabaseResponse;
 }
