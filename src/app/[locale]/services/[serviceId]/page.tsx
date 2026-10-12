@@ -10,7 +10,8 @@ import { CategoryTopicCard } from "@/components/cards/category-topic-card";
 import { AskAIBanner } from "@/components/cards/ask-ai-banner";
 import { LoadingSkeleton } from "@/components/feedback/loading-skeleton";
 import { serviceCategoryData } from "@/lib/data/services-categories";
-import type { ServiceRecord } from "@/lib/api/services";
+import { useServiceDetail } from "@/hooks/queries/use-services";
+import { ApiError, type ServiceRecord } from "@/lib/api/services";
 
 export default function ServiceDetailScreen() {
   const routeParams = useParams<{ serviceId: string }>();
@@ -28,37 +29,14 @@ function ServiceDetailContent({ serviceId }: { serviceId: string }) {
   const categoryConfig =
     serviceCategoryData[serviceId] ?? serviceCategoryData["diabetes-care"];
 
-  const [service, setService] = React.useState<ServiceRecord | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [notFound, setNotFound] = React.useState(false);
-  const [hasError, setHasError] = React.useState(false);
+  const {
+    data: service,
+    isLoading: loading,
+    error,
+    isError: hasError,
+  } = useServiceDetail(serviceId);
 
-  React.useEffect(() => {
-    let active = true;
-
-    fetch("/api/services/" + encodeURIComponent(serviceId))
-      .then(async (response) => {
-        if (response.status === 404) {
-          if (active) setNotFound(true);
-          return null;
-        }
-        if (!response.ok) throw new Error("Service request failed");
-        return (await response.json()) as ServiceRecord;
-      })
-      .then((result) => {
-        if (active && result) setService(result);
-      })
-      .catch(() => {
-        if (active) setHasError(true);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [serviceId]);
+  const notFound = error instanceof ApiError && error.status === 404;
 
   if (loading) {
     return (

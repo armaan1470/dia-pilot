@@ -11,6 +11,7 @@ import { SearchInput } from "@/components/inputs/search-input";
 import { AppleEmoji, type AppleEmojiName } from "@/components/ui/apple-emoji";
 import { ArrowRight } from "lucide-react";
 import { LoadingSkeleton } from "@/components/feedback/loading-skeleton";
+import { useServices } from "@/hooks/queries/use-services";
 import type { ServiceRecord } from "@/lib/api/services";
 
 const servicePresentation: Record<
@@ -36,32 +37,11 @@ export default function ServicesScreen() {
   const isRtl = locale === "ar";
 
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [services, setServices] = React.useState<ServiceRecord[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [hasError, setHasError] = React.useState(false);
-
-  React.useEffect(() => {
-    let active = true;
-
-    fetch("/api/services")
-      .then(async (response) => {
-        if (!response.ok) throw new Error("Service request failed");
-        return (await response.json()) as ServiceRecord[];
-      })
-      .then((result) => {
-        if (active) setServices(result);
-      })
-      .catch(() => {
-        if (active) setHasError(true);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
+  const {
+    data: services = [],
+    isLoading: loading,
+    isError: hasError,
+  } = useServices();
 
   const filteredServices = services.filter((service) => {
     const name = isRtl ? service.nameAr : service.nameEn;
